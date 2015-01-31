@@ -1,0 +1,12 @@
+#!/bin/bash
+alias ack='ack-grep'
+alias ga='git add'
+alias gap='git add -p'
+alias gcim='git commit -m'
+alias gd='git diff'
+alias gpu='git push'
+alias gup='git pull'
+alias gst='git status'
+
+# SPECIFIC TO whathood development
+alias cdw='cd /var/www/whathood'

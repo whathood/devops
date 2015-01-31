@@ -1,4 +1,6 @@
-#### Vagrant config setup for [Whathood.in](http://whathood.in) [jimrsmiley/Whathood.git](https://github.com/jimRsmiley/whathood)
+#### Ubuntu 14 and PostGIS Vagrant config setup for [Whathood.in](http://whathood.in) [jimrsmiley/Whathood.git](https://github.com/jimRsmiley/whathood)
+
+This repository is a vagrant configuration for Whathood. After installing Vagrant and running this configuration. Users will will have the full development environment, complete with a running website, for the web application Whathood.in.
 
 #### Installation
 1. Install [Vagrant](https://www.vagrantup.com/downloads.html)
@@ -13,3 +15,9 @@
       * username `vagrant`
       * password `vagrant`
     - and also view the website at [http://localhost:8080](http://localhost:8080) from your host computer
+    - note: during provisioning, ignore messages like `dpkg-preconfigure: unable to re-open stdin: No such file or directory`, it's a known bug
+
+
+The website will be sitting under /var/www/whathood.
+
+PostGIS will be up and running with a database name of "whathood".
