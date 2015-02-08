@@ -1,1 +1,2 @@
 .vagrant/
+/provision/config/user_config.simple

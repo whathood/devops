@@ -4,7 +4,8 @@ This repository is a vagrant configuration for Whathood. After installing Vagran
 
 #### Installation
 1. Install [Vagrant](https://www.vagrantup.com/downloads.html)
-2. Follow instructions for setup
+2. Install a virtual host provider(Oracle's VirtualBox is free and is what I used)
+3. Follow Vagrant's instructions for setup on that virtual host provider
   * On Windows 7, using Oracle's VirtualBox, in a new project directory, I did:
     - `git clone https://github.com/jimRsmiley/whathood-vagrant.git .`
     - `vagrant box add ubuntu/trusty64 https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box`
@@ -20,4 +21,4 @@ This repository is a vagrant configuration for Whathood. After installing Vagran
 
 The website will be sitting under /var/www/whathood.
 
-PostGIS will be up and running with a database name of "whathood".
+PostGIS will be up and running with a database name of "whathood". You can access it by running the command `/var/www/whathood/bin/init_psql`.

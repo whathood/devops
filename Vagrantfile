@@ -24,8 +24,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
      # Don't boot with headless mode
      # vb.gui = true
      vb.name = "whathood_vm"
-     vb.memory = 4024
-     vb.cpus = 4
+     vb.memory = 1024
+     vb.cpus = 1
   end
 
   config.vm.provision "shell" do |s|
