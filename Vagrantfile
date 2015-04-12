@@ -29,7 +29,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision "shell" do |s|
-    s.path = "provision/setup.sh"
+    s.path = "provision/setup_vagrant.sh"
   end
   
 end
