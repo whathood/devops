@@ -127,3 +127,7 @@ echo "*      copying bash_aliases"
 cp $SHARE_DIR/provision/config/bash_aliases /etc/bash_aliases
 echo "source /etc/bash_aliases" >> /etc/bash.bashrc
 echo "source /vagrant/provision/config/user_config" >> /etc/bash.bashrc
+
+
+echo "*      copying over bashrc"
+cp -f $SHARE_DIR/provision/config/vagrant_bashrc /home/vagrant/.bashrc
