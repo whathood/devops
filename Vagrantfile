@@ -14,11 +14,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.box = 'ubuntu/trusty64'
   config.vm.hostname = "whvagrant"
+
   # forward so http://localhost:8080 points to the whathood home site
   config.vm.network :forwarded_port, guest: 80, host: 8080
-  
-  # create a dev site on port 81  
-  config.vm.network :forwarded_port, guest: 81, host: 8081
 
   config.vm.provider "virtualbox" do |vb|
      # Don't boot with headless mode
