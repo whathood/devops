@@ -9,8 +9,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.timezone.value = "America/New_York"
   end
 
-  # might help with these console messages about tty
-  config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
   config.vm.box = 'ubuntu/trusty64'
   config.vm.hostname = "whvagrant"
