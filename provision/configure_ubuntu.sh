@@ -1,7 +1,6 @@
 #!/bin/bash
 
-echo "*      Provisioning virtual machine"
-
+echo "#####    configure_ubuntu.sh #######"
 
 SHARE_DIR="/vagrant"
 PROVISION_DIR="$SHARE_DIR/provision"
@@ -23,7 +22,7 @@ cp -f /vagrant/provision/config/screenrc /etc/screenrc
 #
 echo "*      Adding ubuntugis to apt-repository"
 #
-add-apt-repository ppa:ubuntugis/ubuntugis-unstable > /dev/null 2>&1
+add-apt-repository ppa:ubuntugis/ubuntugis-unstable
 #
 echo "*      Running apt-get update"
 #
@@ -117,7 +116,7 @@ sudo python get-pip.py > /dev/null 2>&1
 sudo pip install Glances > /dev/null 2>&1
 
 #
-echo "*       installing perl modules"
+echo "*      installing perl modules"
 #
 sudo perl -MCPAN -e 'notest install App::cpanminus' > /dev/null 2>&1
 
@@ -125,6 +124,9 @@ sudo perl -MCPAN -e 'notest install App::cpanminus' > /dev/null 2>&1
 echo "*      copying bash_aliases"
 #
 cp $SHARE_DIR/provision/config/bash_aliases /etc/bash_aliases
+chmod +rx /etc/bash_aliases
+
+# source bash_aliases into bash.bashrc
 echo "source /etc/bash_aliases" >> /etc/bash.bashrc
 echo "source /vagrant/provision/config/user_config" >> /etc/bash.bashrc
 
