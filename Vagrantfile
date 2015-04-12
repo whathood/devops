@@ -13,7 +13,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
   config.vm.box = 'ubuntu/trusty64'
-
+  config.vm.hostname = "whvagrant"
   # forward so http://localhost:8080 points to the whathood home site
   config.vm.network :forwarded_port, guest: 80, host: 8080
   
