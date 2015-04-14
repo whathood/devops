@@ -20,10 +20,9 @@ echo "*       copying bash_alaises"
 cp $PROVISION_DIR/bash_aliases /home/vagrant/.bash_aliases
 chmod +r /home/vagrant/.bash_aliases
 
-echo "*       calling setup_whathood.sh"
-source $PROVISION_DIR/setup_whathood.sh
+# setup whathood env
+source $PROVISION_DIR/setup_whathood.rb
 
-echo " "
 echo "setup complete"
 end_time=`date`
 echo "provision started $start_time"
