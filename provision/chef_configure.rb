@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+# should be sudo'd inside the virtual machine
+
 TMP_DIR = '/tmp/chef-jimrsmiley'
 
 puts "*     configuring ubuntu environment with chef"
