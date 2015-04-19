@@ -5,7 +5,6 @@
 # this gets run inside the virtual machine
 #  * configure_ubuntu.sh to configure environment
 #  * chef_configure.sh - configures other stuff
-#  * copies custom .bash_aliases
 #  * setup_whathood.sh
 
 start_time=`date`
@@ -16,10 +15,6 @@ PROVISION_DIR="$SHARE_DIR/provision"
 source $PROVISION_DIR/configure_ubuntu.sh
 
 sudo $PROVISION_DIR/chef_configure.rb
-
-echo "*       copying bash_alaises"
-cp $PROVISION_DIR/bash_aliases /home/vagrant/.bash_aliases
-chmod +r /home/vagrant/.bash_aliases
 
 # setup whathood env
 source $PROVISION_DIR/setup_whathood.rb

@@ -123,7 +123,7 @@ sudo perl -MCPAN -e 'notest install App::cpanminus' > /dev/null 2>&1
 #
 echo "*      copying bash_aliases"
 #
-cp $SHARE_DIR/provision/config/bash_aliases /etc/bash_aliases
+cp $PROVISION_CONFIG_DIR/bash_aliases /etc/bash_aliases
 chmod +rx /etc/bash_aliases
 
 # source bash_aliases into bash.bashrc

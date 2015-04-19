@@ -12,3 +12,5 @@ puts "*     checking chef install"
 `./install-chef`
 puts "*     running configure"
 `./run-configure`
+
+puts "*     chef_configure.rb done"
