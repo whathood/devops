@@ -22,7 +22,7 @@ cp -f /vagrant/provision/config/screenrc /etc/screenrc
 #
 echo "*      Adding ubuntugis to apt-repository"
 #
-add-apt-repository ppa:ubuntugis/ubuntugis-unstable
+add-apt-repository ppa:ubuntugis/ubuntugis-unstable -y > /dev/null
 #
 echo "*      Running apt-get update"
 #
