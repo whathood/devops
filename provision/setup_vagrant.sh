@@ -1,6 +1,9 @@
 #!/bin/bash
 
 # master setup script
+#
+# this will get run as user vagrant
+#
 # runs
 # this gets run inside the virtual machine
 #  * configure_ubuntu.sh to configure environment
@@ -17,7 +20,7 @@ source $PROVISION_DIR/configure_ubuntu.sh
 sudo $PROVISION_DIR/chef_configure.rb
 
 # setup whathood env
-source $PROVISION_DIR/setup_whathood.rb
+$PROVISION_DIR/setup_whathood.rb
 
 echo "setup complete"
 end_time=`date`
