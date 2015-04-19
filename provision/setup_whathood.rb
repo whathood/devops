@@ -13,6 +13,7 @@ require "fileutils"
 require "net/https"
 require "uri"
 
+GIT_BRANCH    = 'wip/transfer'
 APP_URL       = 'http://localhost:8080'
 SRC_DIR       = '/var/www/whathood'
 PROVISION_DIR = '/vagrant/provision'
@@ -20,7 +21,7 @@ CONFIG_DIR    = "#{PROVISION_DIR}/config"
 
 `chown -R vagrant.vagrant /usr/local`
 
-get_whathood_src(SRC_DIR)
+get_whathood_src(SRC_DIR,GIT_BRANCH)
 run_whathood_deploy(SRC_DIR)
 get_db_data(SRC_DIR)
 setup_whathood_yaml(SRC_DIR,CONFIG_DIR)
@@ -49,14 +50,15 @@ BEGIN {
         end
     end
 
-    def get_whathood_src(src_dir)
+    def get_whathood_src(src_dir,git_branch)
         unless src_dir
             abort "vagrant:setup_whathood.rb: src_dir must be defined"
         end
 
         puts "*      cloning whathood source"
         `git clone https://github.com/jimRsmiley/whathood.git #{src_dir} > /dev/null 2>&1`
-        `git checkout wip/transfer`
+	Dir.chdir src_dir
+        `git checkout #{git_branch}`
         FileUtils.chown_R "vagrant", "vagrant", src_dir
 
     end
