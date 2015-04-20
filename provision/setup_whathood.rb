@@ -22,9 +22,9 @@ CONFIG_DIR    = "#{PROVISION_DIR}/config"
 `chown -R vagrant.vagrant /usr/local`
 
 get_whathood_src(SRC_DIR,GIT_BRANCH)
+setup_whathood_yaml(SRC_DIR,CONFIG_DIR)
 run_whathood_deploy(SRC_DIR)
 get_db_data(SRC_DIR)
-setup_whathood_yaml(SRC_DIR,CONFIG_DIR)
 fix_file_permissions(SRC_DIR)
 test_live_site(APP_URL)
 
@@ -81,6 +81,6 @@ BEGIN {
     def get_db_data(src_dir)
         Dir.chdir src_dir
         puts "*      importing data"
-        `sudo -u vagrant #{src_dir}/bin/import_db`
+        `sudo -u root #{src_dir}/bin/import_db`
     end
 }
