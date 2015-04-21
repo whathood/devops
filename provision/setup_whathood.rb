@@ -14,7 +14,7 @@ require "net/https"
 require "uri"
 
 GIT_BRANCH    = 'wip/transfer'
-APP_URL       = 'http://localhost:8080'
+APP_URL       = 'http://localhost:80'
 SRC_DIR       = '/var/www/whathood'
 PROVISION_DIR = '/vagrant/provision'
 CONFIG_DIR    = "#{PROVISION_DIR}/config"
@@ -34,19 +34,16 @@ BEGIN {
         puts "sleeping for 5 seconds....."
         sleep 5
         puts "checking for site index"
-        result = `wget http://localhost:80`
-        puts result
 
         uri = URI.parse(app_url)
         http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = true
 
         request = Net::HTTP::Get.new(uri.request_uri)
-        res = http.request(request)
+        response = http.request(request)
 
-        puts "res.code: #{res.code}"
-        if res.code != 200
-            puts "WARNING:\n\n**********\n\n\npolling #{app_url} did not return a 200 code"
+        puts "response.code: #{response.code}"
+        if response.code != '200'
+            puts "WARNING:\n\n**********\n\n\npolling #{app_url} did not return a 200 codei **************\n"
         end
     end
 
