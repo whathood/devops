@@ -126,10 +126,5 @@ echo "*      copying bash_aliases"
 cp $PROVISION_CONFIG_DIR/bash_aliases /etc/bash_aliases
 chmod +rx /etc/bash_aliases
 
-# source bash_aliases into bash.bashrc
-echo "source /etc/bash_aliases" >> /etc/bash.bashrc
-echo "source /vagrant/provision/config/user_config" >> /etc/bash.bashrc
-
-
 echo "*      copying over bashrc"
 cp -f $SHARE_DIR/provision/config/vagrant_bashrc /home/vagrant/.bashrc
