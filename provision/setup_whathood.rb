@@ -13,7 +13,7 @@ require "fileutils"
 require "net/https"
 require "uri"
 
-GIT_BRANCH    = 'wip/transfer'
+GIT_BRANCH    = 'master'
 APP_URL       = 'http://localhost:80'
 SRC_DIR       = '/var/www/whathood'
 PROVISION_DIR = '/vagrant/provision'
