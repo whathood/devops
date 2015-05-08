@@ -17,10 +17,10 @@ PROVISION_DIR="$SHARE_DIR/provision"
 
 source $PROVISION_DIR/configure_ubuntu.sh
 
-sudo $PROVISION_DIR/chef_configure.rb
+sudo ruby $PROVISION_DIR/chef_configure.rb
 
 # setup whathood env
-$PROVISION_DIR/setup_whathood.rb
+ruby $PROVISION_DIR/setup_whathood.rb
 
 echo "setup complete"
 end_time=`date`
