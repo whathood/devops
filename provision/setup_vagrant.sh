@@ -19,6 +19,7 @@ source $PROVISION_DIR/configure_ubuntu.sh
 
 sudo ruby $PROVISION_DIR/chef_configure.rb
 
+source $PROVISION_DIR/install_pg_routing
 # setup whathood env
 ruby $PROVISION_DIR/setup_whathood.rb
 
