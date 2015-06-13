@@ -9,7 +9,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.timezone.value = "America/New_York"
   end
 
-
   config.vm.box = 'ubuntu/trusty64'
   config.vm.hostname = "whvagrant"
 
@@ -26,6 +25,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision "shell" do |s|
     s.path = "provision/setup_vagrant.sh"
+  end
+
+  config.vm.provision "shell" do |s|
+    s.privileged = false
+    s.path = "provision/bin/run_whathood"
+  end
+
+  config.vm.provision "shell" do |s|
+    s.privileged = false
+    s.path = 'provision/finished_provision.sh'
   end
 
 end

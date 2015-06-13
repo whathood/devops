@@ -1,6 +1,10 @@
 #!/bin/bash
 
-echo "#####    configure_ubuntu.sh #######"
+echo "##########################
+
+      configure_ubuntu.sh 
+
+#################################"
 
 SHARE_DIR="/vagrant"
 PROVISION_DIR="$SHARE_DIR/provision"
@@ -19,20 +23,16 @@ echo "*      configuring screen"
 $apt_cmd screen > /dev/null
 cp -f /vagrant/provision/config/screenrc /etc/screenrc
 
-#
-echo "*      Adding ubuntugis to apt-repository"
-#
-add-apt-repository ppa:ubuntugis/ubuntugis-unstable -y > /dev/null
-#
 echo "*      Running apt-get update"
 #
 sudo apt-get update -y > /dev/null 2>&1
 
-#
-echo "*      installing Nginx"
-#
-$apt_cmd nginx > /dev/null 2>&1
-usermod -G vagrant www-data
+echo "*      installing docker"
+sudo apt-get install linux-image-generic-lts-trusty
+wget -qO- https://get.docker.com/ | sh
+
+usermod -a -G docker vagrant
+
 
 misc_progs="git ack-grep"
 #
@@ -51,17 +51,6 @@ ln -s /usr/bin/nodejs /usr/bin/node
 npm install -g grunt-cli > /dev/null 2>&1
 
 #
-echo "*      installing PHP"
-#
-$apt_cmd git libpq-dev php5-pgsql php5-curl php5-cli php5-fpm php-pear php5-dev > /dev/null 2>&1
-
-#
-echo "*      installing PHPUnit"
-#
-wget https://phar.phpunit.de/phpunit.phar > /dev/null 2>&1
-chmod +x phpunit.phar > /dev/null 2>&1
-mv -f phpunit.phar /usr/local/bin/phpunit
-#
 echo "*      installing Ruby"
 #
 $apt_cmd ruby-full > /dev/null 2>&1
@@ -71,29 +60,7 @@ echo "*      installing Python"
 #
 $apt_cmd python-dev python-software-properties > /dev/null 2>&1
 
-#
-echo "*      installing PostgreSQL"
-#
-$apt_cmd postgresql postgresql-client postgresql-contrib > /dev/null 2>&1
-
-#
-echo "*      installing PostGIS-2.1"
-#
-$apt_cmd postgis postgresql-9.3-postgis-2.1 postgresql-9.3-postgis-2.1-scripts > /dev/null 2>&1
-
-#
-echo "*      configuring PostGIS"
-#
-cp -f $SHARE_DIR/provision/config/pg_hba.conf /etc/postgresql/9.3/main
-sudo service postgresql restart > /dev/null 2>&1
-
-#
-echo "*      configuring Nginx"
-#
-rm -rf /etc/nginx/sites-available/default > /dev/null 2>&1
-# delete the default website
-rm -rf /var/www/html
-service nginx restart > /dev/null 2>&1
+$apt_cmd php5-cli
 
 #
 echo "*      configuring vim"
@@ -128,3 +95,5 @@ chmod +rx /etc/bash_aliases
 
 echo "*      copying over bashrc"
 cp -f $SHARE_DIR/provision/config/vagrant_bashrc /home/vagrant/.bashrc
+
+echo "* #### done in configure_ubuntu"

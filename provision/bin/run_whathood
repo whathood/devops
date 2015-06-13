@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+home = ENV['HOME']
+
+puts "*      cloning whathood devops"
+system "mkdir #{home}/src"
+system "git clone https://github.com/jimRsmiley/wh-devops.git #{home}/src/wh-devops"
+
+Dir.chdir "#{home}/src/wh-devops"
+`./bin/build_images`
+`./bin/run-both`
