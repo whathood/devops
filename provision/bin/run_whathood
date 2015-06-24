@@ -10,4 +10,4 @@ system "git clone https://github.com/jimRsmiley/wh-devops.git #{home}/src/wh-dev
 
 Dir.chdir "#{home}/src/wh-devops"
 
-`./bin/setup`
+system "sudo ./bin/setup"
