@@ -60,7 +60,7 @@ echo "*      installing Python"
 #
 $apt_cmd python-dev python-software-properties > /dev/null 2>&1
 
-$apt_cmd git libpq-dev php5-pgsql php5-curl php5-cli php5-fpm php-pear php5-dev > /dev/null 2>&1
+$apt_cmd git php5-cli > /dev/null 2>&1
 
 #
 echo "*      configuring vim"
