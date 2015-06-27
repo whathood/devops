@@ -34,33 +34,7 @@ wget -qO- https://get.docker.com/ | sh
 usermod -a -G docker vagrant
 
 
-misc_progs="git ack-grep"
-#
-echo "*      installing programs $misc_progs"
-#
-$apt_cmd $misc_progs > /dev/null 2>&1
-
-#
-echo "*      installing Node.js"
-#
-$apt_cmd nodejs npm build-essential > /dev/null 2>&1
-$apt_cmd coffeescript > /dev/null 2>&1
-
-rm -f /usr/bin/node
-ln -s /usr/bin/nodejs /usr/bin/node
-npm install -g grunt-cli > /dev/null 2>&1
-
-#
-echo "*      installing Ruby"
-#
-$apt_cmd ruby-full > /dev/null 2>&1
-
-#
-echo "*      installing Python"
-#
-$apt_cmd python-dev python-software-properties > /dev/null 2>&1
-
-$apt_cmd git php5-cli > /dev/null 2>&1
+$apt_cmd ack-grep > /dev/null 2>&1
 
 #
 echo "*      configuring vim"
@@ -74,18 +48,6 @@ su - vagrant -c "echo 'filetype plugin indent on' >> /home/vagrant/.vimrc"
 su - vagrant -c 'git clone https://github.com/kchmck/vim-coffee-script.git /home/vagrant/.vim/bundle/vim-coffee-script/ > /dev/null 2>&1'
 su - vagrant -c 'git clone git://github.com/ntpeters/vim-better-whitespace.git /home/vagrant/.vim/bundle/vim-better-whitespace > /dev/null 2>&1'
 cp -f $PROVISION_CONFIG_DIR/vimrc /etc/vim/vimrc
-
-#
-echo "*      installing Glances"
-#
-wget -silent https://bootstrap.pypa.io/get-pip.py > /dev/null 2>&1
-sudo python get-pip.py > /dev/null 2>&1
-sudo pip install Glances > /dev/null 2>&1
-
-#
-echo "*      installing perl modules"
-#
-sudo perl -MCPAN -e 'notest install App::cpanminus' > /dev/null 2>&1
 
 #
 echo "*      copying bash_aliases"
