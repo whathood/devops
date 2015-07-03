@@ -11,14 +11,11 @@ This repository is a vagrant configuration for Whathood. After installing Vagran
     - `vagrant box add ubuntu/trusty64 https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box`
     - `vagrant up`
     - then you can log into the box with 
-      * ip `127.0.0.1`
-      * port `2222`
-      * username `vagrant`
-      * password `vagrant`
+      * `vagrant ssh`
     - and also view the website at [http://localhost:8080](http://localhost:8080) from your host computer
     - note: during provisioning, ignore messages like `dpkg-preconfigure: unable to re-open stdin: No such file or directory`, it's a known bug
 
 
 The website will be sitting under /var/www/whathood.
 
-PostGIS will be up and running with a database name of "whathood". You can access it by running the command `/var/www/whathood/bin/init_psql`.
+PostGIS will be up and running with a database name of "whathood" and accessable through port 5433.
