@@ -6,7 +6,7 @@ home = ENV['HOME']
 
 puts "*      cloning whathood devops"
 system "mkdir #{home}/src"
-system "git clone https://github.com/jimRsmiley/wh-devops.git #{home}/src/wh-devops"
+system "git clone https://github.com/whathood/wh-devops.git #{home}/src/wh-devops"
 
 Dir.chdir "#{home}/src/wh-devops"
 
