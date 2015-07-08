@@ -9,12 +9,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.hostname = "whvagrant"
   config.vm.box_check_update = false
 
-  # forward so http://localhost:8080 points to the whathood home site
+  # forward so http://localhost:8082 points to the whathood home site
   config.vm.network :forwarded_port, guest: 8081, host: 8082
   config.vm.network :forwarded_port, guest: 5432, host: 5433
   config.vm.network "forwarded_port", guest: 21, host: 8021
   config.vm.provider "virtualbox" do |vb|
-     vb.name = "whathood-vagrant"
      vb.memory = 4096
      vb.cpus = 4
   end
