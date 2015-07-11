@@ -13,6 +13,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, guest: 8081, host: 8082
   config.vm.network :forwarded_port, guest: 5432, host: 5433
   config.vm.network "forwarded_port", guest: 21, host: 8021
+
+  config.vm.synced_folder "whathood_src/", "/home/vagrant/src/whathood"
+
   config.vm.provider "virtualbox" do |vb|
      vb.memory = 4096
      vb.cpus = 4
