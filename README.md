@@ -4,18 +4,14 @@ This repository is a vagrant configuration for Whathood. After installing Vagran
 
 #### Installation
 1. Install [Vagrant](https://www.vagrantup.com/downloads.html)
-2. Install a virtual host provider(Oracle's VirtualBox is free and is what I used)
-3. Follow Vagrant's instructions for setup on that virtual host provider
-  * On Windows 7, using Oracle's VirtualBox, in a new project directory, I did:
-    - `git clone https://github.com/jimRsmiley/whathood-vagrant.git .`
-    - `vagrant box add ubuntu/trusty64 https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box`
-    - `vagrant up`
-    - then you can log into the box with 
-      * `vagrant ssh`
-    - and also view the website at [http://localhost:8080](http://localhost:8080) from your host computer
-    - note: during provisioning, ignore messages like `dpkg-preconfigure: unable to re-open stdin: No such file or directory`, it's a known bug
+2. Download and install [Oracle's Virtual Box 4.3](https://www.virtualbox.org/wiki/Download_Old_Builds_4_3), or another [Vagrant supported virtual guest provider](http://docs.vagrantup.com/v2/providers/)
+4. Download Virtual Box's Extension Pack
+5. clone the repo: `git clone https://github.com/whathood/whathood-vagrant.git ~/whathood-vagrant && cd ~/whathood-vagrant`
+6. `vagrant up`
+  * NOTE: during provisioning, ignore messages like `dpkg-preconfigure: unable to re-open stdin: No such file or directory`, it's a known bug
 
-
-The website will be sitting under /var/www/whathood.
-
-PostGIS will be up and running with a database name of "whathood" and accessable through port 5433.
+### Notes
+* under the vagrant install, the directory whathood_src contains the source code mapped to the development environment
+* connect to the ubuntu install: `vagrant ssh`
+* view the development site at: [http://localhost:8082](http://localhost:8082)
+* PostGIS will be up and running with a database name of "whathood" and accessable through port 5433.
