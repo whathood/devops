@@ -34,7 +34,8 @@ wget -qO- https://get.docker.com/ | sh
 usermod -a -G docker vagrant
 
 
-$apt_cmd ack-grep > /dev/null 2>&1
+$apt_cmd ack-grep vsftpd ftp
+cp $PROVISION_CONFIG_DIR/vsftpd.conf /etc/vsftpd.conf
 
 #
 echo "*      configuring vim"
