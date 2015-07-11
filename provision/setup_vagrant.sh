@@ -17,5 +17,3 @@ PROVISION_DIR="$SHARE_DIR/provision"
 BIN_DIR="$PROVISION_DIR/bin"
 
 source $BIN_DIR/configure_ubuntu.sh
-
-sudo ruby $BIN_DIR/chef_configure.rb
