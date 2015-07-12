@@ -16,7 +16,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # forward so http://localhost:8082 points to the whathood home site
   config.vm.network :forwarded_port, guest: 8081, host: 8082
   config.vm.network :forwarded_port, guest: 5432, host: 5433
-  config.vm.network "forwarded_port", guest: 21, host: 8021
 
   # Required for NFS to work, pick any local IP
   #config.vm.network :private_network, ip: '192.168.50.50'
