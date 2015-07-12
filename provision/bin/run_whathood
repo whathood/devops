@@ -6,11 +6,24 @@ home = ENV['HOME']
 user = ENV['USER']
 
 puts "*      cloning whathood devops"
-# required for when adding a mapped drive from vagrant
-system "mkdir -p #{home}/src"
-system "chown #{user}.#{user} #{home}/src"
-system "git clone https://github.com/whathood/wh-devops.git #{home}/src/wh-devops"
+
+cmds = [
+  # required for when adding a mapped drive from vagrant
+  "echo \"whoami is: \" `whoami`",
+  "echo \"home is: \" #{home}",
+  "sudo chmod 777 #{home}/src",
+  "git clone https://github.com/whathood/wh-devops.git #{home}/src/wh-devops"
+]
+
+cmds.each {|cmd|
+  puts cmd
+  unless system(cmd)
+    abort "could not execute cmd '#{cmd}'"
+  end
+}
 
 Dir.chdir "#{home}/src/wh-devops"
 
-system "sudo ./bin/setup"
+cmd = "sudo ./bin/setup"
+puts cmd
+`cmd`

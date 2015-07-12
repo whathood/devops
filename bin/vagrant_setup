@@ -3,9 +3,10 @@
 # run vagrant for the first time
 
 cmds = [
+  "rm -rf whathood",
   "vagrant destroy --force",
   "vagrant plugin install vagrant-triggers",
-  "./vagrant_provision"
+  "./bin/vagrant_provision"
 ]
 
 cmds.each { |cmd|

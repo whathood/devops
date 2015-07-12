@@ -21,9 +21,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #config.vm.network :private_network, ip: '192.168.50.50'
 
   config.vm.synced_folder "whathood/src/", "/home/vagrant/src/whathood", type: "rsync",
-    rsync__auto: true
-  config.vm.synced_folder "whathood/logs/", "/var/log/whathood", type: "rsync",
-    rsync__auto: true
+    rsync__auto: true, owner: "vagrant", group: "vagrant", create: true
+  config.vm.synced_folder "whathood/log/", "/var/log/whathood", type: "rsync",
+    rsync__auto: true, owner: "vagrant", group: "vagrant", create: true
 
   config.vm.provider "virtualbox" do |vb|
      vb.memory = 4096
