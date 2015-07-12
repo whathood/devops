@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+cmds = [
+  "vagrant halt",
+  "./vagrant_up --provision"
+]
+
+cmds.each { |cmd|
+  puts cmd
+  unless system(cmd)
+    abort "could not execute command: '#{cmd}'"
+  end
+}

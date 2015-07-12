@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+# run vagrant for the first time
+
+cmds = [
+  "vagrant destroy --force",
+  "vagrant plugin install vagrant-triggers",
+  "./vagrant_provision"
+]
+
+cmds.each { |cmd|
+  puts cmd
+  unless system(cmd)
+    abort "could not execute command: '#{cmd}'"
+  end
+}

@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+provision_opt = ""
+
+ARGV.each do|a|
+  if a == "--provision"
+    provision_opt = " " + a
+  end
+  puts "Argument: #{a}"
+end
+
+cmds = [
+  "vagrant halt",
+  "vagrant up#{provision_opt}",
+  "vagrant rsync-auto"
+]
+
+cmds.each { |cmd|
+  puts cmd
+  unless system(cmd)
+    abort "could not execute command: '#{cmd}'"
+  end
+}
