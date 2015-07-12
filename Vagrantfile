@@ -9,12 +9,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.hostname = "whvagrant"
   config.vm.box_check_update = false
 
+  # set auto_update to false, if you do NOT want to check the correct 
+  # additions version when booting this machine
+  config.vbguest.auto_update = false
+
   # forward so http://localhost:8082 points to the whathood home site
   config.vm.network :forwarded_port, guest: 8081, host: 8082
   config.vm.network :forwarded_port, guest: 5432, host: 5433
   config.vm.network "forwarded_port", guest: 21, host: 8021
 
-  config.vm.synced_folder "whathood_src/", "/home/vagrant/src/whathood"
+  # Required for NFS to work, pick any local IP
+  #config.vm.network :private_network, ip: '192.168.50.50'
+
+  config.vm.synced_folder "whathood/src/", "/home/vagrant/src/whathood", type: "rsync",
+    rsync__auto: true
+  config.vm.synced_folder "whathood/logs/", "/var/log/whathood", type: "rsync",
+    rsync__auto: true
 
   config.vm.provider "virtualbox" do |vb|
      vb.memory = 4096
