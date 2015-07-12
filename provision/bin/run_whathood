@@ -3,9 +3,12 @@
 # Build the docker containers required by Whathood from whathood-devops
 
 home = ENV['HOME']
+user = ENV['USER']
 
 puts "*      cloning whathood devops"
-system "mkdir #{home}/src"
+# required for when adding a mapped drive from vagrant
+system "mkdir -p #{home}/src"
+system "chown #{user}.#{user} #{home}/src"
 system "git clone https://github.com/whathood/wh-devops.git #{home}/src/wh-devops"
 
 Dir.chdir "#{home}/src/wh-devops"
