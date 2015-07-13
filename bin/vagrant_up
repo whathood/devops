@@ -12,7 +12,8 @@ end
 cmds = [
   "vagrant halt",
 
-  # SHOULD PROBABLY KILL rsync-auto HERE
+  # kill all running rsync-auto's
+  "ps aux | grep rsync-auto | grep -v grep | awk '{ print $2 }' | xargs kill",
 
   "vagrant up#{provision_opt}",
 
