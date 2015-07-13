@@ -6,6 +6,7 @@ cmds = [
   "rm -rf whathood",
   "vagrant destroy --force",
   "vagrant plugin install vagrant-triggers",
+  "vagrant plugin install vagrant-rsync-back",
   "./bin/vagrant_provision"
 ]
 

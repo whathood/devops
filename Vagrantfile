@@ -20,10 +20,25 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Required for NFS to work, pick any local IP
   #config.vm.network :private_network, ip: '192.168.50.50'
 
-  config.vm.synced_folder "whathood/src/", "/home/vagrant/src/whathood", type: "rsync",
-    rsync__auto: true, owner: "vagrant", group: "vagrant", create: true
-  config.vm.synced_folder "whathood/log/", "/var/log/whathood", type: "rsync",
-    rsync__auto: true, owner: "vagrant", group: "vagrant", create: true
+  sync_folders = [
+    {
+      guest: "/home/vagrant/src/whathood",
+      host:  "whathood/src"
+    },
+    {
+      guest: "/var/log/whathood",
+      host:  "whathood/log"
+    }
+  ]
+
+  sync_folders.each { |folders|
+    config.vm.synced_folder folders[:host], folders[:guest], type: "rsync",
+      rsync__auto: true,
+      owner: "vagrant",
+      group: "vagrant",
+      create: false,
+      rsync__args: ["--archive"]
+  }
 
   config.vm.provider "virtualbox" do |vb|
      vb.memory = 4096

@@ -12,7 +12,11 @@ end
 cmds = [
   "vagrant halt",
   "vagrant up#{provision_opt}",
-  "vagrant rsync-auto"
+  # pull the source back from the guest
+  "vagrant rsync-back",
+
+  # now auto rsync with out clearing the source dir
+#  "vagrant rsync-auto"
 ]
 
 cmds.each { |cmd|
