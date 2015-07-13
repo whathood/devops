@@ -24,10 +24,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     {
       guest: "/home/vagrant/src/whathood",
       host:  "whathood/src"
-    },
-    {
-      guest: "/var/log/whathood",
-      host:  "whathood/log"
     }
   ]
 
@@ -40,6 +36,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       rsync__args: ["--archive"]
   }
 
+  sync_folders = [
+    {
+      guest: "/var/log/whathood",
+      host:  "whathood/log"
+    }
+  ]
+
+  sync_folders.each { |folders|
+    config.vm.synced_folder folders[:host], folders[:guest]
+  }
   config.vm.provider "virtualbox" do |vb|
      vb.memory = 4096
      vb.cpus = 4
