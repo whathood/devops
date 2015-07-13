@@ -12,7 +12,7 @@ cmds = [
   "echo \"whoami is: \" `whoami`",
   "echo \"home is: \" #{home}",
   "sudo chmod 777 #{home}/src",
-  "git clone https://github.com/whathood/wh-devops.git #{home}/src/wh-devops"
+  "git clone https://github.com/whathood/wh-devops.git #{home}/src/wh-devops || true"
 ]
 
 cmds.each {|cmd|
@@ -26,4 +26,4 @@ Dir.chdir "#{home}/src/wh-devops"
 
 cmd = "sudo ./bin/setup"
 puts cmd
-`cmd`
+system cmd
