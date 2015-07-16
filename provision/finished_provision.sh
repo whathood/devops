@@ -1,7 +1,14 @@
-#!/bin/bash
+#!/usr/bin/env ruby
 
-echo "setup complete"
-echo " "
-echo " "
-echo "visit http://localhost:8082 on your host machine to test"
-echo " "
+site="http://localhost:8082"
+
+result=system("wget #{site}")
+
+puts result.inspect
+
+puts "setup complete"
+puts " "
+puts " "
+puts "visit #{site} on your host machine to test"
+puts " "
+

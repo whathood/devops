@@ -7,7 +7,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.box = 'ubuntu/trusty64'
   config.vm.hostname = "whvagrant"
-  config.vm.box_check_update = false
+  config.vm.box_check_update = true
 
   # set auto_update to false, if you do NOT want to check the correct 
   # additions version when booting this machine
@@ -47,8 +47,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.synced_folder folders[:host], folders[:guest]
   }
   config.vm.provider "virtualbox" do |vb|
-     vb.memory = 4096
-     vb.cpus = 4
+     vb.memory = 2048
+     vb.cpus = 1 
   end
 
   config.vm.provision "shell" do |s|
