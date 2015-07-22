@@ -11,7 +11,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # set auto_update to false, if you do NOT want to check the correct 
   # additions version when booting this machine
-  #config.vbguest.auto_update = true
+  config.vbguest.auto_update = true
 
   # forward so http://localhost:8082 points to the whathood home site
   config.vm.network :forwarded_port, guest: 8081, host: 8082
