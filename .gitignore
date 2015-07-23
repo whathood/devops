@@ -1,7 +1,6 @@
+user_config
 /whathood
 TODO.md
 /provision/config/whathood.yaml
 /tmp
 .vagrant/
-/provision/config/user_config.simple
-
