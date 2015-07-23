@@ -1,2 +1,26 @@
 # SPECIFIC TO whathood development
-alias cdw='cd /var/www/whathood'
+alias cdw='cd ~/src/whathood'
+
+# git
+
+alias ga='git add'
+alias gap='git add -p'
+alias gcim='git commit -m'
+alias gd='git diff'
+alias gst='git status'
+alias gup='git stash save && git pull'
+alias gpu='git push'
+alias gco='git checkout'
+alias gl='git log'
+
+# other
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias grep='grep --color=auto'
+alias l='ls -CF'
+alias la='ls -A'
+alias ll='ls -alF'
+alias ls='ls --color=auto'
+
+alias ack='ack-grep'
