@@ -20,11 +20,16 @@ apt-get update > /dev/null
 #
 echo "*      configuring screen"
 #
-$apt_cmd screen > /dev/null
+$apt_cmd \
+    screen \
+    ack-grep \
+    > /dev/null
+
 cp -f /vagrant/provision/config/screenrc /etc/screenrc
+cat $PROVISION_CONFIG_DIR/bash_bashrc >> /etc/bashrc
 
 echo "*      Running apt-get update"
-#
+
 sudo apt-get update -y > /dev/null 2>&1
 
 echo "*      installing docker"
@@ -33,13 +38,11 @@ wget -qO- https://get.docker.com/ | sh
 
 usermod -a -G docker vagrant
 
-
 $apt_cmd ack-grep vsftpd ftp
 cp $PROVISION_CONFIG_DIR/vsftpd.conf /etc/vsftpd.conf
 
-#
 echo "*      configuring vim"
-#
+
 su - vagrant -c "mkdir -p /home/vagrant/.vim/autoload"
 su - vagrant -c "mkdir -p /home/vagrant/.vim/bundle"
 su - vagrant -c "curl -LSso /home/vagrant/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim"
