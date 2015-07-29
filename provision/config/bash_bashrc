@@ -113,4 +113,5 @@ if ! shopt -oq posix; then
   fi
 fi
 
+source /etc/bash_aliases
 source /vagrant/provision/config/user_config

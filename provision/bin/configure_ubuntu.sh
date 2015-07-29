@@ -21,25 +21,32 @@ apt-get update > /dev/null
 echo "*      configuring screen"
 #
 $apt_cmd \
+    git \
     screen \
     ack-grep \
     > /dev/null
 
+apt-get -y autoremove
+
 cp -f /vagrant/provision/config/screenrc /etc/screenrc
-cat $PROVISION_CONFIG_DIR/bash_bashrc >> /etc/bashrc
 
 echo "*      Running apt-get update"
 
 sudo apt-get update -y > /dev/null 2>&1
 
-echo "*      installing docker"
-sudo apt-get install linux-image-generic-lts-trusty
-wget -qO- https://get.docker.com/ | sh
+has_docker=`which docker`
+
+echo "has_docker is '$has_docker'"
+if [ "$has_docker" = "" ]
+then
+  echo "*      installing docker"
+  sudo apt-get install -y linux-image-generic-lts-trusty
+  wget -qO- https://get.docker.com/ | sh
+else
+  echo "*      docker already installed"
+fi
 
 usermod -a -G docker vagrant
-
-$apt_cmd ack-grep vsftpd ftp
-cp $PROVISION_CONFIG_DIR/vsftpd.conf /etc/vsftpd.conf
 
 echo "*      configuring vim"
 
@@ -60,6 +67,8 @@ cp $PROVISION_CONFIG_DIR/bash_aliases /etc/bash_aliases
 chmod +rx /etc/bash_aliases
 
 echo "*      copying over bashrc"
-cp -f $SHARE_DIR/provision/config/vagrant_bashrc /home/vagrant/.bashrc
+cp -f $SHARE_DIR/provision/config/bash_bashrc /home/vagrant/.bashrc
+
+source /home/vagrant/.bashrc
 
 echo "* #### done in configure_ubuntu"

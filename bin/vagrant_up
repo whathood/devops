@@ -21,7 +21,9 @@ cmds = [
   "vagrant rsync-back",
 
   # now auto rsync with out clearing the source dir
-  "vagrant rsync-auto &"
+  "vagrant rsync-auto &",
+
+  "cp provision/config/application_env whathood/src/"
 ]
 
 cmds.each { |cmd|

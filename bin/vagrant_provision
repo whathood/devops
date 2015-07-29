@@ -2,7 +2,7 @@
 
 cmds = [
   "vagrant halt",
-  "./bin/vagrant_up --provision"
+  "time ./bin/vagrant_up --provision"
 ]
 
 cmds.each { |cmd|
