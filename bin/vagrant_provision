@@ -2,6 +2,9 @@
 
 cmds = [
   "vagrant halt",
+  "rm -rf whathood/log",
+  "rm -rf whathood/scr",
+  "mkdir -p whathood/log && mkdir -p whathood/src",
   "time ./bin/vagrant_up --provision"
 ]
 

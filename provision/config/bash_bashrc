@@ -115,3 +115,5 @@ fi
 
 source /etc/bash_aliases
 source /vagrant/provision/config/user_config
+
+set -o vi
