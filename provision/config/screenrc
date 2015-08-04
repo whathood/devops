@@ -13,3 +13,4 @@ stuff "tail -f /var/log/whathood/php-zend.log &^M"
 
 screen -t
 select 1
+stuff "cd /home/vagrant/src/whathood"
