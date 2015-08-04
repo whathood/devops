@@ -17,9 +17,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, guest: 8081, host: 8082
   config.vm.network :forwarded_port, guest: 5432, host: 5433
 
-  # Required for NFS to work, pick any local IP
-  #config.vm.network :private_network, ip: '192.168.50.50'
-
+  # windows sync is slow, so for the source dir, use rsync
   sync_folders = [
     {
       guest: "/home/vagrant/src/whathood",
@@ -36,14 +34,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       rsync__args: ["--archive"]
   }
 
-  sync_folders = [
+ 
+  # can use the slower windows sync for log files 
+  windows_sync_folders = [
     {
       guest: "/var/log/whathood",
       host:  "whathood/log"
     }
   ]
 
-  sync_folders.each { |folders|
+  windows_sync_folders.each { |folders|
     config.vm.synced_folder folders[:host], folders[:guest]
   }
   config.vm.provider "virtualbox" do |vb|
