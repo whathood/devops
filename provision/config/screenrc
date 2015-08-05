@@ -10,7 +10,8 @@ stuff "tail -f /var/log/whathood/foreman.log &^M"
 stuff "tail -f /var/log/whathood/nginx-access.log &^M"
 stuff "tail -f /var/log/whathood/nginx-error.log &^M"
 stuff "tail -f /var/log/whathood/php-zend.log &^M"
+stuff "docker logs --follow wh-jsx &^M"
 
 screen -t
 select 1
-stuff "cd /home/vagrant/src/whathood"
+stuff "cd /home/vagrant/src/whathood ^M"
