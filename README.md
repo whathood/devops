@@ -10,8 +10,10 @@ This repository is a vagrant configuration for Whathood. After installing Vagran
 6. if working off a fork of the repository, edit `provision/config/config.local.yaml` with the repository location
 7. run `./bin/vagrant_setup`
   * NOTE: during provisioning, ignore messages like `dpkg-preconfigure: unable to re-open stdin: No such file or directory`, it's a known bug
+8. to get access via the command line use the command: `vagrant ssh -c "screen -R"`
 
 ### Notes
+
 * under the vagrant install, the directory whathood_src contains the source code mapped to the development environment
 * connect to the ubuntu install: `vagrant ssh`
 * view the development site at: [http://localhost:8082](http://localhost:8082)
