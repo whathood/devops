@@ -13,6 +13,7 @@ cmds = [
   "echo \"home is: \" #{home}",
   "sudo chmod 777 #{home}/src",
   "git clone https://github.com/whathood/wh-devops.git #{home}/src/wh-devops || true",
+  "git checkout -b develop",
   "cp /vagrant/provision/config/config.local.yaml #{home}/src/wh-devops"
 ]
 
