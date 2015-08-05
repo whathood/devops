@@ -24,7 +24,10 @@ $apt_cmd \
     git \
     screen \
     ack-grep \
+    python-pip build-essential python-dev \
     > /dev/null
+
+sudo pip install Glances
 
 apt-get -y autoremove
 
