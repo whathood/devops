@@ -1,9 +1,13 @@
 #!/usr/bin/env ruby
 
+# RUN AS: vagrant
+
 # Build the docker containers required by Whathood from whathood-devops
 
 home = ENV['HOME']
 user = ENV['USER']
+
+devops_dir = "#{home}/src/wh-devops"
 
 puts "*      cloning whathood devops"
 
@@ -12,19 +16,32 @@ cmds = [
   "echo \"whoami is: \" `whoami`",
   "echo \"home is: \" #{home}",
   "sudo chmod 777 #{home}/src",
-  "git clone https://github.com/whathood/wh-devops.git #{home}/src/wh-devops || true",
-#  "git checkout -b develop",
-  "cp /vagrant/provision/config/config.local.yaml #{home}/src/wh-devops"
+  "git clone https://github.com/whathood/wh-devops.git #{devops_dir} || true",
+  "sudo chown vagrant.vagrant -R #{home}"
 ]
+
+Dir.chdir devops_dir
 
 cmds.each {|cmd|
   puts cmd
-  unless system(cmd)
+  unless system "#{cmd} >&2"
     abort "could not execute cmd '#{cmd}'"
   end
 }
 
-Dir.chdir "#{home}/src/wh-devops"
+cmds = [
+  "git checkout -b develop || git checkout develop",
+  "cp /vagrant/provision/config/config.local.yaml #{devops_dir}"
+]
+
+cmds.each {|cmd|
+  puts cmd
+  unless system "#{cmd} >&2"
+    abort "could not execute cmd '#{cmd}'"
+  end
+}
+
+Dir.chdir devops_dir
 
 cmd = "sudo ./bin/setup"
 puts cmd
