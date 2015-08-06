@@ -67,6 +67,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.trigger.after :up do
     run "vagrant rsync-back"
+    run "cp provision/config/application_env whathood/src/"
   end
 
   config.trigger.after :halt do
