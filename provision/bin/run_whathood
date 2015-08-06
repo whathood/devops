@@ -20,14 +20,14 @@ cmds = [
   "sudo chown vagrant.vagrant -R #{home}"
 ]
 
-Dir.chdir devops_dir
-
 cmds.each {|cmd|
   puts cmd
   unless system "#{cmd} >&2"
     abort "could not execute cmd '#{cmd}'"
   end
 }
+
+Dir.chdir devops_dir
 
 cmds = [
   "git checkout -b develop || git checkout develop",
