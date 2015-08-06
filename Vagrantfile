@@ -65,4 +65,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     s.path = 'provision/finished_provision.sh'
   end
 
+  config.trigger.after :up do
+    run "vagrant rsync-back"
+  end
+
+  config.trigger.after :halt do
+    run "./bin/killall_plugins"
+  end
+
 end

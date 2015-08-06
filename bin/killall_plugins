@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# kill all vagrant plugins running
+
+ps aux | grep vagrant | grep -v grep | grep -v "vagrant halt" | awk '{ print $2 }' | xargs kill

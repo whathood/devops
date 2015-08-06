@@ -12,13 +12,7 @@ end
 cmds = [
   "vagrant halt",
 
-  # kill all running rsync-auto's
-  "ps aux | grep rsync-auto | grep -v grep | awk '{ print $2 }' | xargs kill",
-
   "vagrant up#{provision_opt}",
-
-  # pull the source back from the guest
-  "vagrant rsync-back",
 
   # now auto rsync with out clearing the source dir
   "vagrant rsync-auto &",
