@@ -18,19 +18,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, guest: 5432, host: 5433
 
   # windows sync is slow, so for the source dir, use rsync
-  sync_folders = [
+  rsync_sync_folders = [
     {
       guest: "/home/vagrant/src/whathood",
       host:  "whathood/src"
     }
   ]
 
-  sync_folders.each { |folders|
+  rsync_sync_folders.each { |folders|
     config.vm.synced_folder folders[:host], folders[:guest], type: "rsync",
       rsync__auto: true,
       owner: "vagrant",
       group: "vagrant",
       create: false,
+      mount_options: ["dmode=775,fmode=664"],
       rsync__args: ["--archive"]
   }
 
@@ -44,8 +45,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   ]
 
   windows_sync_folders.each { |folders|
-    config.vm.synced_folder folders[:host], folders[:guest]
+    config.vm.synced_folder folders[:host], folders[:guest],
+      owner: "vagrant",
+      group: "vagrant",
+      mount_options: ["dmode=775,fmode=664"]
   }
+
   config.vm.provider "virtualbox" do |vb|
      vb.memory = 2048
      vb.cpus = 1 
