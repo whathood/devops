@@ -10,8 +10,6 @@ ARGV.each do|a|
 end
 
 cmds = [
-  "vagrant halt",
-
   "vagrant up#{provision_opt}",
 
   # now auto rsync with out clearing the source dir

@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 
 cmds = [
-  "vagrant halt",
   "rm -rf whathood/log",
   "rm -rf whathood/scr",
   "mkdir -p whathood/log && mkdir -p whathood/src",
