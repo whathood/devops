@@ -6,7 +6,6 @@ src_dir = "whathood"
 
 cmds = [
   "rm -rf whathood",
-  "vagrant destroy --force",
   "mkdir -p #{src_dir}/src",
   "mkdir -p #{src_dir}/log",
   "vagrant plugin install vagrant-vbguest",

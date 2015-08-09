@@ -43,6 +43,6 @@ cmds.each {|cmd|
 
 Dir.chdir devops_dir
 
-cmd = "sudo ./bin/setup"
+cmd = "./bin/setup"
 puts cmd
 system cmd

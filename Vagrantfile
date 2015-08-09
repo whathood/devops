@@ -18,37 +18,35 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, guest: 5432, host: 5433
 
   # windows sync is slow, so for the source dir, use rsync
-  rsync_sync_folders = [
+  [
     {
       guest: "/home/vagrant/src/whathood",
       host:  "whathood/src"
     }
   ]
-
-  rsync_sync_folders.each { |folders|
+  .each { |folders|
     config.vm.synced_folder folders[:host], folders[:guest], type: "rsync",
       rsync__auto: true,
       owner: "vagrant",
       group: "vagrant",
-      create: false,
-      mount_options: ["dmode=775,fmode=664"],
+      create: true,
+      mount_options: ["dmode=777,fmode=666"],
       rsync__args: ["--archive"]
   }
 
  
   # can use the slower windows sync for log files 
-  windows_sync_folders = [
+  [
     {
       guest: "/var/log/whathood",
       host:  "whathood/log"
     }
   ]
-
-  windows_sync_folders.each { |folders|
+  .each { |folders|
     config.vm.synced_folder folders[:host], folders[:guest],
       owner: "vagrant",
       group: "vagrant",
-      mount_options: ["dmode=775,fmode=664"]
+      mount_options: ["dmode=777,fmode=666"]
   }
 
   config.vm.provider "virtualbox" do |vb|
@@ -75,7 +73,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     run "cp provision/config/application_env whathood/src/"
   end
 
-  config.trigger.after :halt do
+  config.trigger.after [:halt, :destroy] do
     run "./bin/killall_plugins"
   end
 
