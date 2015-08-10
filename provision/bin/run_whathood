@@ -31,7 +31,8 @@ Dir.chdir devops_dir
 
 cmds = [
   "git checkout -b develop || git checkout develop",
-  "cp /vagrant/provision/config/config.local.yaml #{devops_dir}"
+  "cp /vagrant/provision/config/config.local.yaml #{devops_dir}",
+  "cp /vagrant/provision/config/whathood.local.yaml #{devops_dir}"
 ]
 
 cmds.each {|cmd|
@@ -43,6 +44,7 @@ cmds.each {|cmd|
 
 Dir.chdir devops_dir
 
-cmd = "./bin/setup"
+# must execute new login because vagrant user is not registered in docker group
+cmd = 'sudo ./bin/setup'
 puts cmd
 system cmd
