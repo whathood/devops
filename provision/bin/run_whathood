@@ -44,7 +44,7 @@ cmds.each {|cmd|
 
 Dir.chdir devops_dir
 
-# must execute new login because vagrant user is not registered in docker group
-cmd = 'sudo ./bin/setup'
+# don't sudo or the root user will own the git repo
+cmd = './bin/setup'
 puts cmd
 system cmd
