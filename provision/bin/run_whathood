@@ -30,8 +30,8 @@ cmds.each {|cmd|
 Dir.chdir devops_dir
 
 cmds = [
-  "git checkout -b develop || git checkout develop",
-  "git pull origin develop",
+  #"git checkout -b develop || git checkout develop",
+  #"git pull origin develop",
   "cp /vagrant/provision/config/config.local.yaml #{devops_dir}",
   "cp /vagrant/provision/config/whathood.local.yaml #{devops_dir} || true"
 ]
