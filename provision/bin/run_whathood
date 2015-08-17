@@ -15,8 +15,11 @@ cmds = [
   # required for when adding a mapped drive from vagrant
   "echo \"whoami is: \" `whoami`",
   "echo \"home is: \" #{home}",
-  "sudo chmod 777 #{home}/src",
-  "git clone https://github.com/whathood/wh-devops.git #{devops_dir} || true",
+
+  # if Vagrantfile is not creating a source file, you'll need to do it
+  "sudo mkdir #{home}/src",
+  "sudo chown -R vagrant #{home}/src",
+  "git clone https://github.com/whathood/wh-devops.git #{devops_dir}",
   "sudo chown vagrant.vagrant -R #{home}"
 ]
 
