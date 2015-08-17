@@ -116,4 +116,6 @@ fi
 source /etc/bash_aliases
 source /vagrant/provision/config/user_config
 
+export EDITOR=/usr/bin/vi
+
 set -o vi
