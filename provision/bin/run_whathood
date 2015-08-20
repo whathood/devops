@@ -54,3 +54,7 @@ Dir.chdir devops_dir
 cmd = './bin/setup'
 puts cmd
 system cmd
+
+cmd = 'cd /home/vagrant/src/whathood; ./d-bin/import_db'
+puts cmd
+system cmd
