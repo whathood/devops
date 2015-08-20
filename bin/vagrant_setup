@@ -11,7 +11,7 @@ cmds = [
   "vagrant plugin install vagrant-vbguest",
   "vagrant plugin install vagrant-triggers",
   "vagrant plugin install vagrant-rsync-back",
-  "./bin/vagrant_provision"
+  "vagrant up --provision"
 ]
 
 cmds.each { |cmd|
