@@ -17,9 +17,11 @@ cmds = [
   "echo \"home is: \" #{home}",
 
   # if Vagrantfile is not creating a source file, you'll need to do it
-  "sudo mkdir #{home}/src",
+  "sudo mkdir -p #{home}/src",
   "sudo chown -R vagrant #{home}/src",
-  "git clone https://github.com/whathood/wh-devops.git #{devops_dir}",
+
+  # try to clone wh-devops
+  "git clone https://github.com/whathood/wh-devops.git #{devops_dir} || true",
   "sudo chown vagrant.vagrant -R #{home}"
 ]
 
