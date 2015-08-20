@@ -25,6 +25,7 @@ $apt_cmd \
     screen \
     ack-grep \
     python-pip build-essential python-dev \
+    apache2-utils \
     > /dev/null
 
 sudo pip install Glances
