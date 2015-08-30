@@ -2,15 +2,10 @@
 
 # run vagrant for the first time
 
-src_dir = "whathood"
-
 cmds = [
-  "rm -rf whathood",
-  "mkdir -p #{src_dir}/src",
-  "mkdir -p #{src_dir}/log",
-  "vagrant plugin install vagrant-vbguest",
-  "vagrant plugin install vagrant-triggers",
-  "vagrant plugin install vagrant-rsync-back",
+  "vagrant plugin install vagrant-vbguest || true",
+  "vagrant plugin install vagrant-triggers || true",
+  "vagrant plugin install vagrant-rsync-back || true",
   "vagrant up --provision"
 ]
 

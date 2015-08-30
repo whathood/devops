@@ -1,5 +1,6 @@
 # SPECIFIC TO whathood development
 alias cdw='cd ~/src/whathood'
+alias cdops='cd ~/src/wh-devops'
 
 # git
 
