@@ -14,12 +14,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vbguest.auto_update = true
 
   # forward so http://localhost:8082 points to the whathood home site
-  config.vm.network :forwarded_port, guest: 8081, host: 8082
+  config.vm.network :forwarded_port, guest: 8081, host: 8082, auto_correct: true
 
   # webgrind
-  config.vm.network :forwarded_port, guest: 8083, host: 8083
+  config.vm.network :forwarded_port, guest: 8083, host: 8083, auto_correct: true
 
-  config.vm.network :forwarded_port, guest: 5432, host: 5433
+  config.vm.network :forwarded_port, guest: 5432, host: 5433, auto_correct: true
 
   if false
     sync_folders(config)
