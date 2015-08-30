@@ -19,8 +19,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # webgrind
   config.vm.network :forwarded_port, guest: 8083, host: 8083, auto_correct: true
 
-  config.vm.network :forwarded_port, guest: 5432, host: 5433, auto_correct: true
-
   if false
     sync_folders(config)
   end
