@@ -43,7 +43,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.trigger.after [:halt, :destroy] do
-    run "./bin/killall_plugins"
+#    run "./bin/killall_plugins"
   end
 
 end
