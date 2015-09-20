@@ -64,6 +64,8 @@ su - vagrant -c 'git clone https://github.com/kchmck/vim-coffee-script.git /home
 su - vagrant -c 'git clone git://github.com/ntpeters/vim-better-whitespace.git /home/vagrant/.vim/bundle/vim-better-whitespace > /dev/null 2>&1'
 cp -f $PROVISION_CONFIG_DIR/vimrc /etc/vim/vimrc
 
+sudo echo "WH_APP_ENV=development" >> /etc/environment
+
 #
 echo "*      copying bash_aliases"
 #

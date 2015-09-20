@@ -1,8 +1,9 @@
+provision/config/ssh
 *.swp
 .DS_store
 user_config
 /whathood
 TODO.md
-/provision/config/whathood.yaml
+/provision/config/whathood.local.yaml
 /tmp
 .vagrant/

@@ -12,6 +12,8 @@ This repository is a vagrant configuration for Whathood. After installing Vagran
   * NOTE: during provisioning, ignore messages like `dpkg-preconfigure: unable to re-open stdin: No such file or directory`, it's a known bug
 8. to get access via the command line use the command: `vagrant ssh -c "screen -R"`
 
+Vagrant will copy a directory provision/config/ssh into the vagrant user's home directory, allowing automatic pushes to github.
+
 ### Notes
 
 * under the vagrant install, the directory whathood_src contains the source code mapped to the development environment
