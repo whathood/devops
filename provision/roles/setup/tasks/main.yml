@@ -1,0 +1,76 @@
+---
+
+- name: Setting whathood env var
+  command: echo "WH_APP_ENV=development" >> /etc/environment
+
+- file: path=/home/{{user}}/src state=directory mode=0755 owner={{user}} group={{user}}
+
+- name: Clone whathood dev-ops
+  git:
+    repo=https://github.com/whathood/wh-devops.git dest=/home/{{user}}/src/wh-devops
+
+- name: copy config.local.yaml
+  copy: src=config.local.yaml dest=/home/{{user}}/src/wh-devops
+- name: copy config.local.yaml
+  copy: src=config.local.yaml dest=/home/{{user}}/src/wh-devops
+
+- name: copy whathood.local.yaml
+  copy: src=whathood.local.yaml dest=/home/{{user}}/src/wh-devops
+
+- name: copy application_env
+  copy: src=application_env dest=/home/{{user}}/src/wh-devops
+
+# pull the repo so it's ready to run under upstart
+- docker_image: path=/home/{{user}}/src/wh-devops/docker/jsx name="whathood/jsx"
+
+- name: postgis container
+  docker:
+    name: wh-postgis
+    image: quay.io/whathood/docker-postgis:latest
+    detach: true
+    ports:
+      - "5432:5432"
+    state: started
+    #volumes_from:#{postgres_data_dir}:/var/lib/postgresql:rw \
+
+- name: memcached container
+  docker:
+    name: wh_memcached
+    image: quay.io/whathood/memcached:latest
+    detach: true
+    ports:
+      - "11211:11211"
+    state: started
+
+- git: repo=https://github.com/whathood/whathood.git dest=/home/{{user}}/src/whathood
+
+- name: wh-nginx container as {{user}}
+  docker:
+    name: wh-nginx
+    image: quay.io/whathood/docker-nginx
+    state: started
+    detach: true
+    ports:
+      - "8081:80" 
+      - "8083:81"
+    volumes:
+      - /var/log/whathood:/var/log/whathood:rw
+      - /home/{{user}}/src/whathood:/var/www/whathood:rw
+    links:
+      - "wh-postgis:wh-postgis"
+      - "wh_memcached:wh_memcached"
+    env:
+      PGPORT: 5432
+      PGUSER: docker
+      PGHOST: wh-postgis
+
+#- command: docker exec wh-nginx /bin/sh -c 'hostname; cd /var/www/whathood; ./bin/run_composer'
+
+#- command: docker exec wh-nginx /bin/sh -c 'cd /var/www/whathood/app; php composer.phar update'
+
+#-  command: docker exec wh-nginx /bin/sh -c 'cd /var/www/whathood/app; php composer.phar dumpautoload -o'
+
+- name: running db import
+  command: docker exec wh-nginx /bin/sh -c 'cd /var/www/whathood/; bin/import_db'
+- register: out
+  debug: var=out.std_out

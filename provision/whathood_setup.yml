@@ -1,0 +1,15 @@
+---
+
+- hosts: all
+  user: vagrant
+  remote_user: vagrant
+  sudo: yes
+  vars:
+    user: vagrant
+    log_dir: /var/log/whathood
+  roles:
+    - common
+    - { role: docker.ubuntu, docker_group_members: [ vagrant ]}
+    - vim
+    - rvm
+    - { role: setup, become: vagrant, user: vagrant }

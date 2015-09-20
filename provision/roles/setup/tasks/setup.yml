@@ -1,0 +1,57 @@
+---
+
+- command: mkdir -p {{log_dir}}
+
+- command: chmod 777 -R {{log_dir}}
+
+- command: touch {{php_zend_log}}
+
+- command: mkdir -p {{postgres_data_dir}}
+
+- command: chown -R {{USERNAME}} {{postgres_data_dir}}
+
+    # pull the repo so it's ready to run under upstart
+- command: cd docker/jsx && sudo docker build -t whathood/jsx ."
+
+    # run postgis
+- command: #{docker_cmd} run --detach \
+        -p 5432:5432 \
+        -v #{postgres_data_dir}:/var/lib/postgresql:rw \
+        --name='wh-postgis' \
+        quay.io/whathood/docker-postgis:#{QUAY_TAG}",
+
+    # run memcached
+    "#{docker_cmd} run --detach \
+        -p 11211:11211 \
+        --name 'wh_memcached' \
+        quay.io/whathood/memcached:latest",
+
+    # necessary ?
+    "#{docker_cmd} start wh-postgis",
+
+    # will not clone into already existing whathood git dir
+    "git clone https://github.com/whathood/whathood.git #{git_dir}",
+
+    "cp -f application_env #{git_dir}",
+
+    # run the docker image
+    "#{docker_cmd} run --detach \
+        --link wh-postgis:wh-postgis \
+        --link wh_memcached:wh_memcached \
+        -p #{HTTP_PORT}:80 \
+        -p 8083:81 \
+        -v #{log_dir}:/var/log/whathood:rw \
+        -v #{git_dir}:/var/www/whathood:rw \
+        -e 'PGPORT=5432' \
+        -e 'PGUSER=docker' \
+        -e 'PGHOST=wh-postgis' \
+        --name='wh-nginx' \
+        #{NGINX_IMG}",
+
+    # generate the zend vendor libaries
+    "sudo docker exec wh-nginx #{docker_src_dir}/bin/run_composer",
+
+    "sudo docker exec wh-nginx /bin/sh -c 'cd /var/www/whathood/app; php composer.phar update'",
+
+    # create an autoload classmap
+    "sudo docker exec wh-nginx /bin/sh -c 'cd /var/www/whathood/app; php composer.phar dumpautoload -o'",

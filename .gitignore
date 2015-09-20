@@ -4,6 +4,8 @@ provision/config/ssh
 user_config
 /whathood
 TODO.md
-/provision/config/whathood.local.yaml
+whathood.local.yaml
 /tmp
 .vagrant/
+/cookbooks/
+/tmp/librarian/

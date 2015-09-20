@@ -1,0 +1,29 @@
+---
+
+# Only run "update_cache=yes" if the last one is more than 3600 seconds ago
+- apt: update_cache=yes cache_valid_time=3600
+
+- name: Install git
+  sudo: yes
+  apt: pkg={{item}} state=installed
+  with_items:
+    - screen
+    - git
+    - ack-grep
+    - apache2-utils
+    - python-dev
+    - python-pip
+    - build-essential
+
+- name: Install Glances
+  sudo: yes
+  pip: name=Glances
+
+- name: Copy screenrc
+  template: src=screenrc dest=/etc/screenrc
+
+- name: Copy bash aliases
+  template: src=bash_aliases dest=/etc/bash_aliases
+
+- name: Copy bash rc
+  template: src=bash_bashrc dest=/home/{{user}}/.bashrc

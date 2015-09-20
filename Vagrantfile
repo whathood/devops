@@ -7,7 +7,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.box = 'ubuntu/trusty64'
   config.vm.hostname = "whvagrant"
-  config.vm.box_check_update = true
+  #config.vm.box_check_update = true
 
   # set auto_update to false, if you do NOT want to check the correct 
   # additions version when booting this machine
@@ -19,77 +19,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # webgrind
   config.vm.network :forwarded_port, guest: 8083, host: 8083, auto_correct: true
 
-  if false
-    sync_folders(config)
-  end
-
   config.vm.provider "virtualbox" do |vb|
      vb.memory = 2048
      vb.cpus = 1 
   end
 
-  config.vm.provision "shell" do |s|
-    s.path = "provision/setup_vagrant.sh"
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "./provision/whathood_setup.yml"
   end
 
-  config.vm.provision "shell" do |s|
-    s.privileged = false
-    s.path = "provision/bin/run_whathood"
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "./provision/whathood_deploy.yml"
   end
-
-  config.vm.provision "shell" do |s|
-    s.privileged = false
-    s.path = 'provision/finished_provision.sh'
-  end
-
-  config.trigger.after [:halt, :destroy] do
-#    run "./bin/killall_plugins"
-  end
-
 end
-
-
-BEGIN {
-
-  def sync_folders(config)
-      # windows sync is slow, so for the source dir, use rsync
-      [
-        {
-          guest: "/home/vagrant/src/whathood",
-          host:  "whathood/src"
-        }
-      ]
-      .each { |folders|
-        config.vm.synced_folder folders[:host], folders[:guest], type: "rsync",
-          rsync__auto: true,
-          owner: "vagrant",
-          group: "vagrant",
-          create: true,
-          mount_options: ["dmode=777,fmode=666"],
-          rsync__args: ["--archive"]
-      }
-
-     
-      # can use the slower windows sync for log files 
-      [
-        {
-          guest: "/var/log/whathood",
-          host:  "whathood/log"
-        }
-      ]
-      .each { |folders|
-        config.vm.synced_folder folders[:host], folders[:guest],
-          owner: "vagrant",
-          group: "vagrant",
-          mount_options: ["dmode=777,fmode=666"]
-      }
-
-      config.trigger.after :up do
-        run "vagrant rsync-back"
-        run "cp provision/config/application_env whathood/src/"
-      end
-
-
-  end
-}
-
