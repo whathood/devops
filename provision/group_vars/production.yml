@@ -1,0 +1,3 @@
+application_env: production
+remote_user: whathood
+docker_nginx_img: quay.io/whathood/docker-nginx:latest

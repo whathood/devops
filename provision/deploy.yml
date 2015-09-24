@@ -1,0 +1,15 @@
+---
+
+- hosts: development
+  vars:
+    user: "{{ ansible_ssh_user }}"
+  roles:
+    - compile
+    - composer
+    - { role: "nginx", container_name: "nginx-{{ application_env }}", http_port: "8081", app_dir: "{{ deploy_working_dir }}" }
+
+#- hosts: development
+#  vars:
+#    user: "{{ ansible_ssh_user }}"
+#  roles:
+#    - { role: "nginx", container_name: "nginx-prod", http_port: "8080", app_dir: "/opt/whathood" }

@@ -1,5 +1,0 @@
----
-
-- command: bin/deploy
-  args:
-    chdir: /home/vagrant/src/wh-devops

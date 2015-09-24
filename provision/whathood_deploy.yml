@@ -1,8 +1,0 @@
----
-- hosts: all
-  user: vagrant
-  remote_user: vagrant
-  vars:
-    user: vagrant
-  roles:
-    - { role: deploy }

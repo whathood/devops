@@ -1,0 +1,80 @@
+---
+
+- name: clear deploy_working_dir
+  shell: rm -rf {{ deploy_working_dir }} || true
+  sudo: yes
+
+   # need to cd into git_dir and clone from there because the dir will already exist
+- name: clone whathood repo
+  git: repo={{whathood_git_url}} dest="{{ deploy_working_dir }}"
+
+- file: path=/var/log/whathood state=directory mode=0777
+  sudo: yes
+
+- file: path=/var/log/whathood/php-zend.log mode=0777
+  sudo: yes
+
+- shell: stop wh-foreman || true
+  sudo: yes
+
+- shell: stop wh-worker || true
+  sudo: yes
+
+- shell: docker stop wh-jsx || true
+  sudo: yes
+  when: application_env == 'development'
+
+- shell: docker rm -f wh-jsx || true
+  sudo: yes
+  when: application_env == 'development'
+
+- shell: docker start wh_memcached || true
+  sudo: yes
+
+- name: check database schema
+  command: "{{ deploy_dir }}/d-bin/check_db_schema"
+
+  command: echo `ssh-keyscan github.com`
+  sudo: yes
+
+- name: add github to known hosts
+  command: echo `ssh-keyscan github.com` >> /root/.ssh/known_hosts
+  sudo: yes
+
+- name: npm install dependencies
+  command: docker run -it --rm -v {{ deploy_working_dir }}:/data whathood/grunt npm install
+  args:
+    chdir: "{{ deploy_working_dir }}"
+  sudo: yes
+
+- name: compile coffeescript
+  command: docker run -it --rm -v {{ deploy_working_dir }}:/data whathood/grunt grunt coffee
+  args:
+    chdir: "{{ deploy_working_dir }}"
+  sudo: yes
+
+- file: path={{ deploy_working_dir }}/app/data/DoctrineORMModule/Proxy mode=777 owner={{user}} group={{user}} state=directory
+  sudo: yes
+ 
+- file: path={{ deploy_working_dir }}/app/data mode=0777
+  sudo: yes
+
+- command: rm -f /etc/init/wh-*.conf
+
+- command: cp -f /home/{{user}}/src/wh-devops/etc/upstart/wh-worker.conf /etc/init/wh-worker.conf
+  sudo: yes
+
+- command: cp -f /home/{{user}}/src/wh-devops/etc/upstart/wh-foreman.conf /etc/init/wh-foreman.conf
+  sudo: yes
+  when: application_env == 'development'
+
+- command: start wh-worker
+  sudo: yes
+
+- command: start wh-foreman
+  sudo: yes
+  when: application_env == 'development'
+
+- command: docker run --rm -v {{ deploy_working_dir }}/libs/react:/src -v {{ deploy_working_dir }}/app/public/js/whathood:/build --name wh-jsx whathood/jsx --extension jsx src build
+  sudo: yes
+

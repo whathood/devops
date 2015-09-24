@@ -1,0 +1,8 @@
+---
+
+- hosts: development
+  vars:
+    user: "{{ ansible_ssh_user }}"
+  roles:
+    - { role: "import_db", nginx_container: "nginx-{{application_env}}" }
+

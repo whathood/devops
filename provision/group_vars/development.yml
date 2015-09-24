@@ -1,0 +1,8 @@
+---
+
+application_env: development
+remote_user: vagrant
+docker_nginx_img: quay.io/whathood/nginx-dev:latest
+application_root: /home/vagrant/src/whathood
+docker_dir: /home/vagrant/src/wh-devops/docker
+deploy_working_dir: /home/vagrant/src/whathood

@@ -1,0 +1,69 @@
+---
+# configure any docker images on the host
+
+# pull the repo so it's ready to run under upstart
+- docker_image: path={{ docker_dir }}/jsx name="whathood/jsx"
+  sudo: yes
+  sudo_user: root
+
+- docker_image: path={{ docker_dir }}/composer name="whathood/composer"
+  sudo: yes
+  sudo_user: root
+
+- name: postgis container
+  docker:
+    name: wh-postgis
+    image: quay.io/whathood/docker-postgis:latest
+    detach: true
+    ports:
+      - "5432:5432"
+    state: started
+    #volumes_from:#{postgres_data_dir}:/var/lib/postgresql:rw \
+  sudo: yes
+  sudo_user: root
+
+- name: memcached container
+  docker:
+    name: wh_memcached
+    image: quay.io/whathood/memcached:latest
+    detach: true
+    ports:
+      - "11211:11211"
+    state: started
+  sudo: yes
+  sudo_user: root
+
+- name: memcached container
+  docker:
+    name: wh_memcached
+    image: quay.io/whathood/memcached:latest
+    detach: true
+    ports:
+      - "11211:11211"
+    state: started
+  sudo: yes
+  sudo_user: root
+- git: repo=https://github.com/whathood/whathood.git dest=/home/{{user}}/src/whathood
+
+- name: wh-nginx container as "{{ user }}"
+  docker:
+    name: wh-nginx
+    image: "{{ docker_nginx_img }}"
+    state: started
+    detach: true
+    ports:
+      - "8081:80" 
+      - "8083:81"
+    volumes:
+      - /var/log/whathood:/var/log/whathood:rw
+      - /home/{{user}}/src/whathood:/var/www/whathood:rw
+    links:
+      - "wh-postgis:wh-postgis"
+      - "wh_memcached:wh_memcached"
+    env:
+      PGPORT: 5432
+      PGUSER: docker
+      PGHOST: wh-postgis
+  sudo: yes
+  sudo_user: root
+
