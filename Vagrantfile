@@ -15,13 +15,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :private_network, ip: "192.168.111.222"
 
   # under /opt
-  config.vm.network :forwarded_port, guest: 8081, host: 8080
+  config.vm.network :forwarded_port, guest: 8080, host: 8080
 
   # under /home/{{user}}/src/whathood
-  config.vm.network :forwarded_port, guest: 8082, host: 8081
+  config.vm.network :forwarded_port, guest: 8081, host: 8081
 
   # webgrind
-  config.vm.network :forwarded_port, guest: 8083, host: 8082
+  config.vm.network :forwarded_port, guest: 8082, host: 8082
 
   config.vm.provider "virtualbox" do |vb|
      vb.memory = 2048
@@ -35,10 +35,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ansible.playbook = "provision/setup.yml"
   end
 
-  config.vm.provision "ansible" do |ansible|
-    ansible.inventory_path = "./provision/inventory"
-    ansible.extra_vars = { ansible_ssh_user: 'vagrant' }
-    ansible.limit = 'development'
-    ansible.playbook = "./provision/deploy.yml"
-  end
 end

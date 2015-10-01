@@ -4,4 +4,4 @@
   vars:
     user: "{{ ansible_ssh_user }}"
   roles:
-    - composer
+    - docker_setup

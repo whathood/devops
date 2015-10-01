@@ -1,24 +1,52 @@
 ---
 
-- docker:
+- name: wh-postgis is started
+  docker:
     name: wh-postgis
     image: quay.io/whathood/docker-postgis
     state: started
+  sudo: yes
 
-- docker:
+- name: wh_memcached is started
+  docker:
     name: wh_memcached
     image: quay.io/whathood/docker-postgis
     state: started
+  sudo: yes
 
-- docker:
-    name: "{{ container_name }}"
-    image: "{{ docker_nginx_img }}"
+- name: nginx PROD container is absent
+  docker:
+    name: wh_nginx-prod
+    image: quay.io/whathood/docker-nginx
     state: absent
+  sudo: yes
+
+- name: nginx container is absent
+  docker:
+    name: "{{ docker_nginx_container }}"
+    image: "{{ docker_nginx_image }}"
+    state: absent
+  sudo: yes
 
 - file: path=/var/log/whathood state=directory mode=0777
 
 - file: path=/var/log/whathood/php-zend.log mode=0777
 
-- name: relaunch the nginx container
-  command: docker run --detach -v "/var/log/whathood:/var/log/whathood:rw" -v "{{ app_dir }}:/var/www/whathood:rw" -p "{{ http_port }}:80" --link wh-postgis:wh-postgis --link wh_memcached:wh_memcached -e 'PGPORT=5432' -e 'PGUSER=docker' -e 'PGHOST=wh-postgis' --name {{container_name}} {{ docker_nginx_img }}
+- name: run PROD nginx container
+  command: >
+    docker run --detach
+      -v "/var/log/whathood:/var/log/whathood:rw"
+      -v "{{item.base_dir}}:/var/www/whathood:rw"
+      -p "{{item.port}}:80" 
+      --link wh-postgis:wh-postgis
+      --link wh_memcached:wh_memcached
+      -e 'PGPORT=5432'
+      -e 'PGUSER=docker'
+      -e 'PGHOST=wh-postgis'
+      --name {{item.container_name}}
+      {{ item.docker_image }}
   sudo: yes
+  when: item.desired_env == application_env or item.desired_env == 'production'
+  with_items:
+  - { container_name: wh_nginx-prod, docker_image: "{{docker_nginx_image}}", base_dir: /opt/whathood, port: 8080, desired_env: "production" }
+  - { container_name: wh_nginx-dev, docker_image: quay.io/whathood/nginx-dev, base_dir:  "/home/vagrant/src/whathood", port: 8081, desired_env: "development" }

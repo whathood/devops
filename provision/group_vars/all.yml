@@ -2,3 +2,5 @@
 whathood_git_url: https://github.com/whathood/whathood.git
 devops_git_url: https://github.com/whathood/devops.git
 deploy_dest_dir: /opt/whathood
+postgres_data_dir: /usr/lib/whathood/postgresql
+production_working_dir: /opt/whathood
