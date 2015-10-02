@@ -1,0 +1,5 @@
+---
+
+- name: copy the code over
+  command: cp -r {{ deploy_working_dir }} {{ production_working_dir }}
+  sudo: yes
