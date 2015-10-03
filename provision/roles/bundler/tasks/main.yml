@@ -1,0 +1,7 @@
+---
+
+# run bundler on the whathood src dir
+- name: bundle update
+  command: bundle update
+  args:
+    chdir: "{{ deploy_working_dir }}"

@@ -6,6 +6,7 @@
   roles:
     #- compile
     #- composer
+    - bundler
     - copy_code
     - { role: "nginx", container_name: "nginx-{{ application_env }}", http_port: "8081", app_dir: "{{ deploy_working_dir }}" }
 
