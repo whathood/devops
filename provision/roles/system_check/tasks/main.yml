@@ -1,6 +1,10 @@
 ---
 
 - name: run system check
-  command: bin/check_system
+  action: shell bin/check_system
   args:
     chdir: "{{ deploy_working_dir }}"
+  register: result
+  until: result.stdout.find("SYSTEM CHECK OK") != -1
+  retries: 5
+  delay: 3
