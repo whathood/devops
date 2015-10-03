@@ -1,0 +1,4 @@
+#!/bin/sh
+
+play="$@"
+ansible-playbook -i provision/inventory provision/$play.yml
