@@ -6,6 +6,7 @@
     log_dir: /var/log/whathood
   roles:
     - { role: common, sudo: yes }
+    # Set up docker on the target machine
     - { role: virt_host_docker,
         sudo: yes,
         vars: { user: user },
@@ -14,7 +15,9 @@
     - { role: vim, sudo: yes }
     - { role: rvm, sudo: yes }
     - { role: setup }
-    - { role: docker_setup, sudo: yes }
+
+    # get the docker images prepped
+    - { role: prep_docker_env, sudo: yes }
 
 - include: deploy.yml
 
