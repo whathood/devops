@@ -12,8 +12,12 @@
         vars: { user: user },
         docker_group_members: [ user ]
       }
+
     - { role: vim, sudo: yes }
+
+- include: git.yml
     - { role: rvm, sudo: yes }
+
     - { role: setup }
 
     # get the docker images prepped
