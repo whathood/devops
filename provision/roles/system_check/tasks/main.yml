@@ -1,0 +1,6 @@
+---
+
+- name: run system check
+  command: bin/check_system
+  args:
+    chdir: "{{ deploy_working_dir }}"

@@ -21,18 +21,21 @@
     state: absent
   sudo: yes
 
-- name: nginx container is absent
+- name: "{{ item.container_name }} nginx container is absent"
   docker:
-    name: "{{ docker_nginx_container }}"
+    name: "{{ item.container_name }}"
     image: "{{ docker_nginx_image }}"
     state: absent
   sudo: yes
+  with_items:
+  - { container_name: wh_nginx-prod }
+  - { container_name: wh_nginx-dev }
 
 - file: path=/var/log/whathood state=directory mode=0777
 
 - file: path=/var/log/whathood/php-zend.log mode=0777
 
-- name: run PROD nginx container
+- name: run {{ desired_env }} nginx container
   command: >
     docker run --detach
       -v "/var/log/whathood:/var/log/whathood:rw"
