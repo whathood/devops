@@ -1,3 +1,4 @@
+provision/hosts/production
 provision/config/ssh
 *.swp
 .DS_store
