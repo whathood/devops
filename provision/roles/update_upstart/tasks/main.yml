@@ -3,8 +3,19 @@
 - name: remove any upstart scripts
   command: rm -rf /etc/init/wh-*
 
+- command: stop "{{ item.name }}"
+  sudo: true
+  ignore_errors: yes
+  with_items:
+  - { name: "wh-worker" }
+  - { name: "wh-foreman" }
+
 - name: copy over current upstart scripts
-  command: cp {{ deploy_working_dir }}/etc/upstart/* /etc/init
+  file: src=templates/{{item.file}} dest=/etc/init
+  sudo: yes
+  with_items:
+  - { file: wh-worker.conf }
+  - { file: wh-foreman.conf }
 
 - name: start the upstart scripts
   command: start wh-worker
@@ -12,4 +23,4 @@
 
 - name: start wh-foreman
   command: start wh-foreman
-  when: "{{application_env}}" == 'development'
+  when: application_env == "development"

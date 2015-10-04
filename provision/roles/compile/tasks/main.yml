@@ -60,22 +60,7 @@
 - file: path={{ deploy_working_dir }}/app/data mode=0777
   sudo: yes
 
-- command: rm -f /etc/init/wh-*.conf
-
-- command: cp -f /home/{{user}}/src/wh-devops/etc/upstart/wh-worker.conf /etc/init/wh-worker.conf
-  sudo: yes
-
-- command: cp -f /home/{{user}}/src/wh-devops/etc/upstart/wh-foreman.conf /etc/init/wh-foreman.conf
-  sudo: yes
-  when: application_env == 'development'
-
-- command: start wh-worker
-  sudo: yes
-
-- command: start wh-foreman
-  sudo: yes
-  when: application_env == 'development'
-
-- command: docker run --rm -v {{ deploy_working_dir }}/libs/react:/src -v {{ deploy_working_dir }}/app/public/js/whathood:/build --name wh-jsx whathood/jsx --extension jsx src build
+- name: compile react
+  command: docker run --rm -v {{ deploy_working_dir }}/libs/react:/src -v {{ deploy_working_dir }}/app/public/js/whathood:/build --name wh-jsx whathood/jsx --extension jsx src build
   sudo: yes
 

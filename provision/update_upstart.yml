@@ -1,0 +1,5 @@
+---
+
+- hosts: development
+  roles:
+  - { role: update_upstart, sudo: yes }
