@@ -1,5 +1,9 @@
 ---
 
+- name: rename old production dir
+  command: mv {{ production_working_dir }} "{{production_working_dir}}`date +%Y-%m-%d`"
+  ignore_errors: yes
+
 - name: copy the code over
   command: cp -r {{ deploy_working_dir }} {{ production_working_dir }}
   sudo: yes

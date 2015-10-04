@@ -54,7 +54,7 @@
     chdir: "{{ deploy_working_dir }}"
   sudo: yes
 
-- file: path={{ deploy_working_dir }}/app/data/DoctrineORMModule/Proxy mode=777 owner={{user}} group={{user}} state=directory
+- file: path={{ deploy_working_dir }}/app/data/DoctrineORMModule/Proxy mode=777 owner={{user}} state=directory
   sudo: yes
  
 - file: path={{ deploy_working_dir }}/app/data mode=0777

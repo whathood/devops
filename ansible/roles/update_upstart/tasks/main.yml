@@ -2,6 +2,7 @@
 
 - name: remove any upstart scripts
   command: rm -rf /etc/init/wh-*
+  sudo: true
 
 - command: stop "{{ item.name }}"
   sudo: true
@@ -11,11 +12,11 @@
   - { name: "wh-foreman" }
 
 - name: copy over current upstart scripts
-  file: src=templates/{{item.file}} dest=/etc/init
+  template: src={{item.file}} dest=/etc/init/{{item.dest}}
   sudo: yes
   with_items:
-  - { file: wh-worker.conf }
-  - { file: wh-foreman.conf }
+  - { file: wh-worker.conf.j2, dest: wh-worker.conf }
+  - { file: wh-foreman.conf, dest: wh-foreman.conf }
 
 - name: start the upstart scripts
   command: start wh-worker

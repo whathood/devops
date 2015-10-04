@@ -1,6 +1,6 @@
 ---
 
-- hosts: development
+- hosts: all
   vars:
     user: "{{ ansible_ssh_user }}"
     log_dir: /var/log/whathood
@@ -17,7 +17,7 @@
 
 - include: git.yml
 
-- hosts: development
+- hosts: all
   vars:
     user: "{{ ansible_ssh_user }}"
     log_dir: /var/log/whathood
@@ -35,7 +35,7 @@
   vars:
     nginx_container: "nginx-{{ application_env }}"
 
-- hosts: development
+- hosts: all
   vars:
     user: "{{ ansible_ssh_user }}"
     log_dir: /var/log/whathood

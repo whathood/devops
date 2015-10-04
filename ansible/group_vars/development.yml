@@ -1,12 +1,8 @@
 ---
 
 application_env: development
-user: vagrant
-remote_user: vagrant
 application_root: /home/vagrant/src/whathood
 docker_dir: /home/vagrant/src/wh-devops/docker
 deploy_working_dir: /home/vagrant/src/whathood
-docker_nginx_container: wh_nginx_{{ application_env }} 
 docker_nginx_image_url: quay.io/whathood/nginx-dev
 docker_nginx_image: quay.io/whathood/nginx-dev:latest
-docker_nginx_http_port: 8081

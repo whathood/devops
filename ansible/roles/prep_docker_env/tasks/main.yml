@@ -13,9 +13,16 @@
   docker_image: path={{ docker_dir }}/nodejs-bower-grunt name="whathood/grunt" state=present
   sudo: yes
 
+- name: memcached container is present
+  docker:
+    name: wh_memcached
+    image: quay.io/whathood/memcached:latest
+    state: present
+  sudo: yes
+
 - name: image nginx is present
   docker:
-    name: "{{docker_nginx_container}}"
+    name: "NGINX_CONTAINER_NAME"
     image: "{{docker_nginx_image}}"
     state: present
   sudo: yes
@@ -27,17 +34,18 @@
     state: present
   sudo: yes
     
-- name: container wh-postgis is started
-  docker:
-    name: wh-postgis
-    image: quay.io/whathood/docker-postgis:latest
-    detach: true
-    ports:
-     - "5432:5432"
-    state: started
-    volumes:
-    - "{{ postgres_data_dir }}:/var/lib/postgresql:rw"
-  sudo: yes
+
+#- name: container wh-postgis is started
+#  docker:
+#    name: wh-postgis
+#    image: quay.io/whathood/docker-postgis:latest
+#    detach: true
+#    ports:
+#     - "5432:5432"
+#    state: started
+#    volumes:
+#    - "{{ postgres_data_dir }}:/var/lib/postgresql:rw"
+#  sudo: yes
 
 - name: memcached container is started
   docker:
