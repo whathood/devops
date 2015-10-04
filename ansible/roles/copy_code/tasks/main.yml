@@ -1,9 +1,20 @@
 ---
 
+- command: echo whathood`date +%Y-%m-%d`
+  register: new_name
+
 - name: rename old production dir
-  command: mv {{ production_working_dir }} "{{production_working_dir}}`date +%Y-%m-%d`"
+  command: mv {{ production_working_dir }} /opt/{{ new_name.stdout_lines }}
+  sudo: yes
   ignore_errors: yes
 
+- name: ensure empty dir
+  command: rm -rf {{ to_dir }}
+  sudo: yes
+
 - name: copy the code over
-  command: cp -r {{ deploy_working_dir }} {{ production_working_dir }}
+  command: cp -r {{ from_dir }} {{ to_dir }}
+  sudo: yes
+
+- command: chmod -R 777 /opt/whathood/app/data
   sudo: yes

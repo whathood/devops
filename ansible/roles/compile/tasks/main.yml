@@ -57,9 +57,6 @@
 - file: path={{ deploy_working_dir }}/app/data/DoctrineORMModule/Proxy mode=777 owner={{user}} state=directory
   sudo: yes
  
-- file: path={{ deploy_working_dir }}/app/data mode=0777
-  sudo: yes
-
 - name: compile react
   command: docker run --rm -v {{ deploy_working_dir }}/libs/react:/src -v {{ deploy_working_dir }}/app/public/js/whathood:/build --name wh-jsx whathood/jsx --extension jsx src build
   sudo: yes

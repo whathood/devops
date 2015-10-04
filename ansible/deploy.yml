@@ -7,7 +7,7 @@
     - compile
     - composer
     - bundler
-    - copy_code
+    - { role: copy_code, from_dir: "{{ deploy_working_dir}}", to_dir: "{{ production_working_dir}}" }
     - { role: "nginx", container_name: "nginx-{{ application_env }}", http_port: "8081", app_dir: "{{ deploy_working_dir }}" }
 
 - include: update_upstart.yml
