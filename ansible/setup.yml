@@ -26,18 +26,8 @@
 
     - { role: setup }
 
-    # get the docker images prepped
-    - { role: prep_docker_env, sudo: yes }
+- include: prep_docker_env.yml
 
 - include: deploy.yml
 
 - include: import_db.yml
-  vars:
-    nginx_container: "nginx-{{ application_env }}"
-
-- hosts: all
-  vars:
-    user: "{{ ansible_ssh_user }}"
-    log_dir: /var/log/whathood
-  roles:
-    - { role: import_db }
