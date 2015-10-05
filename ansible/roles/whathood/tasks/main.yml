@@ -1,19 +1,7 @@
 ---
 
-- name: Setting whathood env var
-  command: echo "WH_APP_ENV={{application_env}}" >> /etc/environment
-  sudo: yes
-
 - file: path=/home/{{user}}/src state=directory mode=0755 owner={{user}} group={{user}}
 
 - name: Clone whathood dev-ops
   git:
     repo=https://github.com/whathood/wh-devops.git dest=/home/{{user}}/src/wh-devops
-
-- name: copy config.local.yaml
-  copy: src=config.local.yaml dest=/home/{{user}}/src/wh-devops
-- name: copy config.local.yaml
-  copy: src=config.local.yaml dest=/home/{{user}}/src/wh-devops
-
-- name: copy whathood.local.yaml
-  copy: src=whathood.local.yaml dest=/home/{{user}}/src/wh-devops
