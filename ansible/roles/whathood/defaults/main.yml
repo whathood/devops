@@ -1,0 +1,11 @@
+---
+
+google_ui: GOOGLE_UI
+
+email_smtp_host: EMAIL_SMTP_HOST
+email_smtp_port: EMAIL_SMTP_PORT
+email_smtp_user: EMAIL_SMTP_USER
+email_stmp_pass: EMAIL_SMTP_PASS
+email_to_address: EMAIL_TO_ADDRESS
+email_from_address: EMAIL_FROM_ADDRESS
+email_to_address: EMAIL_TO_ADDRESS
