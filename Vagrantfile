@@ -29,10 +29,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision "ansible" do |ansible|
-    ansible.inventory_path = "provision/inventory"
+    ansible.inventory_path = "ansible/hosts/development"
     ansible.extra_vars = { ansible_ssh_user: 'vagrant' }
     ansible.limit = 'development'
-    ansible.playbook = "provision/setup.yml"
+    ansible.playbook = "ansible/setup.yml"
   end
 
 end
