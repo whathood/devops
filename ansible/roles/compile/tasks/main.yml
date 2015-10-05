@@ -61,3 +61,5 @@
   command: docker run --rm -v {{ deploy_working_dir }}/libs/react:/src -v {{ deploy_working_dir }}/app/public/js/whathood:/build --name wh-jsx whathood/jsx --extension jsx src build
   sudo: yes
 
+- name: copy in whathood.local.yaml
+  copy: src=/etc/ansible/external_vars/whathood.local.yaml dest={{deploy_working_dir}}/whathood.local.yaml
