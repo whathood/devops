@@ -2,7 +2,7 @@
 
 - hosts: development
   vars_files:
-  - /etc/ansible/external_vars/jimsmiley_git.yml
+  - /etc/ansible/vars_files/jimsmiley_git.yml
   roles:
     - git
   sudo: yes

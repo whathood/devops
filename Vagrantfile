@@ -14,9 +14,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #config.vbguest.auto_update = true
   config.vm.network :private_network, ip: "192.168.111.222"
 
-  # under /opt
-  config.vm.network :forwarded_port, guest: 8080, host: 8080
-
   # under /home/{{user}}/src/whathood
   config.vm.network :forwarded_port, guest: 8081, host: 8081
 

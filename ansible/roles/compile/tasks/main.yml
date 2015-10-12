@@ -16,7 +16,7 @@
   sudo: yes
 
 - name: touch php-zend.log
-  file: path=/var/log/whathood/php-zend.log state=touch owner={{user}} mode=0777
+  file: path=/var/log/whathood/php-zend.log state=touch owner={{ansible_ssh_user}} mode=0777
   sudo: yes
 
 - shell: stop wh-foreman || true
@@ -58,7 +58,7 @@
     chdir: "{{ deploy_working_dir }}"
   sudo: yes
 
-- file: path={{ deploy_working_dir }}/app/data/DoctrineORMModule/Proxy mode=777 owner={{user}} state=directory
+- file: path={{ deploy_working_dir }}/app/data/DoctrineORMModule/Proxy mode=777 owner={{ansible_ssh_user}} state=directory
   sudo: yes
  
 - name: compile react
@@ -66,4 +66,4 @@
   sudo: yes
 
 - name: copy in whathood.yml
-  template: src=templates/whathood.yml.j2 dest={{deploy_working_dir}}/whathood.yml
+  template: src=whathood.yml.j2 dest={{deploy_working_dir}}/whathood.yml

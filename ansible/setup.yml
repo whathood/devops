@@ -24,7 +24,7 @@
   roles:
     - { role: rvm, sudo: yes }
 
-    - { role: setup }
+    - { role: whathood_devops }
 
 - include: prep_docker_env.yml
 
