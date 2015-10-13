@@ -2,21 +2,30 @@
 # configure any docker images on the host
 
 - name: image whathoood/jsx is present
-  docker_image: path={{ docker_dir }}/jsx name="whathood/jsx" state=present
+  docker:
+    name: whathood/jsx
+    image: quay.io/whathood/jsx
+    state: present
   sudo: yes
 
 - name: image whathood/composer is present
-  docker_image: path={{ docker_dir }}/composer name="whathood/composer" state=present
+  docker:
+    name: whathood/composer
+    image: quay.io/whathood/composer
+    state: present
   sudo: yes
 
 - name: image whathood/grunt is present
-  docker_image: path={{ docker_dir }}/nodejs-bower-grunt name="whathood/grunt" state=present
+  docker:
+    name: whathood/grunt
+    image: quay.io/whathood/nodejs-bower-grunt
+    state: present
   sudo: yes
 
 - name: memcached container is present
   docker:
     name: wh_memcached
-    image: quay.io/whathood/memcached:latest
+    image: quay.io/whathood/memcached
     state: present
   sudo: yes
 
@@ -32,27 +41,4 @@
     name: wh-postgis
     image: quay.io/whathood/docker-postgis:latest
     state: present
-  sudo: yes
-    
-
-#- name: container wh-postgis is started
-#  docker:
-#    name: wh-postgis
-#    image: quay.io/whathood/docker-postgis:latest
-#    detach: true
-#    ports:
-#     - "5432:5432"
-#    state: started
-#    volumes:
-#    - "{{ postgres_data_dir }}:/var/lib/postgresql:rw"
-#  sudo: yes
-
-- name: memcached container is started
-  docker:
-    name: wh_memcached
-    image: quay.io/whathood/memcached:latest
-    detach: true
-    ports:
-      - "11211:11211"
-    state: started
   sudo: yes

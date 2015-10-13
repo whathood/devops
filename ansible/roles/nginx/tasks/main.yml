@@ -7,10 +7,13 @@
     state: started
   sudo: yes
 
-- name: wh_memcached is started
+- name: memcached container is started
   docker:
     name: wh_memcached
-    image: quay.io/whathood/docker-postgis
+    image: quay.io/whathood/memcached:latest
+    detach: true
+    ports:
+      - "11211:11211"
     state: started
   sudo: yes
 
