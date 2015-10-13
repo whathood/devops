@@ -3,6 +3,8 @@
 - hosts: all
   vars:
     user: "{{ ansible_ssh_user }}"
+  vars_files:
+  - /etc/ansible/vars_files/whathood.yml
   roles:
     - compile
     - composer
