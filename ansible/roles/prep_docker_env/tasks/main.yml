@@ -3,21 +3,21 @@
 
 - name: image whathoood/jsx is present
   docker:
-    name: whathood/jsx
+    name: wh_jsx
     image: quay.io/whathood/jsx
     state: present
   sudo: yes
 
 - name: image whathood/composer is present
   docker:
-    name: whathood/composer
+    name: wh_composer
     image: quay.io/whathood/composer
     state: present
   sudo: yes
 
 - name: image whathood/grunt is present
   docker:
-    name: whathood/grunt
+    name: wh_composer
     image: quay.io/whathood/nodejs-bower-grunt
     state: present
   sudo: yes
