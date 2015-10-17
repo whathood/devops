@@ -68,3 +68,9 @@
 
 - name: copy in whathood.yml
   template: src=whathood.yml.j2 dest={{deploy_working_dir}}/whathood.yml
+
+- name: Setting up dev friendly symlinks
+  command: dev-bin/init_dev_env
+  args:
+    chdir: "{{ deploy_working_dir }}"
+  when: application_env == 'development'
