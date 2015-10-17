@@ -4,7 +4,7 @@ This repository is a vagrant configuration for Whathood. After installing Vagran
 
 ## Docker Images Build Status
 
-whathood/jsx ![https://quay.io/repository/whathood/jsx/status]
+whathood/jsx ![JSX Build Status[https://quay.io/repository/whathood/jsx/status]
 
 #### Installation
 1. Install [Vagrant](https://www.vagrantup.com/downloads.html)
