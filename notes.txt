@@ -1,1 +1,2 @@
+* `ansible-playbook -i ansible/hosts -l production ansible/deploy.yml` - will deploy to production
 * `ansible all -m setup` - get facts from all systems
