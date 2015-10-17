@@ -4,7 +4,14 @@ This repository is a vagrant configuration for Whathood. After installing Vagran
 
 ## Docker Images Build Status
 
-whathood/jsx ![JSX Build Status](https://quay.io/repository/whathood/jsx/status)
+* ![JSX Build Status](https://quay.io/repository/whathood/jsx/status) whathood/jsx 
+* ![JSX Build Status](https://quay.io/repository/whathood/nginx/status) whathood/nginx
+* ![JSX Build Status](https://quay.io/repository/whathood/postgis/status) whathood/postgis
+* ![JSX Build Status](https://quay.io/repository/whathood/composer/status) whathood/composer
+* ![JSX Build Status](https://quay.io/repository/whathood/memcached/status) whathood/memcached
+* ![JSX Build Status](https://quay.io/repository/whathood/nginx-php-ruby/status) whathood/nginx-php-ruby
+* ![JSX Build Status](https://quay.io/repository/whathood/nginx-dev/status) whathood/nginx-dev
+* ![JSX Build Status](https://quay.io/repository/whathood/nodejs-bower-grunt/status) whathood/nodejs-bower-grunt
 
 #### Installation
 1. Install [Vagrant](https://www.vagrantup.com/downloads.html)
