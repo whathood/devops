@@ -1,12 +1,17 @@
 ---
 
-- command: echo whathood`date +%Y-%m-%d`
+- name: check if whathood production dir exists
+  stat: path={{ to_dir }}
+  register: st
+
+- shell: echo whathood_`date +%Y%m%d%k%M%S`
   register: new_name
+  when: st.stat.exists == true
 
 - name: rename old production dir
-  command: mv {{ production_working_dir }} /opt/{{ new_name.stdout_lines }}
+  command: mv {{ to_dir }} "/opt/{{ new_name.stdout }}"
   sudo: yes
-  ignore_errors: yes
+  when: st.stat.exists == true
 
 - name: ensure empty dir
   command: rm -rf {{ to_dir }}
@@ -16,5 +21,5 @@
   command: cp -r {{ from_dir }} {{ to_dir }}
   sudo: yes
 
-- command: chmod -R 777 /opt/whathood/app/data
+- command: chmod -R 777 {{ to_dir }}/app/data
   sudo: yes

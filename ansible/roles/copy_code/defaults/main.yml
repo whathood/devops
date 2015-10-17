@@ -1,0 +1,4 @@
+---
+
+from_dir: "{{ deploy_working_dir }}"
+to_dir: "{{ production_working_dir }}"
