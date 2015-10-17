@@ -1,0 +1,7 @@
+---
+
+- hosts: all
+  vars:
+  sudo: yes
+  roles:
+    - virt_host_docker
