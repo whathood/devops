@@ -17,7 +17,7 @@
 
 - name: image whathood/grunt is present
   docker:
-    name: wh_composer
+    name: wh_nodejs
     image: quay.io/whathood/nodejs-bower-grunt
     state: present
   sudo: yes

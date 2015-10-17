@@ -5,3 +5,4 @@ deploy_dest_dir: /opt/whathood
 postgres_data_dir: /usr/lib/whathood/postgresql
 production_working_dir: /opt/whathood
 docker_group_members: [ "{{ansible_ssh_user}}" ]
+docker_composer_image: quay.io/whathood/composer

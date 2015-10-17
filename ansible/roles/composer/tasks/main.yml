@@ -3,14 +3,14 @@
 - name: ensuring no other docker containers
   docker:
     name: wh_composer
-    image: whathood/composer:latest
+    image: "{{ docker_composer_image }}"
     state: absent
   sudo: yes
 
 - name: installing vendor libraries
-  command: docker run -ti -v /home/{{ user }}/.composer:/root/.composer -v {{ deploy_working_dir }}/app:/srv --name wh_composer whathood/composer install --no-interaction
+  command: docker run -ti -v /home/{{ user }}/.composer:/root/.composer -v {{ deploy_working_dir }}/app:/srv --name wh_composer {{ docker_composer_image }} install --no-interaction
   sudo: yes
 
 - name: composer creates an autoload classmap
-  command: sudo docker run -ti -v {{ deploy_working_dir }}/app:/srv whathood/composer dumpautoload -o
+  command: sudo docker run -ti -v {{ deploy_working_dir }}/app:/srv {{ docker_composer_image }} dumpautoload -o
   when: application_env == 'production'

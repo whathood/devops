@@ -1,6 +1,6 @@
 #!/bin/sh
 
 play="$@"
-cmd="ansible-playbook -i ansible/hosts -l development ansible/$play.yml"
+cmd="time ansible-playbook -i ansible/hosts -l development ansible/$play.yml"
 echo $cmd
 $cmd

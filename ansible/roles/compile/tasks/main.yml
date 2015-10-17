@@ -47,13 +47,13 @@
   sudo: yes
 
 - name: npm install dependencies
-  command: docker run -it --rm -v {{ deploy_working_dir }}:/data whathood/grunt npm install
+  command: docker run -it --rm -v {{ deploy_working_dir }}:/data quay.io/whathood/nodejs-bower-grunt npm install
+  sudo: yes
   args:
     chdir: "{{ deploy_working_dir }}"
-  sudo: yes
 
 - name: compile coffeescript
-  command: docker run -it --rm -v {{ deploy_working_dir }}:/data whathood/grunt grunt coffee
+  command: docker run -it --rm -v {{ deploy_working_dir }}:/data quay.io/whathood/nodejs-bower-grunt grunt coffee
   args:
     chdir: "{{ deploy_working_dir }}"
   sudo: yes
@@ -62,7 +62,7 @@
   sudo: yes
  
 - name: compile react
-  command: docker run --rm -v {{ deploy_working_dir }}/libs/react:/src -v {{ deploy_working_dir }}/app/public/js/whathood:/build --name wh-jsx whathood/jsx --extension jsx src build
+  command: docker run --rm -v {{ deploy_working_dir }}/libs/react:/src -v {{ deploy_working_dir }}/app/public/js/whathood:/build --name wh-jsx quay.io/whathood/jsx --extension jsx src build
   sudo: yes
 
 - name: copy in whathood.yml
