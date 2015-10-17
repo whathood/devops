@@ -9,3 +9,5 @@ email_stmp_pass: EMAIL_SMTP_PASS
 email_to_address: EMAIL_TO_ADDRESS
 email_from_address: EMAIL_FROM_ADDRESS
 email_to_address: EMAIL_TO_ADDRESS
+
+skip_db_check: false

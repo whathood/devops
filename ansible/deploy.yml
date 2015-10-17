@@ -1,8 +1,7 @@
 ---
 
 - hosts: all
-  vars:
-    user: "{{ ansible_ssh_user }}"
+  gather_facts: false
   vars_files:
   - /etc/ansible/vars_files/whathood.yml
   roles:
@@ -12,6 +11,10 @@
     - { role: copy_code, from_dir: "{{ deploy_working_dir}}", to_dir: "{{ production_working_dir}}" }
     - { role: "nginx", container_name: "nginx-{{ application_env }}", http_port: "8081", app_dir: "{{ deploy_working_dir }}" }
 
-- include: update_upstart.yml
+- hosts: all
+  gather_facts: false
+  include: update_upstart.yml
 
-- include: system_check.yml
+- hosts: all
+  gather_facts: false
+  include: system_check.yml

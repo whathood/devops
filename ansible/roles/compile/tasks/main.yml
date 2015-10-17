@@ -36,8 +36,9 @@
 - shell: docker start wh_memcached || true
   sudo: yes
 
-- name: check database schema
+- name: checking database schema
   command: "{{ deploy_dir }}/d-bin/check_db_schema"
+  when: not skip_db_check
 
   command: echo `ssh-keyscan github.com`
   sudo: yes

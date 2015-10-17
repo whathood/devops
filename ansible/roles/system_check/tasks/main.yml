@@ -8,3 +8,4 @@
   until: result.rc == 0
   retries: 5
   delay: 3
+  when: not skip_system_check

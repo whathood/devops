@@ -1,6 +1,7 @@
 ---
 
 - hosts: all
+  gather_facts: true
   vars:
     user: "{{ ansible_ssh_user }}"
     log_dir: /var/log/whathood
@@ -18,6 +19,7 @@
 - include: git.yml
 
 - hosts: all
+  gather_facts: false
   vars:
     user: "{{ ansible_ssh_user }}"
     log_dir: /var/log/whathood
@@ -26,8 +28,20 @@
 
     - { role: whathood_devops }
 
-- include: prep_docker_env.yml
+- hosts: all
+  gather_facts: false
+  include: prep_docker_env.yml
 
-- include: deploy.yml
+- hosts: all
+  gather_facts: false
+  include: deploy.yml
+  vars:
+    skip_db_check: true
+    skip_system_check: true
 
-- include: import_db.yml
+- hosts: all
+  gather_facts: false
+  include: import_db.yml
+
+- hosts: all
+  include: system_check.yml
