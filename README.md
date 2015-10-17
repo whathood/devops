@@ -2,6 +2,10 @@
 
 This repository is a vagrant configuration for Whathood. After installing Vagrant and running this configuration. Users will will have the full development environment, complete with a running website, for the web application Whathood.in.
 
+## Docker Images Build Status
+
+whathood/jsx ![https://quay.io/repository/whathood/jsx/status]
+
 #### Installation
 1. Install [Vagrant](https://www.vagrantup.com/downloads.html)
 2. Download and install [Oracle's Virtual Box 4.3](https://www.virtualbox.org/wiki/Download_Old_Builds_4_3)(5.0 is too new), or another [Vagrant supported virtual guest provider](http://docs.vagrantup.com/v2/providers/)
