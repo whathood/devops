@@ -11,8 +11,7 @@ RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
 
 CMD ["/sbin/my_init"]
 
-
-RUN add-apt-repository -y ppa:ondrej/php5
+RUN add-apt-repository -y ppa:ondrej/php5-5.6
 RUN add-apt-repository -y ppa:nginx/stable
 RUN apt-add-repository --yes ppa:brightbox/ruby-ng
 
