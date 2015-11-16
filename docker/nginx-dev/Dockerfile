@@ -1,4 +1,4 @@
-FROM quay.io/whathood/docker-nginx:latest
+FROM quay.io/whathood/nginx:latest
 
 RUN apt-get update
 

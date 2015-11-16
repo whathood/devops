@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker build -t quay.io/whathood/docker-nginx:latest .
+docker build -t quay.io/whathood/nginx:latest .
