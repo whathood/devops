@@ -6,7 +6,12 @@ This repository is a vagrant configuration for Whathood. After installing Vagran
 
 * See [Docker README](docker/README.md) for more details
 
+### Ansible
+
+See [Ansible's readme](ansible/README.md)
+
 #### Installation
+
 1. Install [Vagrant](https://www.vagrantup.com/downloads.html)
 2. Download and install [Oracle's Virtual Box 4.3](https://www.virtualbox.org/wiki/Download_Old_Builds_4_3)(5.0 is too new), or another [Vagrant supported virtual guest provider](http://docs.vagrantup.com/v2/providers/)
 4. Download Virtual Box's Extension Pack, located on the same page as the 4.3 install
