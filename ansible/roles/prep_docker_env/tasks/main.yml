@@ -43,4 +43,4 @@
     state: present
   sudo: yes
 
-- include: phpdoc.yml tags=phpdoc
+- include: phpdoc.yml tags=phpdoc,docs
