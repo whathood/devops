@@ -3,6 +3,6 @@
 - hosts: development
   vars:
     user: "{{ ansible_ssh_user }}"
-    docker_nginx_http_port: 8081
+    docker_nginx_http_port: 81
   roles:
     - nginx

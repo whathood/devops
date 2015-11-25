@@ -54,5 +54,5 @@
   sudo: yes
   when: item.desired_env == application_env or item.desired_env == 'production'
   with_items:
-  - { container_name: wh_nginx-prod, docker_image: "{{docker_nginx_image}}", base_dir: /opt/whathood, port: 8080, desired_env: "production" }
-  - { container_name: wh_nginx-dev, docker_image: quay.io/whathood/nginx-dev, base_dir:  "/home/vagrant/src/whathood", port: 8081, desired_env: "development" }
+  - { container_name: wh_nginx-prod, docker_image: "{{docker_nginx_image}}", base_dir: /opt/whathood, port: 80, desired_env: "production" }
+  - { container_name: wh_nginx-dev, docker_image: quay.io/whathood/nginx-dev, base_dir:  "/home/vagrant/src/whathood", port: 81, desired_env: "development" }
