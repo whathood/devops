@@ -7,12 +7,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.box = 'ubuntu/trusty64'
   config.vm.hostname = "whvagrant"
-  #config.vm.box_check_update = true
 
-  # set auto_update to false, if you do NOT want to check the correct 
-  # additions version when booting this machine
-  #config.vbguest.auto_update = true
   config.vm.network :private_network, ip: "192.168.111.222"
+  config.vm.network "forwarded_port", guest: 22, host: 2223,
+    auto_correct: true
 
   config.vm.provider "virtualbox" do |vb|
      vb.memory = 2048
