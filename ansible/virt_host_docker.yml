@@ -2,6 +2,7 @@
 
 - hosts: all
   vars:
+    docker_group_members: [ "{{ansible_ssh_user}}" ]
   sudo: yes
   roles:
     - virt_host_docker
