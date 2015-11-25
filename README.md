@@ -2,15 +2,9 @@
 
 This repository is a vagrant configuration for Whathood. After installing Vagrant and running this configuration. Users will will have the full development environment, complete with a running website, for the web application Whathood.in.
 
-## Docker Images Build Status
+### Docker Images
 
-* ![JSX Build Status](https://quay.io/repository/whathood/jsx/status) whathood/jsx 
-* ![JSX Build Status](https://quay.io/repository/whathood/nginx/status) whathood/nginx
-* ![JSX Build Status](https://quay.io/repository/whathood/docker-postgis/status) whathood/docker-postgis
-* ![JSX Build Status](https://quay.io/repository/whathood/composer/status) whathood/composer
-* ![JSX Build Status](https://quay.io/repository/whathood/memcached/status) whathood/memcached
-* ![JSX Build Status](https://quay.io/repository/whathood/nginx-dev/status) whathood/nginx-dev
-* ![JSX Build Status](https://quay.io/repository/whathood/nodejs-bower-grunt/status) whathood/nodejs-bower-grunt
+* See [Docker README](docker/README.md) for more details
 
 #### Installation
 1. Install [Vagrant](https://www.vagrantup.com/downloads.html)
