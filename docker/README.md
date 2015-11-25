@@ -8,6 +8,7 @@ tags/phpdoc
 
 ### Image build status
 
+* ![JSX Build Status](https://quay.io/repository/whathood/phpdoc/status) whathood/phpdoc 
 * ![JSX Build Status](https://quay.io/repository/whathood/jsx/status) whathood/jsx 
 * ![JSX Build Status](https://quay.io/repository/whathood/nginx/status) whathood/nginx
 * ![JSX Build Status](https://quay.io/repository/whathood/docker-postgis/status) whathood/docker-postgis
