@@ -16,6 +16,6 @@
     image: kyma/docker-nginx 
     state: started
     volumes:
-    - "$HOME/src/whathood/docs:/var/www"
+    - "/home/vagrant/src/whathood/docs:/var/www"
     ports:
     - "83:80"
