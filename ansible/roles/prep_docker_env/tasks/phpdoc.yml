@@ -1,8 +1,21 @@
 ---
 
+- name: create phpdoc root dir
+  file: path=/home/{{ansible_ssh_user}}/src/whathood/docs state=directory
+
 - name: container whathoood/phpdoc is present
   docker:
     name: phpdoc
     image: quay.io/whathood/phpdoc
     state: present
   sudo: yes
+
+- name: start docs nginx container
+  docker:
+    name: docs
+    image: kyma/docker-nginx 
+    state: started
+    volumes:
+    - "$HOME/src/whathood/docs:/var/www"
+    ports:
+    - "83:80"
