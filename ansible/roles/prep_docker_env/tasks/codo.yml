@@ -1,0 +1,4 @@
+---
+
+- name: build whathood/codo
+  docker_image: path="/home/{{ansible_ssh_user}}/src/docker/codo" name="whathood/codo" state=build

@@ -47,3 +47,5 @@
   sudo: yes
 
 - include: docs.yml tags=phpdoc,docs
+
+- include: codo.yml tags=codo,docs
