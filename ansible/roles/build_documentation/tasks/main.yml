@@ -1,0 +1,4 @@
+---
+
+- include: phpdoc.yml tags=phpdoc,docs
+- include: codo.yml   tags=codo,docs
