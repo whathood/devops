@@ -1,2 +1,2 @@
-git_location: https://github.com/whathood/whathood
+git_location: git:git@github.com/whathood/whathood.git
 application_env: development

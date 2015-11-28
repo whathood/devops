@@ -12,9 +12,13 @@
   file: path={{deploy_working_dir}} state=directory mode=0755 owner={{ansible_ssh_user}} group={{ansible_ssh_user}}
   sudo: yes
 
+#- name: Verify we can authenticate with github
+#  command: ssh -T git@github.com
+
    # need to cd into git_dir and clone from there because the dir will already exist
 - name: clone whathood repo
-  git: repo={{whathood_git_url}} dest="{{ deploy_working_dir }}"
+  git: repo=git@github.com:whathood/whathood.git dest="{{ deploy_working_dir }}" accept_hostkey=yes
+  #git: repo="https://github.com/whathood/whathood.git" dest="{{ deploy_working_dir }}" accept_hostkey=yes
 
 - file: path=/var/log/whathood state=directory mode=0777
   sudo: yes
