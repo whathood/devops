@@ -27,6 +27,7 @@
     name: wh_memcached
     image: quay.io/whathood/memcached
     state: present
+    restart_policy: always
   sudo: yes
 
 - name: image nginx is present
@@ -34,13 +35,15 @@
     name: "NGINX_CONTAINER_NAME"
     image: "{{docker_nginx_image}}"
     state: present
+    restart_policy: always
   sudo: yes
 
-- name: image whathood/docker-postgis is present
+- name: image whathood/postgres is present
   docker:
     name: wh-postgis
-    image: quay.io/whathood/docker-postgis:latest
+    image: quay.io/whathood/postgres
     state: present
+    restart_policy: always
   sudo: yes
 
 - include: docs.yml tags=phpdoc,docs

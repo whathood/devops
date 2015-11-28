@@ -15,6 +15,7 @@
     name: docs
     image: kyma/docker-nginx 
     state: started
+    restart_policy: always
     volumes:
     - "/home/vagrant/src/whathood/docs:/var/www"
     ports:
