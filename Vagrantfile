@@ -4,6 +4,7 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
   config.ssh.forward_agent = true
 
   config.vm.box = 'ubuntu/trusty64'
@@ -21,10 +22,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder "docker/", "/home/vagrant/src/docker"
 
   config.vm.provision "ansible" do |ansible|
-    ansible.inventory_path = "ansible/hosts/development"
-    ansible.extra_vars = { ansible_ssh_user: 'vagrant' }
-    ansible.limit = 'development'
-    ansible.playbook = "ansible/setup.yml"
+    ansible.inventory_path  = "ansible/hosts/development"
+    ansible.limit           = 'development'
+    ansible.playbook        = "ansible/setup.yml"
+    ansible.extra_vars      = { ansible_ssh_user: 'vagrant' }
   end
 
 end
