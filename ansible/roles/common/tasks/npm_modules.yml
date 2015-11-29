@@ -1,0 +1,9 @@
+---
+
+- name: install npm markdown-to-html
+  npm:
+    name: "{{ item }}"
+    global: yes
+  with_items:
+  - markdown-to-html
+  - foreman
