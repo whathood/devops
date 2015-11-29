@@ -10,7 +10,7 @@
 - name: memcached container is started
   docker:
     name: wh_memcached
-    image: quay.io/whathood/memcached:latest
+    image: quay.io/whathood/memcached
     detach: true
     ports:
       - "11211:11211"
@@ -19,20 +19,17 @@
 
 - name: nginx PROD container is absent
   docker:
-    name: wh_nginx-prod
-    image: quay.io/whathood/docker-nginx
+    name: nginx
+    image: quay.io/whathood/nginx
     state: absent
   sudo: yes
 
 - name: "{{ item.container_name }} nginx container is absent"
   docker:
-    name: "{{ item.container_name }}"
+    name: nginx
     image: "{{ docker_nginx_image }}"
     state: absent
   sudo: yes
-  with_items:
-  - { container_name: wh_nginx-prod }
-  - { container_name: wh_nginx-dev }
 
 - file: path=/var/log/whathood state=directory mode=0777
 
@@ -42,17 +39,13 @@
   command: >
     docker run --detach
       -v "/var/log/whathood:/var/log/whathood:rw"
-      -v "{{item.base_dir}}:/var/www/whathood:rw"
-      -p "{{item.port}}:80" 
+      -v "{{application_root}}:/var/www/whathood:rw"
+      -p "80:80" 
       --link wh-postgis:wh-postgis
       --link wh_memcached:wh_memcached
       -e 'PGPORT=5432'
       -e 'PGUSER=docker'
       -e 'PGHOST=wh-postgis'
-      --name {{item.container_name}}
-      {{ item.docker_image }}
+      --name nginx
+      {{docker_nginx_image}} 
   sudo: yes
-  when: item.desired_env == application_env or item.desired_env == 'production'
-  with_items:
-  - { container_name: wh_nginx-prod, docker_image: "{{docker_nginx_image}}", base_dir: /opt/whathood, port: 80, desired_env: "production" }
-  - { container_name: wh_nginx-dev, docker_image: quay.io/whathood/nginx-dev, base_dir:  "/home/vagrant/src/whathood", port: 81, desired_env: "development" }

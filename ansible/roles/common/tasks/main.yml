@@ -27,3 +27,5 @@
 
 - name: Copy bash rc
   template: src=bash_bashrc dest=/home/{{user}}/.bashrc
+
+- include: npm_modules.yml tags=node

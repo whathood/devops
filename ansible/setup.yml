@@ -6,12 +6,15 @@
     user: "{{ ansible_ssh_user }}"
     log_dir: /var/log/whathood
   roles:
-    - { role: common, sudo: yes }
 
     - name: install node on guest
       role: nodesource.node
       sudo: yes
       tags: node
+
+    - name: install common stuff on the guest
+      role: common
+      sudo: yes
 
     # Set up docker on the target machine
     - { role: virt_host_docker,

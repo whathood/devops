@@ -32,7 +32,7 @@
 
 - name: image nginx is present
   docker:
-    name: "NGINX_CONTAINER_NAME"
+    name: nginx
     image: "{{docker_nginx_image}}"
     state: present
     restart_policy: always
