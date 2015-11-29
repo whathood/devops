@@ -10,10 +10,9 @@
     - bundler
     - { role: copy_code, from_dir: "{{ deploy_working_dir}}", to_dir: "{{ production_working_dir}}" }
     - { role: "nginx", container_name: "nginx-{{ application_env }}", http_port: "81", app_dir: "{{ deploy_working_dir }}" }
-
-- hosts: all
-  gather_facts: false
-  include: update_upstart.yml
+    - role: update_upstart
+      tags: update_upstart
+      sudo: yes
 
 - hosts: all
   gather_facts: false
