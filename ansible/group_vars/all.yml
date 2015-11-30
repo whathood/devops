@@ -1,8 +1,26 @@
 ---
 whathood_git_url: "git@github.com:whathood/whathood.git"
+
+# always copy the src code here, also define application_root
+# to determine where the actual source code we'll mount into nginx
+# goes, for production, the two dirs should be the same
+# for development, they can be different
 deploy_dest_dir: /opt/whathood
+
 postgres_data_dir: /usr/lib/whathood/postgresql
-production_working_dir: /opt/whathood
+
 docker_group_members: [ "{{ansible_ssh_user}}" ]
-docker_composer_image: quay.io/whathood/composer
+
 nginx_container_name: "nginx"
+
+# group vars by environment should implement
+
+#application_env: development
+
+# we need a place to put the code before copy over
+#wh_src_dir: /home/vagrant/src/whathood 
+
+# where will the production code go
+#application_root: /home/vagrant/src/whathood
+
+#docker_nginx_image: quay.io/whathood/nginx-dev

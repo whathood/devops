@@ -4,4 +4,4 @@
 - name: bundle update
   command: bundle update
   args:
-    chdir: "{{ deploy_working_dir }}"
+    chdir: "{{ wh_src_dir }}"

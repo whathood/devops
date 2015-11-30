@@ -6,10 +6,12 @@
   - /etc/ansible/vars_files/whathood.yml
   roles:
     - compile
-    - composer
+    - role: composer
+      tags: composer
+
     - bundler
-    - { role: copy_code, from_dir: "{{ deploy_working_dir}}", to_dir: "{{ production_working_dir}}" }
-    - { role: "nginx", container_name: "nginx-{{ application_env }}", http_port: "81", app_dir: "{{ deploy_working_dir }}" }
+    - { role: copy_code, from_dir: "{{ wh_src_dir }}", to_dir: "{{deploy_dest_dir}}" }
+    - { role: "nginx", container_name: "nginx-{{ application_env }}", http_port: "81", app_dir: "{{ wh_src_dir }}" }
     - role: update_upstart
       tags: update_upstart
       sudo: yes

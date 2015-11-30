@@ -1,15 +1,15 @@
 ---
 
 - name: Setting whathood env var
-  command: echo "WH_APP_ENV={{application_env}}" >> /etc/environment
+  command: /bin/bash -c "echo 'WH_APP_ENV={{application_env}}' >> /etc/environment"
   sudo: yes
 
 - name: clear deploy_working_dir
-  shell: rm -rf {{ deploy_working_dir }} || true
+  shell: rm -rf {{ wh_src_dir }} || true
   sudo: yes
 
-- name: ensure {{deploy_working_dir}} exists and we have rights to it
-  file: path={{deploy_working_dir}} state=directory mode=0755 owner={{ansible_ssh_user}} group={{ansible_ssh_user}}
+- name: ensure {{wh_src_dir}} exists and we have rights to it
+  file: path={{wh_src_dir}} state=directory mode=0755 owner={{ansible_ssh_user}} group={{ansible_ssh_user}}
   sudo: yes
 
 #- name: Verify we can authenticate with github
@@ -17,8 +17,7 @@
 
    # need to cd into git_dir and clone from there because the dir will already exist
 - name: clone whathood repo
-  git: repo=git@github.com:whathood/whathood.git dest="{{ deploy_working_dir }}" accept_hostkey=yes
-  #git: repo="https://github.com/whathood/whathood.git" dest="{{ deploy_working_dir }}" accept_hostkey=yes
+  git: repo=git@github.com:whathood/whathood.git dest="{{ wh_src_dir }}" accept_hostkey=yes
 
 - file: path=/var/log/whathood state=directory mode=0777
   sudo: yes
@@ -45,7 +44,7 @@
   sudo: yes
 
 - name: checking database schema
-  command: "{{ deploy_dir }}/d-bin/check_db_schema"
+  command: "{{ wh_src_dir }}/d-bin/check_db_schema"
   when: not skip_db_check
 
   command: echo `ssh-keyscan github.com`
@@ -56,29 +55,29 @@
   sudo: yes
 
 - name: npm install dependencies
-  command: docker run -it --rm -v {{ deploy_working_dir }}:/data quay.io/whathood/nodejs-bower-grunt npm install
+  command: docker run -it --rm -v {{ wh_src_dir }}:/data quay.io/whathood/nodejs-bower-grunt npm install
   sudo: yes
   args:
-    chdir: "{{ deploy_working_dir }}"
+    chdir: "{{ wh_src_dir }}"
 
 - name: compile coffeescript
-  command: docker run -it --rm -v {{ deploy_working_dir }}:/data quay.io/whathood/nodejs-bower-grunt grunt coffee
+  command: docker run -it --rm -v {{ wh_src_dir }}:/data quay.io/whathood/nodejs-bower-grunt grunt coffee
   args:
-    chdir: "{{ deploy_working_dir }}"
+    chdir: "{{ wh_src_dir }}"
   sudo: yes
 
-- file: path={{ deploy_working_dir }}/app/data/DoctrineORMModule/Proxy mode=777 owner={{ansible_ssh_user}} state=directory
+- file: path={{ wh_src_dir }}/app/data/DoctrineORMModule/Proxy mode=777 owner={{ansible_ssh_user}} state=directory
   sudo: yes
  
 - name: compile react
-  command: docker run --rm -v {{ deploy_working_dir }}/libs/react:/src -v {{ deploy_working_dir }}/app/public/js/whathood:/build --name wh-jsx quay.io/whathood/jsx --extension jsx src build
+  command: docker run --rm -v {{ wh_src_dir }}/libs/react:/src -v {{ wh_src_dir }}/app/public/js/whathood:/build --name wh-jsx quay.io/whathood/jsx --extension jsx src build
   sudo: yes
 
 - name: copy in whathood.yml
-  template: src=whathood.yml.j2 dest={{deploy_working_dir}}/whathood.yml
+  template: src=whathood.yml.j2 dest={{wh_src_dir}}/whathood.yml
 
 - name: Setting up dev friendly symlinks
   command: dev-bin/init_dev_env
   args:
-    chdir: "{{ deploy_working_dir }}"
+    chdir: "{{ wh_src_dir }}"
   when: application_env == 'development'

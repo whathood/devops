@@ -1,7 +1,7 @@
 ---
 
-- name: set nginx container name in environment
-  command: echo "WH_NGINX_CONTAINER={{nginx_container_name}}" >> /etc/environment
+- name: set WH_NGINX_CONTAINER in environment
+  command: /bin/bash -c "echo 'WH_NGINX_CONTAINER={{nginx_container_name}}' >> /etc/environment"
   sudo: yes
 
 - name: wh-postgis is started

@@ -1,4 +1,4 @@
 ---
 
-from_dir: "{{ deploy_working_dir }}"
-to_dir: "{{ production_working_dir }}"
+from_dir: "{{ wh_src_dir }}"
+to_dir: "{{ application_root }}"
