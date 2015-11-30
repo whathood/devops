@@ -1,0 +1,4 @@
+---
+
+docker_postgis_container: wh-postgis
+docker_memcached_container: wh_memcached

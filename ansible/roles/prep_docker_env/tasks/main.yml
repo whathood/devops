@@ -48,4 +48,5 @@
 
 - include: docs.yml tags=phpdoc,docs
 
-- include: codo.yml tags=codo,docs
+- template: src=wh-start-containers.conf.j2 dest=/etc/init/wh-start-containers.conf
+  sudo: yes

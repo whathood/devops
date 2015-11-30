@@ -12,6 +12,11 @@
       sudo: yes
       tags: node
 
+    - name: configure timezone
+      role: timezone
+      sudo: yes
+      tags: timezone
+
     - name: install common stuff on the guest
       role: common
       sudo: yes

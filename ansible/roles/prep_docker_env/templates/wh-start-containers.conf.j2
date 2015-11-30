@@ -1,0 +1,10 @@
+description "Start Whathood's Docker Containers"
+author "Jim Smiley"
+start on filesystem and started docker
+stop on runlevel [!2345]
+respawn
+script
+  /usr/bin/docker start {{docker_postgis_container}}
+  /usr/bin/docker start {{docker_memcached_container}}
+  /usr/bin/docker start {{nginx_container_name}}
+end script
