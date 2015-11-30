@@ -19,6 +19,7 @@
 
     - name: install common stuff on the guest
       role: common
+      tags: common
       sudo: yes
 
     # Set up docker on the target machine

@@ -5,20 +5,4 @@ caption always "%{= KW}%-Lw%{= wb}%n %t %{= KW}%+Lw %-=| ${USER}@%H | %M%d %c%{-
 term screen-256color
 defscrollback 5000
 
-screen -t "wh logs"
-select 0
-stuff "tail -f /var/log/whathood/foreman.log &^M"
-stuff "tail -f /var/log/whathood/php-zend.log &^M"
-
-screen -t "nginx logs"
-select 1
-stuff "tail -f /var/log/whathood/nginx-access.log &^M"
-stuff "tail -f /var/log/whathood/nginx-error.log &^M"
-
-screen -t "devops"
-select 2
-stuff "cd /home/vagrant/src/wh-devops ^M"
-
-screen -t "src"
-select 3
 stuff "cd /home/vagrant/src/whathood ^M"
