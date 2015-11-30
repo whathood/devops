@@ -5,6 +5,7 @@
   vars:
     user: "{{ ansible_ssh_user }}"
     log_dir: /var/log/whathood
+    dot_vim_dir: "/home/{{ansible_ssh_user}}/.vim"
   roles:
 
     - name: install node on guest
@@ -29,7 +30,8 @@
         docker_group_members: [ user ]
       }
 
-    - { role: vim, sudo: yes }
+    - role: jsmiley.vim
+      tags: vim
 
 - include: git.yml
 
