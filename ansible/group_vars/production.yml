@@ -1,5 +1,6 @@
 ---
-
+boundary_build_grid_res: 0.00009
+heatmap_build_grid_res:  0.0007
 application_env: production
 docker_dir: /home/whathood/src/wh-devops/docker
 docker_nginx_image_url: quay.io/whathood/nginx

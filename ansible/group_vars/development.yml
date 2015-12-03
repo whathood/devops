@@ -1,4 +1,6 @@
 ---
+boundary_build_grid_res: 0.0009
+heatmap_build_grid_res:  0.0015
 
 application_env: development
 
