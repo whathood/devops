@@ -84,4 +84,5 @@
   command: dev-bin/init_dev_env
   args:
     chdir: "{{ wh_src_dir }}"
+  ignore_errors: yes
   when: application_env == 'development'
