@@ -4,10 +4,6 @@
   command: /bin/bash -c "echo 'WH_APP_ENV={{application_env}}' >> /etc/environment"
   sudo: yes
 
-- name: clear deploy_working_dir
-  shell: rm -rf {{ wh_src_dir }} || true
-  sudo: yes
-
 - name: ensure {{wh_src_dir}} exists and we have rights to it
   file: path={{wh_src_dir}} state=directory mode=0755 owner={{ansible_ssh_user}} group={{ansible_ssh_user}}
   sudo: yes
