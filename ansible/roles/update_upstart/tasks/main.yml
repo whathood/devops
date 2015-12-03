@@ -21,7 +21,4 @@
 - name: start the upstart scripts
   command: start wh-worker
   sudo: yes
-
-- name: start wh-foreman
-  command: start wh-foreman
-  when: application_env == "development"
+  when: application_env == "production"
