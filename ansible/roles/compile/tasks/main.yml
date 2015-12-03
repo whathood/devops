@@ -22,11 +22,19 @@
   file: path=/var/log/whathood/php-zend.log state=touch owner={{ansible_ssh_user}} mode=0777
   sudo: yes
 
-- shell: stop wh-foreman || true
-  sudo: yes
+- command: status wh-foreman
+  register: result
 
-- shell: stop wh-worker || true
+- shell: stop wh-foreman
   sudo: yes
+  when: '"started" in result.stdout'
+
+- command: status wh-foreman
+  register: result
+
+- shell: stop wh-worker
+  sudo: yes
+  when: '"started" in result.stdout'
 
 - shell: docker stop wh-jsx || true
   sudo: yes
