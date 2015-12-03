@@ -13,7 +13,7 @@
 
    # need to cd into git_dir and clone from there because the dir will already exist
 - name: clone whathood repo
-  git: repo=git@github.com:whathood/whathood.git dest="{{ wh_src_dir }}" accept_hostkey=yes
+  git: force=yes repo=git@github.com:whathood/whathood.git dest="{{ wh_src_dir }}" accept_hostkey=yes
 
 - file: path=/var/log/whathood state=directory mode=0777
   sudo: yes
