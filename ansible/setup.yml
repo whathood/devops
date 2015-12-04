@@ -56,7 +56,10 @@
 
 - hosts: all
   gather_facts: false
-  include: import_db.yml
+  role: import_db
+  vars:
+    nginx_container: "{{nginx_container_name}}"
+  tags: import_db
 
 - hosts: all
   include: system_check.yml
