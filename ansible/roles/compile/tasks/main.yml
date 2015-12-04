@@ -80,6 +80,14 @@
 - name: copy in whathood.yml
   template: src=whathood.yml.j2 dest={{wh_src_dir}}/whathood.yml
 
+- name: copy in applicaton_env template
+  template: src=application_env.j2 dest={{wh_src_dir}}/application_env
+
+- name: Install gems
+  command: bundle install
+  args:
+    chdir: "{{wh_src_dir}}"
+
 - name: Setting up dev friendly symlinks
   command: dev-bin/init_dev_env
   args:
