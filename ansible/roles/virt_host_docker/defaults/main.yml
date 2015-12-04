@@ -1,6 +1,6 @@
 ---
 # lxc-docker is the default
-docker_pkg_name: "docker-engine=1.8.2-0~trusty"
+docker_pkg_name: "docker-engine"
 # docker_pkg_name: docker.io
 
 # docker dns path for docker.io package ( changed at ubuntu 14.04 from docker to docker.io )
