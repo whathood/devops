@@ -12,5 +12,5 @@
   sudo: yes
 
 - name: composer creates an autoload classmap
-  command: sudo docker run -ti -v {{ application_root }}/app:/srv {{ docker_composer_image }} dumpautoload -o
+  command: sudo docker run -ti -v {{application_root}}/app:/srv {{ docker_composer_image }} dumpautoload -o
   when: application_env == 'production'
