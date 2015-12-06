@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "deploying to production"
+ansible-playbook -i ansible/hosts -l production ansible/deploy.yml "$@"
