@@ -9,3 +9,5 @@
   - foreman
   - apidoc
   - supervisor
+  - less
+  - coffee-script

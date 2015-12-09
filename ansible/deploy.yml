@@ -8,6 +8,8 @@
     - compile
     - role: composer
       tags: composer
+    - role: less
+      tags: less
 
     - bundler
     - { role: copy_code, from_dir: "{{ wh_src_dir }}", to_dir: "{{deploy_dest_dir}}" }
