@@ -57,7 +57,8 @@
 
 - hosts: all
   gather_facts: false
-  role: import_db
+  roles:
+  - { role: import_db }
   vars:
     nginx_container: "{{nginx_container_name}}"
   tags: import_db
