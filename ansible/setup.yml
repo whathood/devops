@@ -30,7 +30,8 @@
         docker_group_members: [ user ]
       }
 
-    - role: jsmiley.vim
+    - name: configure vim
+      role: jsmiley.vim
       tags: vim
 
 - include: git.yml
