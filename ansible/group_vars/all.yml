@@ -13,6 +13,9 @@ docker_group_members: [ "{{ansible_ssh_user}}" ]
 
 nginx_container_name: "nginx"
 
+# should not be in repo
+# rollbar_access_token: adsfasdfsadf
+
 # production may be running an nginx reverse proxy, so we need
 # to be able to specify the port
 # docker_nginx_http_port: 8080
