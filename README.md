@@ -6,11 +6,9 @@ See [Vagrant install instructions](VAGRANT_INSTALL_README.md) for install instru
 
 ### Docker Images
 
-* See [Docker README](docker/README.md) for more details
+* [Docker](docker/README.md)
 
-### Ansible
+* [Ansible](ansible/README.md)
 
-See [Ansible's readme](ansible/README.md)
-
-See [Vagrant Config](VAGRANT_README.md) for information on accessing resources through Vagrant.
+* [Vagrant](docs/VAGRANT_README.md)
 
