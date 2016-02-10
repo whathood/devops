@@ -14,10 +14,11 @@
     - bundler
     - { role: copy_code, from_dir: "{{ wh_src_dir }}", to_dir: "{{deploy_dest_dir}}" }
     - { role: "nginx", container_name: "nginx-{{ application_env }}", http_port: "81", app_dir: "{{ wh_src_dir }}" }
+
     - role: update_upstart
       tags: update_upstart
       sudo: yes
 
-- hosts: all
-  gather_facts: false
-  include: system_check.yml
+    - role: system_check
+      system_check_dir: "{{application_root}}"
+      tags: system_check

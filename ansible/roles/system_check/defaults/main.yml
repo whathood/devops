@@ -1,3 +1,4 @@
 ---
 
 skip_system_check: false
+uri_base: "http://0.0.0.0:{{docker_nginx_http_port}}"
