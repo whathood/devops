@@ -5,7 +5,7 @@
   sudo: yes
 
 - name: ensure {{wh_src_dir}} exists and we have rights to it
-  file: path={{wh_src_dir}} state=directory mode=0755 owner={{ansible_ssh_user}} group={{ansible_ssh_user}}
+  file: path={{wh_src_dir}} state=directory mode=0755 owner={{ansible_ssh_user}}
   sudo: yes
 
 #- name: Verify we can authenticate with github
@@ -79,6 +79,14 @@
 
 - name: copy in whathood.yml
   template: src=whathood.yml.j2 dest={{wh_src_dir}}/whathood.yml
+
+- name: copy in applicaton_env template
+  template: src=application_env.j2 dest={{wh_src_dir}}/application_env
+
+- name: Install gems
+  command: bundle install
+  args:
+    chdir: "{{wh_src_dir}}"
 
 - name: Setting up dev friendly symlinks
   command: dev-bin/init_dev_env

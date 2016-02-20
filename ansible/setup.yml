@@ -30,7 +30,8 @@
         docker_group_members: [ user ]
       }
 
-    - role: jsmiley.vim
+    - name: configure vim
+      role: jsmiley.vim
       tags: vim
 
 - include: git.yml
@@ -56,7 +57,11 @@
 
 - hosts: all
   gather_facts: false
-  include: import_db.yml
+  roles:
+  - { role: import_db }
+  vars:
+    nginx_container: "{{nginx_container_name}}"
+  tags: import_db
 
 - hosts: all
   include: system_check.yml

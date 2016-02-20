@@ -1,11 +1,23 @@
 ---
 
-- name: run system check
-  action: command bin/check_system
-  args:
-    chdir: "{{ system_check_dir }}"
-  register: result
-  until: result.rc == 0
-  retries: 5
-  delay: 3
-  when: not skip_system_check
+- name: nginx is compressing
+  shell: "curl -D - -H 'Accept-Encoding: gzip' {{uri_base}}  -o /dev/null 2>/dev/null | grep 'Content-Encoding: gzip' | wc | awk '{ print $1 }'"
+  register: command_result
+  failed_when: "'0' in command_result.stdout"
+
+- name: Checking for uri for a 404
+  uri:
+    url: "{{uri_base}}/api/v1/asdlfkasjdflsdf"
+    status_code: 404
+
+- uri: url="{{item.uri}}"
+  with_items:
+  - uri: "{{uri_base}}"
+  - uri: "{{uri_base}}/api/v1/neighborhood-border/region/Philadelphia"
+  - uri: "{{uri_base}}/api/v1/point-election/x/-75.0898801428571/y/40.0218525714286"
+
+- name: wh-worker is running
+  shell: status wh-worker
+  register: command_result
+  failed_when: "'waiting' in command_result.stdout"
+  when: not skip_system_check and application_env == 'production'

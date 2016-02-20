@@ -1,8 +1,0 @@
----
-
-- hosts: all
-  gather_facts: false
-  vars:
-    system_check_dir: "{{application_root}}"
-  roles:
-    - system_check

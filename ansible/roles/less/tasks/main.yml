@@ -1,0 +1,6 @@
+---
+
+- name: compile less
+  command: bin/grunt less
+  args:
+    chdir: "{{wh_src_dir}}"

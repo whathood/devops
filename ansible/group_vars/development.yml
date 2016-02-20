@@ -1,6 +1,6 @@
 ---
-boundary_build_grid_res: 0.0009
-heatmap_build_grid_res:  0.0015
+boundary_build_grid_res: "0.0009"
+heatmap_build_grid_res:  "0.0015"
 
 application_env: development
 
@@ -11,3 +11,4 @@ wh_src_dir: /home/vagrant/src/whathood
 application_root: /home/vagrant/src/whathood
 
 docker_nginx_image: quay.io/whathood/nginx-dev
+docker_nginx_http_port: 80

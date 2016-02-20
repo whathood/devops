@@ -39,12 +39,12 @@
 
 - file: path=/var/log/whathood/php-zend.log mode=0777
 
-- name: run {{ desired_env }} nginx container
+- name: run nginx container
   command: >
     docker run --detach
       -v "/var/log/whathood:/var/log/whathood:rw"
       -v "{{application_root}}:/var/www/whathood:rw"
-      -p "80:80" 
+      -p "{{docker_nginx_http_port}}:80"
       --link wh-postgis:wh-postgis
       --link wh_memcached:wh_memcached
       -e 'PGPORT=5432'

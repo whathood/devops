@@ -1,7 +1,0 @@
-#!/bin/sh
-
-# kill all vagrant plugins running
-
-echo "killing rsync-auto"
-ps aux | grep vagrant | grep -v grep | grep "rsync-auto" | awk '{ print $2 }' | xargs kill
-ps aux | grep vagrant | grep -v grep
