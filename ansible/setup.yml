@@ -62,6 +62,3 @@
   vars:
     nginx_container: "{{nginx_container_name}}"
   tags: import_db
-
-- hosts: all
-  include: system_check.yml

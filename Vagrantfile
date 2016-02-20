@@ -22,7 +22,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder "docker/", "/home/vagrant/src/docker"
 
   config.vm.provision "ansible" do |ansible|
-    ansible.inventory_path  = "ansible/hosts/development"
+    ansible.inventory_path  = "ansible/hosts"
     ansible.limit           = 'development'
     ansible.playbook        = "ansible/setup.yml"
     ansible.extra_vars      = { ansible_ssh_user: 'vagrant' }

@@ -4,11 +4,13 @@
   shell: "curl -D - -H 'Accept-Encoding: gzip' {{uri_base}}  -o /dev/null 2>/dev/null | grep 'Content-Encoding: gzip' | wc | awk '{ print $1 }'"
   register: command_result
   failed_when: "'0' in command_result.stdout"
+  when: not skip_system_check
 
 - name: Checking for uri for a 404
   uri:
     url: "{{uri_base}}/api/v1/asdlfkasjdflsdf"
     status_code: 404
+  when: not skip_system_check
 
 - uri: url="{{item.uri}}"
   with_items:

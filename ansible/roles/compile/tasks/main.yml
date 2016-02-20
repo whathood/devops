@@ -14,6 +14,7 @@
    # need to cd into git_dir and clone from there because the dir will already exist
 - name: clone whathood repo
   git: force=yes repo=git@github.com:whathood/whathood.git dest="{{ wh_src_dir }}" accept_hostkey=yes
+  ignore_errors: yes
 
 - file: path=/var/log/whathood state=directory mode=0777
   sudo: yes
@@ -22,15 +23,18 @@
   file: path=/var/log/whathood/php-zend.log state=touch owner={{ansible_ssh_user}} mode=0777
   sudo: yes
 
+# on setup, wh-foreman won't exist, so ignore errors
 - command: status wh-foreman
   register: result
+  ignore_errors: yes
 
 - shell: stop wh-foreman
   sudo: yes
   when: '"started" in result.stdout'
-
-- command: status wh-foreman
+  
+- command: status wh-worker
   register: result
+  ignore_errors: yes
 
 - shell: stop wh-worker
   sudo: yes

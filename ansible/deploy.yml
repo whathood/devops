@@ -21,4 +21,5 @@
 
     - role: system_check
       system_check_dir: "{{application_root}}"
+      skip_system_check: true
       tags: system_check

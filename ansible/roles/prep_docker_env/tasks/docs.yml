@@ -1,5 +1,9 @@
 ---
 
+- name: make user ansible_ssh_user has full rights to src
+  file: recurse=yes path=/home/{{ansible_ssh_user}}/src owner={{ansible_ssh_user}} state=directory
+  sudo: yes
+
 - name: create phpdoc root dir
   file: path=/home/{{ansible_ssh_user}}/src/whathood/docs state=directory
 
@@ -11,12 +15,13 @@
   sudo: yes
 
 - name: start docs nginx container
+  sudo: yes
   docker:
     name: docs
     image: kyma/docker-nginx 
     state: started
     restart_policy: always
-    volumes:
-    - "/home/vagrant/src/whathood/docs:/var/www"
+#    volumes:
+#    - "/home/{{ansible_ssh_user}}/src/whathood/docs:/var/www"
     ports:
     - "83:80"

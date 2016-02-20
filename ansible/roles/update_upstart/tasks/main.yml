@@ -4,6 +4,13 @@
   command: rm -rf /etc/init/wh-*
   sudo: true
 
+- name: copy over current upstart scripts
+  template: src={{item.file}} dest=/etc/init/{{item.dest}}
+  sudo: yes
+  with_items:
+  - { file: wh-worker.conf.j2, dest: wh-worker.conf }
+  - { file: wh-foreman.conf, dest: wh-foreman.conf }
+
 - name: is wh-worker running
   command: status wh-worker
   sudo: yes
