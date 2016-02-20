@@ -7,13 +7,4 @@
 6. if working off a fork of the repository, edit `provision/config/config.local.yaml` with the repository location
 7. run `./bin/vagrant_setup`
   * NOTE: during provisioning, ignore messages like `dpkg-preconfigure: unable to re-open stdin: No such file or directory`, it's a known bug
-8. to get access via the command line use the command: `vagrant ssh -c "screen -R"`
-
-Vagrant will copy a directory provision/config/ssh into the vagrant user's home directory, allowing automatic pushes to github.
-
-### Notes
-
-* under the vagrant install, the directory whathood_src contains the source code mapped to the development environment
-* connect to the ubuntu install: `vagrant ssh`
-* PostGIS will be up and running with a database name of "whathood" and accessable through port 5433.
-
+8. to get access via the command line use the command: `vagrant ssh`
