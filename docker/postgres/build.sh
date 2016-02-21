@@ -1,1 +1,1 @@
-sudo docker build -t quay.io/whathood/docker-postgis .
+sudo docker build -t quay.io/whathood/postgres .

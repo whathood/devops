@@ -7,7 +7,7 @@
 - name: wh-postgis is started
   docker:
     name: wh-postgis
-    image: quay.io/whathood/docker-postgis
+    image: quay.io/whathood/postgres
     state: started
   sudo: yes
 
