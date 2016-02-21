@@ -42,11 +42,16 @@
     user: "{{ ansible_ssh_user }}"
     log_dir: /var/log/whathood
   roles:
-    - { role: rvm, sudo: yes }
+    - role: rvm
+      sudo: yes
 
 - hosts: all
   gather_facts: false
-  include: prep_docker_env.yml
+  roles:
+  - role: prep_docker_env
+    vars:
+      user: "{{ ansible_ssh_user }}"
+    tags: prep_docker_env 
 
 - hosts: all
   gather_facts: false
