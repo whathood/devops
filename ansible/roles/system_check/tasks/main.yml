@@ -17,6 +17,7 @@
   - uri: "{{uri_base}}"
   - uri: "{{uri_base}}/api/v1/neighborhood-border/region/Philadelphia"
   - uri: "{{uri_base}}/api/v1/point-election/x/-75.0898801428571/y/40.0218525714286"
+  when: not skip_system_check
 
 - name: wh-worker is running
   shell: status wh-worker
