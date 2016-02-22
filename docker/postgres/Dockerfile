@@ -12,7 +12,7 @@ RUN echo "deb http://archive.ubuntu.com/ubuntu trusty main universe" > /etc/apt/
 # needed for apt-add-repository
 RUN apt-get install -y software-properties-common
 ## Add pgRouting launchpad repository ("stable" or "unstable")
-RUN add-apt-repository ppa:georepublic/pgrouting-unstable
+RUN add-apt-repository ppa:georepublic/pgrouting
 RUN apt-get -y update
 RUN apt-get -y install ca-certificates rpl pwgen
 
