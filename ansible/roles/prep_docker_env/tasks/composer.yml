@@ -1,0 +1,9 @@
+---
+
+# we build it fresh because composer will complain that it's old
+
+- name: build composer image
+  docker_image:
+    name: "whathood/composer"
+    path: /home/{{ansible_ssh_user}}/src/docker/composer
+    state: present

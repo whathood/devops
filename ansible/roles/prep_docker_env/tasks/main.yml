@@ -3,7 +3,7 @@
 
 - synchronize:
     src: ../docker
-    dest: /home/{{ansible_ssh_user}}/src/docker
+    dest: /home/{{ansible_ssh_user}}/src/
     archive: yes
     recursive: yes
   remote_user: "{{ansible_ssh_user}}"
@@ -15,12 +15,7 @@
     state: present
   sudo: yes
 
-- name: image whathood/composer is present
-  docker:
-    name: wh_composer
-    image: quay.io/whathood/composer
-    state: present
-  sudo: yes
+- include: composer.yml tags=composer
 
 - name: image whathood/grunt is present
   docker:
@@ -53,7 +48,7 @@
     restart_policy: always
   sudo: yes
 
-- include: docs.yml tags=phpdoc,docs
+- include: docs.yml tags=phpdoc,docs sudo=yes
 
 - template: src=wh-start-containers.conf.j2 dest=/etc/init/wh-start-containers.conf
   sudo: yes
