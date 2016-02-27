@@ -1,6 +1,6 @@
 [production]       
      
-market ansible_ssh_user=whathood ansible_user=whathood ansible_ssh_host=market.phl.io ansible_ssh_port=57145 ansible_ssh_private_key_file=/home/jsmiley/.ssh/id_rsa
+whitman ansible_ssh_user=whathood ansible_user=whathood ansible_ssh_host=whitman ansible_ssh_port=57145 ansible_ssh_private_key_file=/home/jsmiley/.ssh/id_rsa
 
 [development]      
 
