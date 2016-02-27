@@ -1,6 +1,13 @@
 ---
 # configure any docker images on the host
 
+- synchronize:
+    src: ../docker
+    dest: /home/{{ansible_ssh_user}}/src/docker
+    archive: yes
+    recursive: yes
+  remote_user: "{{ansible_ssh_user}}"
+
 - name: image whathoood/jsx is present
   docker:
     name: wh_jsx
