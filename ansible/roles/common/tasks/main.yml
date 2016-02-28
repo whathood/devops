@@ -15,6 +15,10 @@
     - python-pip
     - build-essential
 
+# for ansible's url module used, by system check on urls
+- pip: name=httplib2
+  sudo: yes
+
 - name: Install Glances
   sudo: yes
   pip: name=Glances
