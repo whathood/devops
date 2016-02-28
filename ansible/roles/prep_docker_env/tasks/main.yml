@@ -1,6 +1,11 @@
 ---
 # configure any docker images on the host
 
+- file:
+    path: /home/{{ansible_ssh_user}}/src
+    state: directory
+    owner: "{{ansible_ssh_user}}"
+
 - synchronize:
     src: ../docker
     dest: /home/{{ansible_ssh_user}}/src/
