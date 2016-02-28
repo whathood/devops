@@ -6,6 +6,10 @@
     state: directory
     owner: "{{ansible_ssh_user}}"
 
+- name: Set  correct ssh key path
+  set_fact: 
+    ansible_ssh_private_key_file: "{{ ansible_ssh_private_key_file | realpath }}"
+
 - synchronize:
     src: ../docker
     dest: /home/{{ansible_ssh_user}}/src/
