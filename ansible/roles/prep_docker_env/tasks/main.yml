@@ -5,6 +5,7 @@
     path: /home/{{ansible_ssh_user}}/src
     state: directory
     owner: "{{ansible_ssh_user}}"
+  sudo: yes
 
 - name: Set  correct ssh key path
   set_fact: 
