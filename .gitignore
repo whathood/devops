@@ -11,3 +11,4 @@ whathood.local.yaml
 /cookbooks/
 /tmp/librarian/
 roles/
+*.retry
