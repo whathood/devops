@@ -1,10 +1,2 @@
-[production]       
-     
-whitman remote_user=whathood ansible_ssh_user=whathood ansible_user=whathood ansible_ssh_host=whitman.jimsmiley.us ansible_ssh_port=57145 ansible_ssh_private_key_file=/Users/jsmiley/.ssh/id_rsa
-
-[development]      
-
-whvagrant ansible_ssh_user=vagrant ansible_user=vagrant ansible_ssh_host=192.168.111.222 ansible_ssh_port=2223 ansible_ssh_private_key_file=.vagrant/machines/default/virtualbox/private_key 
-
 [localhost]
-localhost 127.0.0.1
+localhost ansible_host=127.0.0.1
