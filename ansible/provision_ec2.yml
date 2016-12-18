@@ -2,10 +2,11 @@
 - hosts: localhost
   gather_facts: false
   vars:
+    ec2_key_name: "ansible_test_ec2_key"
     region: us-east-1
     image: ami-c481fad3
     instance_type: t2.micro
-    group_id: sg-09e15872
+    group_id: sg-df5942a5
     vpc_subnet_id: subnet-9ceb91b6
     ansible_host_group: ec2_hosts
     ssh_pub_key_file: "/Users/jsmiley/.ssh/id_rsa_ec2_tests.pub"
