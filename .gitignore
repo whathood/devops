@@ -10,3 +10,4 @@ whathood.local.yaml
 .vagrant/
 /cookbooks/
 /tmp/librarian/
+roles/
