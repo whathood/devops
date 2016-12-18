@@ -24,7 +24,7 @@
       sudo: yes
 
     # Set up docker on the target machine
-    - { role: virt_host_docker,
+    - { role: jsmiley.virt_host_docker,
         sudo: yes,
         vars: { user: user },
         docker_group_members: [ user ]
