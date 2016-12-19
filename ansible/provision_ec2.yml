@@ -1,5 +1,6 @@
 
 - hosts: localhost
+  connection: local
   gather_facts: false
   vars:
     ec2_key_name: "ansible_test_ec2_key"
