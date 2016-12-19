@@ -10,7 +10,7 @@
 
     - name: install node on guest
       role: nodesource.node
-      sudo: yes
+      become: yes
       tags: node
 
     - name: configure timezone
@@ -31,7 +31,7 @@
         rvm1_rubies: ['ruby-2.3.1'],
         rvm1_user: 'ubuntu'
       }
-  sudo: yes
+  become: yes
 
 - hosts: all
   gather_facts: false
