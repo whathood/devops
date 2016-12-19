@@ -90,9 +90,6 @@
   tags: ["npm"]
   register: result
 
-- debug: var=result
-  tags: [ npm ]
-
 - name: compile coffeescript
   docker_container:
     name: "npm"
@@ -103,9 +100,6 @@
     entrypoint: grunt coffee
   tags: [ coffee ]
   register: result
-
-- debug: var=result
-  tags: [ coffee ]
 
 - file: path={{ wh_src_dir }}/app/data/DoctrineORMModule/Proxy mode=777 owner={{ansible_ssh_user}} state=directory
   become: yes
