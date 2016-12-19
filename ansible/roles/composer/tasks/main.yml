@@ -1,12 +1,13 @@
 ---
 
 - name: installing vendor libraries
-  command: make composer-install
-  args:
-    chdir: /home/{{ansible_ssh_user}}/src/whathood
+  make:
+    target: "composer-install"
+    chdir: "/home/{{ansible_user}}/src/whathood"
+  tags: [ composer ]
 
 - name: composer creates an autoload classmap
   command: make composer-dumpautoload
   args:
-    chdir: /home/{{ansible_ssh_user}}/src/whathood
-  when: application_env == 'production'
+    chdir: /home/{{ansible_user}}/src/whathood
+  tags: [ composer ]
