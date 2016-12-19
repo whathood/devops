@@ -1,19 +1,20 @@
 ---
 
 - name: Setting whathood env var
-  command: /bin/bash -c "echo 'WH_APP_ENV={{application_env}}' >> /etc/environment"
-  sudo: yes
+  command: /bin/bash -c "echo 'WH_APP_ENV={{ item }}' >> /etc/environment"
+  become: yes
+  with_items: application_env
 
 - name: ensure {{wh_src_dir}} exists and we have rights to it
   file: path={{wh_src_dir}} state=directory mode=0755 owner={{ansible_ssh_user}}
-  sudo: yes
+  become: yes
 
 #- name: Verify we can authenticate with github
 #  command: ssh -T git@github.com
 
 - name: clear the whathood directory
   file: path={{wh_src_dir}} state=absent
-  sudo: yes
+  become: yes
 
    # need to cd into git_dir and clone from there because the dir will already exist
 - name: clone whathood repo
@@ -21,11 +22,11 @@
   sudo: no
 
 - file: path=/var/log/whathood state=directory mode=0777
-  sudo: yes
+  become: yes
 
 - name: touch php-zend.log
   file: path=/var/log/whathood/php-zend.log state=touch owner={{ansible_ssh_user}} mode=0777
-  sudo: yes
+  become: yes
 
 # on setup, wh-foreman won't exist, so ignore errors
 - command: status wh-foreman
@@ -33,7 +34,7 @@
   ignore_errors: yes
 
 - shell: stop wh-foreman
-  sudo: yes
+  become: yes
   when: '"started" in result.stdout'
   
 - command: status wh-worker
@@ -41,34 +42,34 @@
   ignore_errors: yes
 
 - shell: stop wh-worker
-  sudo: yes
+  become: yes
   when: '"started" in result.stdout'
 
 - shell: docker stop wh-jsx || true
-  sudo: yes
+  become: yes
   when: application_env == 'development'
 
 - shell: docker rm -f wh-jsx || true
-  sudo: yes
+  become: yes
   when: application_env == 'development'
 
 - shell: docker start wh_memcached || true
-  sudo: yes
+  become: yes
 
 - name: checking database schema
   command: "{{ wh_src_dir }}/d-bin/check_db_schema"
   when: not skip_db_check
 
-  command: echo `ssh-keyscan github.com`
-  sudo: yes
+- command: echo `ssh-keyscan github.com`
+  become: yes
 
 - name: add github to known hosts
   command: echo `ssh-keyscan github.com` >> /root/.ssh/known_hosts
-  sudo: yes
+  become: yes
 
 - name: npm install dependencies
   command: docker run -it --rm -v {{ wh_src_dir }}:/data quay.io/whathood/nodejs-bower-grunt npm install
-  sudo: yes
+  become: yes
   args:
     chdir: "{{ wh_src_dir }}"
 
@@ -76,14 +77,14 @@
   command: docker run -it --rm -v {{ wh_src_dir }}:/data quay.io/whathood/nodejs-bower-grunt grunt coffee
   args:
     chdir: "{{ wh_src_dir }}"
-  sudo: yes
+  become: yes
 
 - file: path={{ wh_src_dir }}/app/data/DoctrineORMModule/Proxy mode=777 owner={{ansible_ssh_user}} state=directory
-  sudo: yes
+  become: yes
  
 - name: compile react
   command: docker run --rm -v {{ wh_src_dir }}/libs/react:/src -v {{ wh_src_dir }}/app/public/js/whathood:/build --name wh-jsx quay.io/whathood/jsx --extension jsx src build
-  sudo: yes
+  become: yes
 
 - name: copy in whathood.yml
   template: src=whathood.yml.j2 dest={{wh_src_dir}}/whathood.yml
