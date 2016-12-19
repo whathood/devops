@@ -18,23 +18,20 @@
       sudo: yes
       tags: timezone
 
-- hosts: development
-  gather_facts: true
+- include: git.yml
+
+- hosts: all
+  gather_facts: false
   vars:
     user: "{{ ansible_ssh_user }}"
     log_dir: /var/log/whathood
-    dot_vim_dir: "/home/{{ansible_ssh_user}}/.vim"
   roles:
-    - name: install common stuff on the guest
-      role: common
-      tags: common
-      sudo: yes
-
-    - name: configure vim
-      role: jsmiley.vim
-      tags: vim
-
-- include: git.yml
+    - { role: rvm_io.ruby,
+        tags: ruby,
+        rvm1_rubies: ['ruby-2.3.1'],
+        rvm1_user: 'ubuntu'
+      }
+  sudo: yes
 
 - hosts: all
   gather_facts: false

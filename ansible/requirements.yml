@@ -1,5 +1,7 @@
 - name: nodesource.node
 
+- name: rvm_io.ruby
+
 - name: jsmiley.vim
   src: git@bitbucket.org:jimrsmiley/ansible-jsmiley-vim.git
   scm: git
