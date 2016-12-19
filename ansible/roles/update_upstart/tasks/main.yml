@@ -2,41 +2,41 @@
 
 - name: remove any upstart scripts
   command: rm -rf /etc/init/wh-*
-  sudo: true
+  become: true
 
 - name: copy over current upstart scripts
   template: src={{item.file}} dest=/etc/init/{{item.dest}}
-  sudo: yes
+  become: yes
   with_items:
   - { file: wh-worker.conf.j2, dest: wh-worker.conf }
   - { file: wh-foreman.conf, dest: wh-foreman.conf }
 
 - name: is wh-worker running
   command: status wh-worker
-  sudo: yes
+  become: yes
   register: result
 
 - command: stop wh-worker
-  sudo: true
+  become: true
   when: '"started" in result.stdout'
 
 - name: is wh-foreman running
   command: status wh-foreman
-  sudo: yes
+  become: yes
   register: result
 
 - command: stop wh-foreman
-  sudo: true
+  become: true
   when: '"started" in result.stdout'
 
 - name: copy over current upstart scripts
   template: src={{item.file}} dest=/etc/init/{{item.dest}}
-  sudo: yes
+  become: yes
   with_items:
   - { file: wh-worker.conf.j2, dest: wh-worker.conf }
   - { file: wh-foreman.conf, dest: wh-foreman.conf }
 
 - name: start the upstart scripts
   command: start wh-worker
-  sudo: yes
+  become: yes
   when: application_env == "production"

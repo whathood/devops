@@ -10,16 +10,16 @@
 
 - name: rename old production dir
   command: mv {{ to_dir }} "/opt/{{ new_name.stdout }}"
-  sudo: yes
+  become: yes
   when: st.stat.exists == true
 
 - name: ensure empty dir
   command: rm -rf {{ to_dir }}
-  sudo: yes
+  become: yes
 
 - name: copy the code over
   command: cp -r {{ from_dir }} {{ to_dir }}
-  sudo: yes
+  become: yes
 
 - command: chmod -R 777 {{ to_dir }}/app/data
-  sudo: yes
+  become: yes

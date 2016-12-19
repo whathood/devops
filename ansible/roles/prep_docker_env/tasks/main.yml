@@ -5,7 +5,7 @@
     path: /home/{{ansible_ssh_user}}/src
     state: directory
     owner: "{{ansible_ssh_user}}"
-  sudo: yes
+  become: yes
 
 - name: Set  correct ssh key path
   set_fact: 
@@ -23,17 +23,17 @@
     name: wh_jsx
     image: quay.io/whathood/jsx
     state: present
-  sudo: yes
+  become: yes
 
 - include: composer.yml tags=composer
-  sudo: yes
+  become: yes
 
 - name: image whathood/grunt is present
   docker:
     name: wh_nodejs
     image: quay.io/whathood/nodejs-bower-grunt
     state: present
-  sudo: yes
+  become: yes
 
 - name: memcached container is present
   docker:
@@ -41,7 +41,7 @@
     image: quay.io/whathood/memcached
     state: present
     restart_policy: always
-  sudo: yes
+  become: yes
 
 - name: image nginx is present
   docker:
@@ -49,7 +49,7 @@
     image: "{{docker_nginx_image}}"
     state: present
     restart_policy: always
-  sudo: yes
+  become: yes
 
 - name: image whathood/postgres is present
   docker:
@@ -57,10 +57,10 @@
     image: quay.io/whathood/postgres
     state: present
     restart_policy: always
-  sudo: yes
+  become: yes
 
 - include: docs.yml tags=phpdoc,docs sudo=yes
   when: application_env != "production"
 
 - template: src=wh-start-containers.conf.j2 dest=/etc/init/wh-start-containers.conf
-  sudo: yes
+  become: yes

@@ -1,7 +1,7 @@
 ---
 
 - command: apt-get update
-  sudo: yes
+  become: yes
 
 - name: Detect rvm binary
   stat: path='{{ rvm1_rvm }}'

@@ -23,7 +23,7 @@
     repo: git@github.com:whathood/whathood.git
     dest: "{{ wh_src_dir }}"
     accept_hostkey: yes
-  sudo: no
+  become: no
 
 - file: path=/var/log/whathood state=directory mode=0777
   become: yes

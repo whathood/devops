@@ -4,7 +4,7 @@
 - apt: update_cache=yes cache_valid_time=3600
 
 - name: Install git
-  sudo: yes
+  become: yes
   apt: pkg={{item}} state=installed
   with_items:
     - screen
@@ -17,10 +17,10 @@
 
 # for ansible's url module used, by system check on urls
 - pip: name=httplib2
-  sudo: yes
+  become: yes
 
 - name: Install Glances
-  sudo: yes
+  become: yes
   pip: name=Glances
 
 - name: Copy screenrc

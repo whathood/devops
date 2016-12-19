@@ -2,4 +2,4 @@
 
 - name: running db import
   command: docker exec {{ nginx_container }} /bin/sh -c 'cd /var/www/whathood/; bin/import_db'
-  sudo: yes
+  become: yes

@@ -2,7 +2,7 @@
 
 - name: make user ansible_ssh_user has full rights to src
   file: recurse=yes path=/home/{{ansible_ssh_user}}/src owner={{ansible_ssh_user}} state=directory
-  sudo: yes
+  become: yes
 
 - name: create phpdoc root dir
   file: path=/home/{{ansible_ssh_user}}/src/whathood/docs state=directory
@@ -12,10 +12,10 @@
     name: phpdoc
     image: quay.io/whathood/phpdoc
     state: present
-  sudo: yes
+  become: yes
 
 - name: start docs nginx container
-  sudo: yes
+  become: yes
   docker:
     name: docs
     image: kyma/docker-nginx 

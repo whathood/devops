@@ -2,14 +2,14 @@
 
 - name: set WH_NGINX_CONTAINER in environment
   command: /bin/bash -c "echo 'WH_NGINX_CONTAINER={{nginx_container_name}}' >> /etc/environment"
-  sudo: yes
+  become: yes
 
 - name: wh-postgis is started
   docker:
     name: wh-postgis
     image: quay.io/whathood/postgres
     state: started
-  sudo: yes
+  become: yes
 
 - name: memcached container is started
   docker:
@@ -19,21 +19,21 @@
     ports:
       - "11211:11211"
     state: started
-  sudo: yes
+  become: yes
 
 - name: nginx PROD container is absent
   docker:
     name: nginx
     image: quay.io/whathood/nginx
     state: absent
-  sudo: yes
+  become: yes
 
 - name: "{{ item.container_name }} nginx container is absent"
   docker:
     name: nginx
     image: "{{ docker_nginx_image }}"
     state: absent
-  sudo: yes
+  become: yes
 
 - file: path=/var/log/whathood state=directory mode=0777
 
@@ -52,4 +52,4 @@
       -e 'PGHOST=wh-postgis'
       --name nginx
       {{docker_nginx_image}} 
-  sudo: yes
+  become: yes
