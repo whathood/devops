@@ -15,4 +15,6 @@
   roles:
   -  jsmiley.provision_ec2
 
+- include: setup.yml
+
 - include: deploy.yml

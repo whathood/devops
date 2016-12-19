@@ -18,17 +18,17 @@
       sudo: yes
       tags: timezone
 
+- hosts: development
+  gather_facts: true
+  vars:
+    user: "{{ ansible_ssh_user }}"
+    log_dir: /var/log/whathood
+    dot_vim_dir: "/home/{{ansible_ssh_user}}/.vim"
+  roles:
     - name: install common stuff on the guest
       role: common
       tags: common
       sudo: yes
-
-    # Set up docker on the target machine
-    - { role: jsmiley.virt_host_docker,
-        sudo: yes,
-        vars: { user: user },
-        docker_group_members: [ user ]
-      }
 
     - name: configure vim
       role: jsmiley.vim
@@ -53,9 +53,7 @@
       user: "{{ ansible_ssh_user }}"
     tags: prep_docker_env 
 
-- hosts: all
-  gather_facts: false
-  include: deploy.yml
+- include: deploy.yml
   vars:
     skip_db_check: true
     skip_system_check: true
