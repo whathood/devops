@@ -1,0 +1,3 @@
+[production]
+
+whathood.in ansible_user=ubuntu
