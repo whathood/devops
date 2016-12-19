@@ -36,11 +36,11 @@
 - hosts: all
   gather_facts: false
   vars:
-    user: "{{ ansible_ssh_user }}"
-    log_dir: /var/log/whathood
+    ansible_ssh_user: "{{ ansible_user }}"
+  tags: [ "docker" ]
   roles:
-    - role: rvm
-      sudo: yes
+  - angstwad.docker_ubuntu
+  become: yes
 
 - hosts: all
   gather_facts: false
