@@ -3,7 +3,7 @@
   connection: local
   gather_facts: false
   vars:
-    ec2_key_name: "ansible_test_ec2_key"
+    ec2_key_name: "id_rsa_ec2_tests"
     region: us-east-1
     image: ami-c481fad3
     instance_type: t2.micro
@@ -11,5 +11,6 @@
     vpc_subnet_id: subnet-9ceb91b6
     ansible_host_group: ec2_hosts
     ssh_pub_key_file: "/Users/jsmiley/.ssh/id_rsa_ec2_tests.pub"
+    ssh_private_key_file: "/Users/jsmiley/.ssh/id_rsa_ec2_tests"
   roles:
   -  jsmiley.provision_ec2
