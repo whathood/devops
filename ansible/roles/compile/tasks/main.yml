@@ -79,17 +79,33 @@
   command: echo `ssh-keyscan github.com` >> /root/.ssh/known_hosts
   become: yes
 
-- name: npm install dependencies
-  command: docker run -it --rm -v {{ wh_src_dir }}:/data quay.io/whathood/nodejs-bower-grunt npm install
-  become: yes
-  args:
-    chdir: "{{ wh_src_dir }}"
+- name: install npm dependencies
+  docker_container:
+    name: "npm"
+    image: quay.io/whathood/nodejs-bower-grunt
+    volumes:
+    - "{{ wh_src_dir }}:/data"
+    cleanup: yes
+    entrypoint: npm install
+  tags: ["npm"]
+  register: result
+
+- debug: var=result
+  tags: [ npm ]
 
 - name: compile coffeescript
-  command: docker run -it --rm -v {{ wh_src_dir }}:/data quay.io/whathood/nodejs-bower-grunt grunt coffee
-  args:
-    chdir: "{{ wh_src_dir }}"
-  become: yes
+  docker_container:
+    name: "npm"
+    image: quay.io/whathood/nodejs-bower-grunt
+    volumes:
+    - "{{ wh_src_dir }}:/data"
+    cleanup: yes
+    entrypoint: grunt coffee
+  tags: [ coffee ]
+  register: result
+
+- debug: var=result
+  tags: [ coffee ]
 
 - file: path={{ wh_src_dir }}/app/data/DoctrineORMModule/Proxy mode=777 owner={{ansible_ssh_user}} state=directory
   become: yes
@@ -104,14 +120,20 @@
 - name: copy in applicaton_env template
   template: src=application_env.j2 dest={{wh_src_dir}}/application_env
 
-- name: Install gems
-  command: bundle install
+- debug: var=wh_src_dir
+  tags: [ ruby ]
+
+# Installs latest available version of rake.
+- name: install gem executable-hooks
+  gem:
+    name: executable-hooks
+    state: latest
+  become: yes
+
+- name: install project ruby gems
+  command: /home/ubuntu/.rvm/gems/ruby-2.3.1/wrappers/bundle install
   args:
     chdir: "{{wh_src_dir}}"
-
-- name: Setting up dev friendly symlinks
-  command: dev-bin/init_dev_env
-  args:
-    chdir: "{{ wh_src_dir }}"
-  ignore_errors: yes
-  when: application_env == 'development'
+  tags: [ ruby, ruby-bundle ]
+  environment:
+    PATH: "/home/ubuntu/.rvm:{{ ansible_env.PATH }}"
