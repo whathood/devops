@@ -5,8 +5,12 @@
   become: yes
   with_items: application_env
 
-- name: ensure {{wh_src_dir}} exists and we have rights to it
-  file: path={{wh_src_dir}} state=directory mode=0755 owner={{ansible_ssh_user}}
+- name: ensure "{{ wh_src_dir }}" exists and we have rights to it
+  file:
+    path: "{{ wh_src_dir }}"
+    state: directory
+    mode: 0755
+    owner: "{{ ansible_ssh_user }}"
   become: yes
 
 #- name: Verify we can authenticate with github
