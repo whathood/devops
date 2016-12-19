@@ -12,3 +12,4 @@ whathood.local.yaml
 /tmp/librarian/
 roles/
 *.retry
+ansible/hosts
