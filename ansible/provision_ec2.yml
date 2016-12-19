@@ -4,7 +4,7 @@
   gather_facts: false
   vars:
     ec2_key_name: "id_rsa_ec2_tests"
-    region: us-east-1
+    region: "{{ region }}"
     image: ami-c481fad3
     instance_type: t2.micro
     group_id: sg-df5942a5

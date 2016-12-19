@@ -1,4 +1,8 @@
 ---
+
+region: us-east-1
+security_group: launch-wizard-1
+vpc_id: vpc-b1bd6fd6
 whathood_git_url: "git@github.com:whathood/whathood.git"
 
 deploy_dest_dir: /opt/whathood

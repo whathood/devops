@@ -1,0 +1,15 @@
+
+- hosts: all
+  connection: local
+  tasks:
+  - name: ensure security group allows port 80
+    ec2_group:
+      description: an example EC2 group
+      name: "{{ security_group }}"
+      vpc_id: "{{ vpc_id }}"
+      region: "{{ region }}"
+      rules:
+        - proto: tcp
+          from_port: 80
+          to_port: 80
+          cidr_ip: 0.0.0.0/0
