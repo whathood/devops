@@ -20,6 +20,10 @@
   file: path={{wh_src_dir}} state=absent
   become: yes
 
+- apt:
+    name: git
+  become: yes
+
    # need to cd into git_dir and clone from there because the dir will already exist
 - name: clone whathood repo
   git:
