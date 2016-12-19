@@ -13,11 +13,6 @@
       become: yes
       tags: node
 
-    - name: configure timezone
-      role: timezone
-      sudo: yes
-      tags: timezone
-
 - include: git.yml
 
 - hosts: all
