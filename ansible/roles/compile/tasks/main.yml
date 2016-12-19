@@ -123,13 +123,6 @@
 - debug: var=wh_src_dir
   tags: [ ruby ]
 
-# Installs latest available version of rake.
-- name: install gem executable-hooks
-  gem:
-    name: executable-hooks
-    state: latest
-  become: yes
-
 - name: install project ruby gems
   command: /home/ubuntu/.rvm/gems/ruby-2.3.1/wrappers/bundle install
   args:
