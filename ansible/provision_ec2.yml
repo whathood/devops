@@ -14,3 +14,5 @@
     ssh_private_key_file: "/Users/jsmiley/.ssh/id_rsa_ec2_tests"
   roles:
   -  jsmiley.provision_ec2
+
+- include: deploy.yml
