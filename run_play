@@ -1,7 +1,0 @@
-#!/bin/sh
-
-play="$1"
-rest="$2"
-cmd="time ansible-playbook -i ansible/hosts -l development ansible/$play.yml $rest"
-echo $cmd
-$cmd
