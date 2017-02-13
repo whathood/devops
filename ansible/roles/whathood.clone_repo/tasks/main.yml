@@ -31,3 +31,5 @@
 - file: path=/var/log/whathood state=directory mode=0777
   become: yes
 
+- name: copy in whathood.yml
+  template: src=whathood.yml.j2 dest={{wh_src_dir}}/whathood.yml

@@ -30,7 +30,6 @@
       tags: prep_docker_env 
     - role: whathood.npm_setup
       tags: [ npm_install, npm_setup ]
-    - compile
     - role: composer
       tags: composer
     - role: less
