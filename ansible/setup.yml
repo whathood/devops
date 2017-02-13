@@ -2,16 +2,14 @@
 
 - hosts: all
   gather_facts: true
-  vars:
-    user: "{{ ansible_ssh_user }}"
-    log_dir: /var/log/whathood
-    dot_vim_dir: "/home/{{ansible_ssh_user}}/.vim"
   roles:
-
     - name: install node on guest
       role: nodesource.node
       become: yes
       tags: node
+    - name: install whathood required npm packages
+      role: whathood.npm_setup
+      tags: [ npm_install, npm_setup ]
 
 - include: git.yml
 

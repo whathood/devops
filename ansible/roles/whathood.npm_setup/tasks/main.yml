@@ -1,0 +1,17 @@
+- name: make sure .npm directory is owned by ansible_user
+  file: path=/home/ubuntu/.npm state=directory owner=ubuntu recurse=yes mode="0777"
+  become: yes
+
+- name: make sure node_modules is owned by user
+  file: path=/home/ubuntu/src/whathood/node_modules state=directory recurse=yes owner=ubuntu mode="0777"
+  become: yes
+
+- npm:
+    name: "{{item}}"
+    path: "/home/{{ansible_user}}/src/whathood"
+  with_items:
+  - grunt
+  - grunt-contrib-coffee
+  - grunt-contrib-clean
+  - grunt-contrib-less
+  - grunt-contrib-watch
