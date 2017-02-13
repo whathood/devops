@@ -37,7 +37,8 @@
     register: result
     become: yes
 
-  - file: path={{ wh_src_dir }}/app/data/DoctrineORMModule/Proxy mode=777 owner={{ansible_ssh_user}} state=directory
+  - name: make sure the doctrine proxy dir is writeable
+    file: path={{ wh_src_dir }}/app/data/DoctrineORMModule/Proxy mode=777 owner={{ansible_ssh_user}} state=directory
     become: yes
    
   - name: compile react
