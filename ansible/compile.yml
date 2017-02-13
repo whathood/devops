@@ -51,9 +51,6 @@
       line: "{{application_env}}"
       create: yes
 
-  - debug: var=wh_src_dir
-    tags: [ ruby ]
-
   - name: install project ruby gems
     command: /home/ubuntu/.rvm/gems/ruby-2.3.1/wrappers/bundle install
     args:
