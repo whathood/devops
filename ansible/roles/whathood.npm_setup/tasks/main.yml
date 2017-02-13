@@ -6,6 +6,18 @@
   file: path=/home/ubuntu/src/whathood/node_modules state=directory recurse=yes owner=ubuntu mode="0777"
   become: yes
 
+#  - name: install npm dependencies
+#    docker_container:
+#      name: "npm"
+#      image: quay.io/whathood/nodejs-bower-grunt
+#      volumes:
+#      - "{{ wh_src_dir }}:/data"
+#      cleanup: yes
+#      entrypoint: npm install
+#    tags: ["npm"]
+#    register: result
+#    become: yes
+
 - npm:
     name: "{{item}}"
     path: "/home/{{ansible_user}}/src/whathood"
