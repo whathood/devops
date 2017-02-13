@@ -1,0 +1,33 @@
+---
+
+- name: ensure "{{ wh_src_dir }}" exists and we have rights to it
+  file:
+    path: "{{ wh_src_dir }}"
+    state: directory
+    mode: 0755
+    owner: "{{ ansible_ssh_user }}"
+  become: yes
+
+#- name: Verify we can authenticate with github
+#  command: ssh -T git@github.com
+
+- name: clear the whathood directory
+  file: path={{wh_src_dir}} state=absent
+  become: yes
+
+- apt:
+    name: git
+  become: yes
+
+   # need to cd into git_dir and clone from there because the dir will already exist
+- name: clone whathood repo
+  git:
+    force: yes
+    repo: git@github.com:whathood/whathood.git
+    dest: "{{ wh_src_dir }}"
+    accept_hostkey: yes
+  become: no
+
+- file: path=/var/log/whathood state=directory mode=0777
+  become: yes
+
