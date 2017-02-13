@@ -45,7 +45,7 @@
     command: docker run --rm -v {{ wh_src_dir }}/libs/react:/src -v {{ wh_src_dir }}/app/public/js/whathood:/build --name wh-jsx quay.io/whathood/jsx --extension jsx src build
     become: yes
 
-  - name: copy in applicaton_env template
+  - name: set applicaton_env
     lineinfile:
       dest: "{{wh_src_dir}}/application_env"
       line: "{{application_env}}"
