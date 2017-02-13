@@ -51,10 +51,13 @@
       line: "{{application_env}}"
       create: yes
 
+- hosts: all
+  gather_facts: true
+  tasks:
   - name: install project ruby gems
     command: /home/ubuntu/.rvm/gems/ruby-2.3.1/wrappers/bundle install
+    environment:
+      PATH: "/home/ubuntu/.rvm:{{ ansible_env.PATH }}"
     args:
       chdir: "{{wh_src_dir}}"
     tags: [ ruby, ruby-bundle ]
-    environment:
-      PATH: "/home/ubuntu/.rvm:{{ ansible_env.PATH }}"
