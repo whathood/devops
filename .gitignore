@@ -10,6 +10,8 @@ whathood.local.yaml
 .vagrant/
 /cookbooks/
 /tmp/librarian/
-roles/
 *.retry
 ansible/hosts
+ansible/roles/nodesource.node
+ansible/roles/rvm_io.ruby/
+ansible/roles/angstwad.docker_ubuntu
