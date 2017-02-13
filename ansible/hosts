@@ -1,3 +1,6 @@
 [production]
 
 whathood.in ansible_user=ubuntu
+
+[development]
+52.70.160.126 ansible_user=ubuntu
