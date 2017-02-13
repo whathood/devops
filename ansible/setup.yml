@@ -1,15 +1,17 @@
 ---
 
+# setup should:
+# * install base languages like ruby, node, npm
+# * it should then call deploy.yml
+# * and then import the database
+#
 - hosts: all
   gather_facts: true
   roles:
     - name: install node on guest
       role: nodesource.node
       become: yes
-      tags: node
-    - name: install whathood required npm packages
-      role: whathood.npm_setup
-      tags: [ npm_install, npm_setup ]
+      tags: node_install
 
 - include: git.yml
 
@@ -34,14 +36,6 @@
   roles:
   - angstwad.docker_ubuntu
   become: yes
-
-- hosts: all
-  gather_facts: false
-  roles:
-  - role: prep_docker_env
-    vars:
-      user: "{{ ansible_ssh_user }}"
-    tags: prep_docker_env 
 
 - include: deploy.yml
   vars:

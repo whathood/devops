@@ -1,10 +1,35 @@
 ---
-
+# deploy.yml
+#
+# should:
+# * prepare the docker environment
+# * call the compile play
+#
 - hosts: all
   gather_facts: false
+  vars:
+    user: "{{ ansible_ssh_user }}"
   vars_files:
   - /etc/ansible/vars_files/whathood.yml
   roles:
+    - role: prep_docker_env
+      tags: prep_docker_env 
+    - role: whathood.npm_setup
+      tags: [ npm_install, npm_setup ]
+
+- include: compile.yml
+
+- hosts: all
+  gather_facts: false
+  vars:
+    user: "{{ ansible_ssh_user }}"
+  vars_files:
+  - /etc/ansible/vars_files/whathood.yml
+  roles:
+    - role: prep_docker_env
+      tags: prep_docker_env 
+    - role: whathood.npm_setup
+      tags: [ npm_install, npm_setup ]
     - compile
     - role: composer
       tags: composer

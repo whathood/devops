@@ -91,6 +91,10 @@
   register: result
   become: yes
 
+- name: make sure node_modules is owned by user
+  file: path=/home/ubuntu/src/whathood/node_modules state=directory recurse=yes owner=ubuntu mode="0777"
+  become: yes
+
 - name: compile coffeescript
   docker_container:
     name: "npm"
