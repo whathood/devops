@@ -3,4 +3,4 @@
 whathood.in ansible_user=ubuntu
 
 [development]
-52.70.160.126 ansible_user=ubuntu
+184.72.212.46 ansible_user=ubuntu
