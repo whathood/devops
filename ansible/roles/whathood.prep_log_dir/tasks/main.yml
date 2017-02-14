@@ -1,0 +1,14 @@
+---
+
+# create a directory if it doesn't exist
+- name: ensure log directory exists
+  become: yes
+  file:
+    path: "{{wh_log_dir}}"
+    state: directory
+    mode: 0755
+    owner: "{{ansible_user}}"
+
+- name: touch php-zend.log
+  file: path="{{wh_log_dir}}/php-zend.log" state=touch owner={{ansible_user}} mode=0644
+  become: yes

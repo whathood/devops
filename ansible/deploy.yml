@@ -9,6 +9,7 @@
   gather_facts: false
   vars:
     user: "{{ ansible_ssh_user }}"
+    wh_log_dir: /var/log/whathood
   vars_files:
   - /etc/ansible/vars_files/whathood.yml
   roles:
@@ -16,6 +17,8 @@
       tags: prep_docker_env 
     - role: whathood.npm_setup
       tags: [ npm_install, npm_setup ]
+    - role: whathood.prep_log_dir
+      tags: [ prep_log_dir ]
 
 - hosts: all
   gather_facts: false
