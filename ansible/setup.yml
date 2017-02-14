@@ -34,7 +34,8 @@
     ansible_ssh_user: "{{ ansible_user }}"
   tags: [ "docker" ]
   roles:
-  - angstwad.docker_ubuntu
+    - role: angstwad.docker_ubuntu
+      pip_version_docker_py: '1.10.6'
   become: yes
 
 - include: deploy.yml
