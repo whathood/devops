@@ -2,7 +2,6 @@
 
 - hosts: all
   gather_facts: false
-  vars:
   vars_files:
   - /etc/ansible/vars_files/whathood.yml
   tasks:
@@ -13,29 +12,18 @@
 
 - hosts: all
   gather_facts: false
-  vars:
   vars_files:
   - /etc/ansible/vars_files/whathood.yml
   roles:
     - role: whathood.clone_repo
+    - role: whathood.compile_coffeescript
+      tags: compile_coffeescript
 
 - hosts: all
   gather_facts: false
-  vars:
   vars_files:
   - /etc/ansible/vars_files/whathood.yml
   tasks:
-  - name: compile coffeescript
-    docker_container:
-      name: "npm"
-      image: quay.io/whathood/nodejs-bower-grunt
-      volumes:
-      - "{{ wh_src_dir }}:/data"
-      cleanup: yes
-      entrypoint: grunt coffee
-    tags: [ coffee ]
-    register: result
-    become: yes
 
   - name: make sure the doctrine proxy dir is writeable
     file: path={{ wh_src_dir }}/app/data/DoctrineORMModule/Proxy mode=777 owner={{ansible_ssh_user}} state=directory
