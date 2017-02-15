@@ -4,4 +4,3 @@
   command: ./node_modules/grunt/bin/grunt less
   args:
     chdir: "{{wh_src_dir}}"
-  tags: [ less ]
