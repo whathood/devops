@@ -1,11 +1,6 @@
+---
+
 - name: compile coffeescript
-  docker_container:
-    name: "npm"
-    image: quay.io/whathood/nodejs-bower-grunt
-    volumes:
-    - "{{ wh_src_dir }}:/data"
-    cleanup: yes
-    entrypoint: grunt coffee
-  tags: [ coffee ]
-  register: result
-  become: yes
+  command: ./node_modules/grunt/bin/grunt coffee
+  args:
+    chdir: "{{wh_src_dir}}"
