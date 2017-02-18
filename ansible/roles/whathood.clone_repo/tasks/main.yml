@@ -8,13 +8,6 @@
     owner: "{{ ansible_ssh_user }}"
   become: yes
 
-#- name: Verify we can authenticate with github
-#  command: ssh -T git@github.com
-
-- name: clear the whathood directory
-  file: path={{wh_src_dir}} state=absent
-  become: yes
-
 - apt:
     name: git
   become: yes
