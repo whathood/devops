@@ -18,15 +18,12 @@
     recursive: yes
   remote_user: "{{ansible_ssh_user}}"
 
-- name: Install docker-py
-  pip: name=docker-py version=1.10.6
+- name: pip install docker
+  pip: name=docker version=2.0.2
   become: yes
 
-- name: image whathoood/jsx is present
-  docker:
-    name: wh_jsx
-    image: quay.io/whathood/jsx
-    state: present
+- name: pip install docker-py
+  pip: name=docker-py version=1.9.0
   become: yes
 
 - include: composer.yml tags=composer
