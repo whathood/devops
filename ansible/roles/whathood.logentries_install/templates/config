@@ -1,0 +1,28 @@
+[Main]
+user-key = {{logentries.user_key}}
+pull-server-side-config = False
+metrics-mem = system
+metrics-token =
+metrics-disk = sum
+metrics-swap = system
+metrics-space = /
+metrics-vcpu =
+metrics-net = sum
+metrics-interval = 5s
+metrics-cpu = system
+
+[nginx-access-log]
+path = /var/log/whathood/nginx-access.log
+destination = {{environment}}/NginxAccessLog
+
+[nginx-error-log]
+path = /var/log/whathood/nginx-error.log
+destination = {{environment}}/nginx_error
+
+[php-zend]
+path = /var/log/whathood/php-zend.log
+destination = {{environment}}/php_zend
+
+[wh-worker]
+path = /var/log/whathood/wh-worker.log
+destination = {{environment}}/wh_worker
