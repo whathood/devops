@@ -85,8 +85,6 @@
   vars_files:
   - /etc/ansible/vars_files/whathood.yml
   roles:
-    - role: prep_docker_env
-      tags: prep_docker_env 
     - role: whathood.npm_setup
       tags: [ npm_install, npm_setup ]
     - role: composer
