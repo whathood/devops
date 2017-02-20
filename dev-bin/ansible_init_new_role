@@ -1,0 +1,7 @@
+#!/bin/sh
+
+role_name=$*
+
+mkdir -p ansible/roles/$role_name/tasks
+
+echo "created role $role_name"
