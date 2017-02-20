@@ -1,0 +1,10 @@
+---
+
+npm_modules:
+  - name: grunt-contrib-uglify 
+  - name: grunt
+  - name: grunt-contrib-coffee
+  - name: grunt-contrib-clean
+  - name: grunt-contrib-less
+  - name: grunt-contrib-watch
+  - name: grunt-angular-builder

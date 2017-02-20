@@ -6,6 +6,9 @@
 #
 - hosts: all
   gather_facts: true
+  vars:
+    user: "{{ ansible_ssh_user }}"
+    log_dir: /var/log/whathood
   roles:
 
     - role: nodesource.node
@@ -18,20 +21,13 @@
     - role: jsmiley.bash
       tags: bash
 
-- include: git.yml
+    - role: rvm_io.ruby
+      tags: ruby
+      rvm1_rubies: ['ruby-2.3.1']
+      rvm1_user: 'ubuntu'
+      become: yes
 
-- hosts: all
-  gather_facts: false
-  vars:
-    user: "{{ ansible_ssh_user }}"
-    log_dir: /var/log/whathood
-  roles:
-    - { role: rvm_io.ruby,
-        tags: ruby,
-        rvm1_rubies: ['ruby-2.3.1'],
-        rvm1_user: 'ubuntu'
-      }
-  become: yes
+- include: git.yml
 
 - hosts: all
   gather_facts: false
