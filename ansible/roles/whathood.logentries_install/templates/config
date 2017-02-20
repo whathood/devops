@@ -12,17 +12,17 @@ metrics-interval = 5s
 metrics-cpu = system
 
 [nginx-access-log]
-path = /var/log/whathood/nginx-access.log
+path = {{log_dir}}/nginx-access.log
 destination = {{environment}}/NginxAccessLog
 
 [nginx-error-log]
-path = /var/log/whathood/nginx-error.log
+path = {{log_dir}}/nginx-error.log
 destination = {{environment}}/nginx_error
 
 [php-zend]
-path = /var/log/whathood/php-zend.log
+path = {{log_dir}}/php-zend.log
 destination = {{environment}}/php_zend
 
 [wh-worker]
-path = /var/log/whathood/wh-worker.log
+path = {{log_dir}}/wh-worker.log
 destination = {{environment}}/wh_worker
