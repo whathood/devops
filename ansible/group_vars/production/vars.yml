@@ -1,0 +1,4 @@
+---
+
+environment: production
+logentries: "{{vault_logentries}}"

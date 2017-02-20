@@ -1,0 +1,43 @@
+---
+
+- name: add logentries to sources.list.d
+  shell: echo 'deb http://rep.logentries.com/ trusty main' > /etc/apt/sources.list.d/logentries.list
+  become: yes
+
+- name: add logentries gpg key
+  shell: gpg --keyserver pgp.mit.edu --recv-keys A5270289C43C79AD && gpg -a --export A5270289C43C79AD | sudo apt-key add -
+  become: yes
+
+- name: apt-get update
+  apt:
+    update_cache: yes
+  become: yes
+
+- name: apt-get install logentries
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    name: logentries
+  become: yes
+
+- file:
+    path: /etc/le
+    state: directory
+  become: yes
+
+- name: setup logentries config
+  template:
+    src: config
+    dest: /etc/le/config
+  become: yes
+
+- name: apt-get install logentries-daemon
+  apt:
+    name: logentries-daemon
+  become: yes
+
+- name: start logentries service
+  service:
+    name: logentries
+    state: started
+  become: yes
