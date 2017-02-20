@@ -31,7 +31,8 @@
     file: path=/var/log/whathood/php-zend.log state=touch owner={{ansible_ssh_user}} mode=0777
     become: yes
 
-  - command: echo `ssh-keyscan github.com`
+  - name: make sure ssh-keyscan command works
+    command: echo `ssh-keyscan github.com`
     become: yes
 
   - name: add github to known hosts
