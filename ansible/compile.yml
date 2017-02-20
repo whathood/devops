@@ -49,3 +49,17 @@
     args:
       chdir: "{{wh_src_dir}}"
     tags: [ ruby, ruby-bundle ]
+
+- hosts: production
+  gather_facts: false
+  roles:
+    - role: whathood.grunt_uglify
+      tags: grunt_uglify
+
+- hosts: development
+  gather_facts: false
+  vars:
+    wh_src_dir: /opt/whathood
+  roles:
+    - role: whathood.grunt_uglify
+      tags: grunt_uglify
