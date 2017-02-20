@@ -1,0 +1,4 @@
+---
+
+- shell: echo "{{environment}}" > /etc/hostname
+  become: yes
