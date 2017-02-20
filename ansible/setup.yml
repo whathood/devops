@@ -1,8 +1,7 @@
 ---
 
 # setup should:
-# * install base languages like ruby, node, npm
-# * it should then call deploy.yml
+# * install base languages like ruby, node, npm # * it should then call deploy.yml
 # * and then import the database
 #
 - hosts: all
@@ -36,6 +35,13 @@
   roles:
     - role: angstwad.docker_ubuntu
       pip_version_docker_py: '1.10.6'
+  become: yes
+
+- hosts: production
+  gather_facts: false
+  roles:
+    - role: whathood.logentries_install
+      tags: logentries_install
   become: yes
 
 - include: deploy.yml

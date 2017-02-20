@@ -2,6 +2,9 @@
 
 ### Setup
 
+* set the AWS credentials environment variables
+* set the ansible vault password in the file `vpass`
+
 ~~~~
 # install required ansible roles
 
