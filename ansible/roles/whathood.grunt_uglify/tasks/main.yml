@@ -1,0 +1,6 @@
+---
+
+- name: grunt uglify
+  shell: ./bin/grunt uglify
+  args:
+    chdir: "{{wh_src_dir}}"

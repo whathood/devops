@@ -7,4 +7,3 @@ npm_modules:
   - name: grunt-contrib-clean
   - name: grunt-contrib-less
   - name: grunt-contrib-watch
-  - name: grunt-angular-builder
