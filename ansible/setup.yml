@@ -7,8 +7,8 @@
 - hosts: all
   gather_facts: true
   roles:
-    - name: install node on guest
-      role: nodesource.node
+
+    - role: nodesource.node
       become: yes
       tags: node_install
 
