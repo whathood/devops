@@ -19,9 +19,6 @@
     - role: whathood.hostname_set
       tags: hostname_set
 
-    - role: whathood.npm_setup
-      tags: [ npm_install, npm_setup ]
-
     - role: whathood.prep_log_dir
       tags: [ prep_log_dir ]
 
@@ -41,9 +38,6 @@
     command: echo `ssh-keyscan github.com` >> /root/.ssh/known_hosts
     become: yes
 
-  - name: make sure node_modules is owned by user
-    file: path=/home/ubuntu/src/whathood/node_modules state=directory recurse=yes owner=ubuntu mode="0777"
-    become: yes
   # on setup, wh-foreman won't exist, so ignore errors
   - command: status wh-foreman
     register: result
@@ -84,6 +78,7 @@
     user: "{{ ansible_ssh_user }}"
   vars_files:
   - /etc/ansible/vars_files/whathood.yml
+  - group_vars/npm_modules.yml
   roles:
     - role: whathood.npm_setup
       tags: [ npm_install, npm_setup ]
