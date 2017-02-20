@@ -13,7 +13,7 @@ metrics-cpu = system
 
 [nginx-access-log]
 path = {{log_dir}}/nginx-access.log
-destination = {{environment}}/NginxAccessLog
+destination = {{environment}}/nginx_access
 
 [nginx-error-log]
 path = {{log_dir}}/nginx-error.log
