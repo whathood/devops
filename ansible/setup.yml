@@ -12,6 +12,9 @@
       become: yes
       tags: node_install
 
+    - role: jsmiley.bash
+      tags: bash
+
 - include: git.yml
 
 - hosts: all
