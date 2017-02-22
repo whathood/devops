@@ -10,8 +10,6 @@
   vars:
     user: "{{ ansible_ssh_user }}"
     wh_log_dir: /var/log/whathood
-  vars_files:
-  - /etc/ansible/vars_files/whathood.yml
   roles:
     - role: prep_docker_env
       tags: prep_docker_env 
@@ -78,7 +76,6 @@
   vars:
     user: "{{ ansible_ssh_user }}"
   vars_files:
-  - /etc/ansible/vars_files/whathood.yml
   - group_vars/npm_modules.yml
   roles:
     - role: whathood.npm_setup
