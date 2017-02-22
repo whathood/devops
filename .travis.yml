@@ -4,7 +4,7 @@ python: "2.7"
 
 addons:
   ssh_known_hosts:
-  - bitbucket.com
+  - bitbucket.org
 
 before_install:
   # Make sure everything's up to date.
