@@ -2,8 +2,6 @@
 
 - hosts: all
   gather_facts: false
-  vars_files:
-  - /etc/ansible/vars_files/whathood.yml
   tasks:
   - name: Setting whathood env var
     command: /bin/bash -c "echo 'WH_APP_ENV={{ item }}' >> /etc/environment"
@@ -12,8 +10,6 @@
 
 - hosts: all
   gather_facts: false
-  vars_files:
-  - /etc/ansible/vars_files/whathood.yml
   roles:
     - role: whathood.clone_repo
     - role: whathood.compile_coffeescript
@@ -21,8 +17,6 @@
 
 - hosts: all
   gather_facts: false
-  vars_files:
-  - /etc/ansible/vars_files/whathood.yml
   tasks:
 
   - name: make sure the doctrine proxy dir is writeable
