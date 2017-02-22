@@ -1,0 +1,14 @@
+---
+
+- set_fact:
+    no_pub_key_material: yes
+  when: ("{{ssh_pub_key_material}}" == "") or (not "{{ssh_pub_key_material}}")
+
+- set_fact:
+    no_pub_key_material: no
+  when: not(("{{ssh_pub_key_material}}" == "") or (not "{{ssh_pub_key_material}}"))
+
+- name: if there's no variable set, load the public key file
+  set_fact:
+    ssh_pub_key_material: "{{ lookup('file', ssh_pub_key_file) }}"
+  when: no_pub_key_material
