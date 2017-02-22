@@ -27,11 +27,10 @@ before_install:
   # we're storing the decrypt pass as a travis env var ANSIBLE_VAULT_PASS
   - echo $ANSIBLE_VAULT_PASS > ${TRAVIS_BUILD_DIR}/vpass
 
-  - ansible-galaxy install -r ansible/requirements.yml -p ansible/roles
-
 install:
   # Install Ansible.
   - pip install ansible
 
 script:
+  - ansible-galaxy install -r ansible/requirements.yml -p ansible/roles
   - ansible-playbook ansible/provision_ec2.yml --syntax-check
