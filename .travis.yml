@@ -24,6 +24,9 @@ before_install:
   - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
   - git submodule update --init --recursive
 
+  # we're storing the decrypt pass as a travis env var ANSIBLE_VAULT_PASS
+  - echo $ANSIBLE_VAULT_PASS > ${TRAVIS_BUILD_DIR}/vpass
+
 install:
   # Install Ansible.
   - pip install ansible
