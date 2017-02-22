@@ -10,6 +10,10 @@ before_install:
   # Make sure everything's up to date.
   - sudo apt-get update -qq
 
+  # from https://gist.github.com/petrbel/c3bf7e0f59c22a52f534
+  - sed -i 's/git@bitbucket.org:/https:\/\/bitbucket.org\//' .gitmodules
+  - git submodule update --init --recursive
+
 install:
   # Install Ansible.
   - pip install ansible
