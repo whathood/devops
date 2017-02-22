@@ -1,0 +1,18 @@
+---
+language: python
+python: "2.7"
+
+addons:
+  ssh_known_hosts:
+  - bitbucket.com
+
+before_install:
+  # Make sure everything's up to date.
+  - sudo apt-get update -qq
+
+install:
+  # Install Ansible.
+  - pip install ansible
+
+script:
+  - ansible-playbook ansible/provision_ec2.yml --syntax-check

@@ -2,6 +2,16 @@
 
 role_name=$*
 
-mkdir -p ansible/roles/$role_name/tasks
 
-echo "created role $role_name"
+dir=ansible/roles/$role_name/tasks
+main_task_file=$dir/main.yml
+
+mkdir -p $dir
+
+echo "created taskss directory $dir"
+
+touch $main_task_file
+
+echo "touched $main_task_file"
+
+echo "finishing setting up new role $role_name"
