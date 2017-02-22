@@ -14,6 +14,10 @@ ssh_pub_key_file: "/Users/jsmiley/.ssh/id_rsa_ec2_tests.pub"
 ssh_private_key_file: "/Users/jsmiley/.ssh/id_rsa_ec2_tests"
 ansible_ssh_private_key_file: "{{ ssh_private_key_file }}"
 
+git_username: "James Smiley"
+git_usermail: "james.robert.smiley@gmail.com"
+composer_github_token: "{{vault_composer_github_token}}"
+
 deploy_dest_dir: /opt/whathood
 log_dir: /var/log/whathood
 postgres_data_dir: /usr/lib/whathood/postgresql
