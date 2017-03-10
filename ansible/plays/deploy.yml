@@ -11,7 +11,7 @@
     user: "{{ ansible_ssh_user }}"
     wh_log_dir: /var/log/whathood
   roles:
-    - role: prep_docker_env
+    - role: whathood.prep_docker_env
       tags: prep_docker_env 
 
     - role: whathood.hostname_set
