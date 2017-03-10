@@ -12,7 +12,7 @@
     ansible_ssh_private_key_file: "{{ ansible_ssh_private_key_file | realpath }}"
 
 - synchronize:
-    src: ../docker
+    src: "{{ playbook_dir }}/../../docker"
     dest: /home/{{ansible_ssh_user}}/src/
     archive: yes
     recursive: yes
