@@ -9,4 +9,4 @@
     -  whathood.ssh_pub_key_material_init
     -  jsmiley.provision_ec2
 
-- include: setup.yml
+- include: setup.yml hosts=localhost
