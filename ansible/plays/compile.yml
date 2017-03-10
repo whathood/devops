@@ -10,8 +10,14 @@
 
 - hosts: all
   gather_facts: false
+  vars:
+    user: "{{ ansible_ssh_user }}"
+  vars_files:
+  - ../group_vars/npm_modules.yml
   roles:
     - role: whathood.clone_repo
+    - role: whathood.npm_setup
+      tags: [ npm_install, npm_setup ]
     - role: whathood.compile_coffeescript
       tags: compile_coffeescript
 
