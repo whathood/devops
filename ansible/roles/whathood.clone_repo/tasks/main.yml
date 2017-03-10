@@ -1,12 +1,9 @@
 ---
 
-- name: ensure "{{ wh_src_dir }}" exists and we have rights to it
+- name: ensure "{{ wh_src_dir }}" does not exist
   file:
     path: "{{ wh_src_dir }}"
-    state: directory
-    mode: 0755
-    owner: "{{ ansible_ssh_user }}"
-  become: yes
+    state: absent
 
 - apt:
     name: git
