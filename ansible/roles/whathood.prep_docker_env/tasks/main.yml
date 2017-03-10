@@ -61,7 +61,7 @@
   become: yes
 
 - include: docs.yml tags=phpdoc,docs sudo=yes
-  when: application_env != "production"
+  when: ("{{ application_env }}" != 'production')
 
 - template: src=wh-start-containers.conf.j2 dest=/etc/init/wh-start-containers.conf
   become: yes
