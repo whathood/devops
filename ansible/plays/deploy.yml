@@ -56,11 +56,11 @@
 
   - shell: docker stop wh-jsx || true
     become: yes
-    when: application_env == 'development'
+    when: (application_env is defined) and (application_env == 'development')
 
   - shell: docker rm -f wh-jsx || true
     become: yes
-    when: application_env == 'development'
+    when: (application_env is defined) and (application_env == 'development')
 
   - shell: docker start wh_memcached || true
     become: yes
@@ -85,7 +85,7 @@
 
     - { role: copy_code, from_dir: "{{ wh_src_dir }}", to_dir: "{{deploy_dest_dir}}" }
 
-    - { role: "nginx", container_name: "nginx-{{ application_env }}", http_port: "81", app_dir: "{{ wh_src_dir }}" }
+    - { role: "nginx", container_name: "nginx", http_port: "81", app_dir: "{{ wh_src_dir }}" }
 
     - role: update_upstart
       tags: update_upstart
