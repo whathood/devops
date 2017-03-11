@@ -2,18 +2,13 @@
 
 # Gather facts about all ec2 instances
 - ec2_remote_facts:
-    region: us-east-1
+    region: "{{ region }}"
   register: ec2
-
-- debug:
-    msg: "{{ item.id }}"
-  when:  (item.tags.Name is undefined)
-  with_items: "{{ ec2.instances }}"
 
 - name: terminate instance with no 'Name' tag defined
   ec2:
     state: 'absent'
-    region: us-east-1
+    region: "{{ region }}"
     instance_id: "{{ item.id }}" 
   when:  (item.tags.Name is undefined)
   with_items: "{{ ec2.instances }}"
