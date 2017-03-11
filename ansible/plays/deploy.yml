@@ -14,9 +14,6 @@
     - role: whathood.prep_docker_env
       tags: prep_docker_env 
 
-    - role: whathood.hostname_set
-      tags: hostname_set
-
     - role: whathood.prep_log_dir
       tags: [ prep_log_dir ]
 
