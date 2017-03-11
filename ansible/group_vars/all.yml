@@ -35,4 +35,5 @@ docker_nginx_image: quay.io/whathood/nginx:latest
 deploy_working_dir: /home/ubuntu/src/whathood
 application_root: /opt/whathood
 wh_src_dir: /home/ubuntu/src/whathood
+application_env: unknown
 environment: "{{ application_env }}"
