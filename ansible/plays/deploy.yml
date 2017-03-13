@@ -87,7 +87,3 @@
     - role: update_upstart
       tags: update_upstart
       sudo: yes
-
-    - role: whathood.system_check
-      system_check_dir: "{{application_root}}"
-      tags: system_check

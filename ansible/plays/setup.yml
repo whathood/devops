@@ -54,8 +54,13 @@
 
 - hosts: all
   gather_facts: false
-  roles:
-  - { role: whathood.import_db }
   vars:
     nginx_container: "{{nginx_container_name}}"
-  tags: import_db
+  roles:
+
+  - role: whathood.import_db
+    tags: import_db
+
+  - role: whathood.system_check
+    system_check_dir: "{{application_root}}"
+    tags: system_check
