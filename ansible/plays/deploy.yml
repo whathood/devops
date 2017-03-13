@@ -12,7 +12,7 @@
     wh_log_dir: /var/log/whathood
   roles:
     - role: whathood.prep_docker_env
-      tags: prep_docker_env 
+      tags: prep_docker_env
 
     - role: whathood.prep_log_dir
       tags: [ prep_log_dir ]
@@ -42,7 +42,7 @@
   - shell: stop wh-foreman
     become: yes
     when: '"started" in result.stdout'
-    
+
   - command: status wh-worker
     register: result
     ignore_errors: yes
