@@ -27,7 +27,8 @@
       rvm1_user: 'ubuntu'
       become: yes
 
-- include: git.yml
+    - role: git
+      become: yes
 
 - hosts: all
   gather_facts: false
