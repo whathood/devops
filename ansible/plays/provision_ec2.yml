@@ -1,12 +1,14 @@
 ---
 
-- hosts: localhost
+- hosts: all
   connection: local
   gather_facts: false
+  vars_files:
+    - "../group_vars/vault.yml"
   vars:
     ssh_pub_key_material: "{{ lookup('env', 'WH_SSH_PUB_KEY_MATERIAL') }}"
   roles:
-    -  whathood.ssh_pub_key_material_init
-    -  jsmiley.provision_ec2
+    - whathood.ssh_pub_key_material_init
+    - role: jsmiley.provision_ec2
 
 - include: setup.yml hosts=localhost
