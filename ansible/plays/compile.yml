@@ -46,13 +46,7 @@
       chdir: "{{wh_src_dir}}"
     tags: [ ruby, ruby-bundle ]
 
-- hosts: production
-  gather_facts: false
-  roles:
-    - role: whathood.grunt_uglify
-      tags: grunt_uglify
-
-- hosts: development
+- hosts: all
   gather_facts: false
   vars:
     wh_src_dir: /opt/whathood
