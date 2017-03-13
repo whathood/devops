@@ -6,7 +6,7 @@
 	url = git@bitbucket.org:jimrsmiley/ansible-jsmiley-git.git
 [submodule "ansible/roles/jsmiley.vim"]
 	path = ansible/roles/jsmiley.vim
-	url = git@bitbucket.org:jimrsmiley/ansible-jsmiley-vim.git
+	url = git@github.com:jimRsmiley/ansible-vim.git
 [submodule "ansible/roles/jsmiley.bash"]
 	path = ansible/roles/jsmiley.bash
 	url = git@bitbucket.org:jimrsmiley/ansible-jsmiley-bash.git
