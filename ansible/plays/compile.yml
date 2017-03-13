@@ -28,10 +28,6 @@
   - name: make sure the doctrine proxy dir is writeable
     file: path={{ wh_src_dir }}/app/data/DoctrineORMModule/Proxy mode=777 owner={{ansible_ssh_user}} state=directory
     become: yes
-   
-  - name: compile react
-    command: docker run --rm -v {{ wh_src_dir }}/libs/react:/src -v {{ wh_src_dir }}/app/public/js/whathood:/build --name wh-jsx quay.io/whathood/jsx --extension jsx src build
-    become: yes
 
   - name: set applicaton_env
     lineinfile:
