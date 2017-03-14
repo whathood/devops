@@ -2,6 +2,7 @@
 
 - name: ensure source dir files is owned by ansible_user
   file:
+    state: directory
     path: "{{ wh_src_dir }}"
     owner: "{{ ansible_user }}"
     recurse: yes
@@ -10,4 +11,4 @@
 - name: build whathood javascript
   shell: ./bin/grunt uglify
   args:
-    chdir: "{{wh_src_dir}}"
+    chdir: "{{ wh_src_dir }}"

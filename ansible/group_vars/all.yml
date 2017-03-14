@@ -1,21 +1,13 @@
 ---
 
-region: us-east-1
-security_group: launch-wizard-1
-vpc_id: vpc-b1bd6fd6
-vpc_subnet_id: subnet-9ceb91b6
 whathood_git_url: "git@github.com:whathood/whathood.git"
-ec2_key_name: "id_rsa_ec2_tests"
 image: ami-c481fad3
 instance_type: t2.micro
 group_id: sg-df5942a5
 ansible_host_group: ec2_hosts
-ssh_pub_key_file: "/Users/jsmiley/.ssh/id_rsa_ec2_tests.pub"
-ssh_private_key_file: "/Users/jsmiley/.ssh/id_rsa_ec2_tests"
-ansible_ssh_private_key_file: "{{ ssh_private_key_file }}"
 
-aws_access_key: "{{ vault_AWS_ACCESS_KEY_ID }}"
-aws_secret_key: "{{ vault_AWS_SECRET_ACCESS_KEY }}"
+aws_access_key: "{{ vault_aws_access_key }}"
+aws_secret_key: "{{ vault_aws_secret_key }}"
 
 git_username: "James Smiley"
 git_usermail: "james.robert.smiley@gmail.com"
@@ -39,4 +31,13 @@ deploy_working_dir: /home/ubuntu/src/whathood
 application_root: /opt/whathood
 wh_src_dir: /home/ubuntu/src/whathood
 application_env: unknown
-environment: "{{ application_env }}"
+
+security_group: "whathood-{{ application_env }}"
+vpc:
+  name: "whathood-vpc-{{ application_env }}"
+  cidr: 10.0.0.0/16
+  resource_tags:
+    Environment: "{{ application_env }}"
+region: us-east-1
+ec2_key_name: "whathood-key-{{ application_env }}"
+cidr_ip: 0.0.0.0/0

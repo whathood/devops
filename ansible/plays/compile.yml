@@ -48,8 +48,6 @@
 
 - hosts: all
   gather_facts: false
-  vars:
-    wh_src_dir: /opt/whathood
   roles:
     - role: whathood.grunt_uglify
       tags: grunt_uglify

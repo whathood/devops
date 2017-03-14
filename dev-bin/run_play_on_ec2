@@ -1,0 +1,3 @@
+#!/bin/sh
+
+ansible-playbook -i ansible/hosts --private-key ~/.ssh/id_rsa_ec2_tests ansible/plays/setup.yml -t grunt_uglify -vvvv

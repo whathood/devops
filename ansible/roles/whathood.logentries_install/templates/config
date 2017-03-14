@@ -13,16 +13,16 @@ metrics-cpu = system
 
 [nginx-access-log]
 path = {{log_dir}}/nginx-access.log
-destination = {{environment}}/nginx_access
+destination = {{application_env}}/nginx_access
 
 [nginx-error-log]
 path = {{log_dir}}/nginx-error.log
-destination = {{environment}}/nginx_error
+destination = {{application_env}}/nginx_error
 
 [php-zend]
 path = {{log_dir}}/php-zend.log
-destination = {{environment}}/php_zend
+destination = {{application_env}}/php_zend
 
 [wh-worker]
 path = {{log_dir}}/wh-worker.log
-destination = {{environment}}/wh_worker
+destination = {{application_env}}/wh_worker
