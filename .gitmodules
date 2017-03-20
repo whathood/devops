@@ -1,9 +1,9 @@
 [submodule "ansible/roles/jsmiley.provision_ec2"]
 	path = ansible/roles/jsmiley.provision_ec2
-	url = git@github.com:jimRsmiley/ansible-role-provision-ec2.git
+	url = https://github.com/jimRsmiley/ansible-role-provision-ec2
 [submodule "ansible/roles/jsmiley.vim"]
 	path = ansible/roles/jsmiley.vim
-	url = git@github.com:jimRsmiley/ansible-vim.git
+	url = https://github.com/jimRsmiley/ansible-vim
 [submodule "ansible/roles/jsmiley.git"]
 	path = ansible/roles/jsmiley.git
 	url = https://github.com/jimRsmiley/ansible-role-git
@@ -12,4 +12,4 @@
 	url = https://github.com/jimRsmiley/ansible-role-bash
 [submodule "ansible/roles/whathood.ruby"]
 	path = ansible/roles/whathood.ruby
-	url = git@github.com:whathood/ansible-role-ruby.git
+	url = https://github.com/whathood/ansible-role-ruby
