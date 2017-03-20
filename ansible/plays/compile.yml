@@ -2,8 +2,6 @@
 
 - hosts: all
   gather_facts: false
-  vars_files:
-  - /etc/ansible/vars_files/whathood.yml
   tasks:
   - name: Setting whathood env var
     command: /bin/bash -c "echo 'WH_APP_ENV={{ item }}' >> /etc/environment"
@@ -12,25 +10,23 @@
 
 - hosts: all
   gather_facts: false
+  vars:
+    user: "{{ ansible_ssh_user }}"
   vars_files:
-  - /etc/ansible/vars_files/whathood.yml
+  - ../group_vars/npm_modules.yml
   roles:
     - role: whathood.clone_repo
+    - role: whathood.npm_setup
+      tags: [ npm_install, npm_setup ]
     - role: whathood.compile_coffeescript
       tags: compile_coffeescript
 
 - hosts: all
   gather_facts: false
-  vars_files:
-  - /etc/ansible/vars_files/whathood.yml
   tasks:
 
   - name: make sure the doctrine proxy dir is writeable
     file: path={{ wh_src_dir }}/app/data/DoctrineORMModule/Proxy mode=777 owner={{ansible_ssh_user}} state=directory
-    become: yes
-   
-  - name: compile react
-    command: docker run --rm -v {{ wh_src_dir }}/libs/react:/src -v {{ wh_src_dir }}/app/public/js/whathood:/build --name wh-jsx quay.io/whathood/jsx --extension jsx src build
     become: yes
 
   - name: set applicaton_env
@@ -50,16 +46,8 @@
       chdir: "{{wh_src_dir}}"
     tags: [ ruby, ruby-bundle ]
 
-- hosts: production
+- hosts: all
   gather_facts: false
-  roles:
-    - role: whathood.grunt_uglify
-      tags: grunt_uglify
-
-- hosts: development
-  gather_facts: false
-  vars:
-    wh_src_dir: /opt/whathood
   roles:
     - role: whathood.grunt_uglify
       tags: grunt_uglify

@@ -1,7 +1,7 @@
 ---
 
 # run bundler on the whathood src dir
-- name: run bundler on whathood
+- name: install whathood ruby gems
   command: /home/ubuntu/.rvm/gems/ruby-2.3.1/wrappers/bundle update
   args:
     chdir: "{{wh_src_dir}}"

@@ -1,0 +1,5 @@
+[production]
+whathood.in ansible_user=ubuntu
+
+[development]
+jim.whathood.in ansible_user=ubuntu

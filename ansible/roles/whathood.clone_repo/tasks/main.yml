@@ -1,12 +1,9 @@
 ---
 
-- name: ensure "{{ wh_src_dir }}" exists and we have rights to it
+- name: ensure "{{ wh_src_dir }}" does not exist
   file:
     path: "{{ wh_src_dir }}"
-    state: directory
-    mode: 0755
-    owner: "{{ ansible_ssh_user }}"
-  become: yes
+    state: absent
 
 - apt:
     name: git
@@ -16,7 +13,7 @@
 - name: clone whathood repo
   git:
     force: yes
-    repo: git@github.com:whathood/whathood.git
+    repo: "{{ git_repo_url }}"
     dest: "{{ wh_src_dir }}"
     accept_hostkey: yes
   become: no
