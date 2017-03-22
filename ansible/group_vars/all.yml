@@ -13,13 +13,6 @@ git_username: "James Smiley"
 git_usermail: "james.robert.smiley@gmail.com"
 composer_github_token: "{{vault_composer_github_token}}"
 
-aws_access_key: "{{ vault_AWS_ACCESS_KEY_ID }}"
-aws_secret_key: "{{ vault_AWS_SECRET_ACCESS_KEY }}"
-
-git_username: "James Smiley"
-git_usermail: "james.robert.smiley@gmail.com"
-composer_github_token: "{{vault_composer_github_token}}"
-
 deploy_dest_dir: /opt/whathood
 log_dir: /var/log/whathood
 postgres_data_dir: /usr/lib/whathood/postgresql
