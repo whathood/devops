@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/whathood/devops.svg?branch=master)](https://travis-ci.org/whathood/devops)
+
 ### AWS Provisioning and Deployment using Ansible and Docker for [Whathood.in](https://github.com/jimRsmiley/whathood)
 
 ### Setup

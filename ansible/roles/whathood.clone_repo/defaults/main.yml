@@ -1,3 +1,4 @@
+git_repo_url: https://github.com/whathood/whathood.git
 rollbar_access_token: ""
 google_ui: ""
 email_smtp_host: ""

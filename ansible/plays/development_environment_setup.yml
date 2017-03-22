@@ -8,7 +8,7 @@
     - name: install common stuff on the guest
       role: common
       tags: common
-      sudo: yes
+      become: yes
 
     - name: configure vim
       role: jsmiley.vim
