@@ -16,6 +16,14 @@ ansible-playbook ansible/plays/provision_ec2.yml
 
 ~~~~
 
+### Running more ansible plays after provisioning
+
+Add the new host to the hosts file like so:
+
+```
+[ip address] ansible_ssh_private_key_file=[private key file]
+```
+
 #### See
 
 * [Docker](docker/README.md) - docker containers run all of the programs needed for the Whathood system

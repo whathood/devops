@@ -8,7 +8,7 @@
   become: yes
 
 - name: Set  correct ssh key path
-  set_fact: 
+  set_fact:
     ansible_ssh_private_key_file: "{{ ansible_ssh_private_key_file | realpath }}"
 
 - synchronize:
