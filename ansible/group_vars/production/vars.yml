@@ -1,4 +1,3 @@
 ---
 
 application_env: production
-logentries: "{{vault_logentries}}"

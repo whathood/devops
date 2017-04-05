@@ -41,3 +41,5 @@ vpc:
 region: us-east-1
 ec2_key_name: "whathood-key-{{ application_env }}"
 cidr_ip: 0.0.0.0/0
+
+logentries: "{{vault_logentries}}"
