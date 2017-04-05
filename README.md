@@ -12,7 +12,7 @@
 
 ansible-galaxy install -r ansible/requirements.yml -p ansible/roles/
 
-ansible-playbook ansible/plays/provision_ec2.yml
+ansible-playbook ansible/plays/provision_ec2.yml -e ansible_ssh_private_key_file=[private_key_file]
 
 ~~~~
 
