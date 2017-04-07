@@ -29,12 +29,12 @@
 - include: composer.yml tags=composer
   become: yes
 
-- name: image whathood/grunt is present
-  docker:
-    name: wh_nodejs
-    image: quay.io/whathood/nodejs-bower-grunt
-    state: present
-  become: yes
+# - name: image whathood/grunt is present
+#   docker:
+#     name: wh_nodejs
+#     image: quay.io/whathood/nodejs-bower-grunt
+#     state: present
+#   become: yes
 
 - name: memcached container is present
   docker:
