@@ -30,3 +30,17 @@ ansible-playbook ansible/plays/provision_ec2.yml -e application_env=production -
 ```
 ????
 ```
+
+## Vagrant
+
+Provision Vagrant with:
+
+`vagrant up`
+
+Re-run ansible setup in Vagrant with(good for iterating through bad builds):
+
+`vagrant provision --provision-with=ansible`
+
+### Site Url
+
+Access the site from http://localhost:8080
