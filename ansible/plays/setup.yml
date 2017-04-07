@@ -12,9 +12,7 @@
 - hosts: all
   gather_facts: true
   vars:
-    user: ubuntu
-    ansible_user: ubuntu
-    remote_user: ubuntu
+    user: "{{ ansible_user }}"
     log_dir: /var/log/whathood
   roles:
 
