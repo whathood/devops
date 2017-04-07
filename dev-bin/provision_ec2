@@ -4,4 +4,5 @@ PLAY=ansible/plays/provision_ec2.yml
 PRIV_KEY_FILE=/Users/jsmiley/.ssh/id_rsa_ec2_tests
 
 ansible-playbook $PLAY \
-    -e ssh_private_key_file=$PRIV_KEY_FILE
+    -e ansible_ssh_private_key_file=$PRIV_KEY_FILE \
+    -e application_env=development
