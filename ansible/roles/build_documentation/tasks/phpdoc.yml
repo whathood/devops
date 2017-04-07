@@ -3,4 +3,4 @@
 - name: build phpdocs
   command: d-bin/phpdoc_run
   args:
-    chdir: /home/{{ansible_ssh_user/src/whathood
+    chdir: "{{ wh_src_dir }}"

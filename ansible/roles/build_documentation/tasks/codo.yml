@@ -3,4 +3,4 @@
 - name: build coffeescript documentation
   command: d-bin/codo
   args:
-    chdir: /home/{{ansible_ssh_user}}/src/whathood
+    chdir: "{{ wh_src_dir }}"

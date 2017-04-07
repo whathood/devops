@@ -5,7 +5,7 @@
   become: yes
 
 - name: create phpdoc root dir
-  file: path=/home/{{ansible_ssh_user}}/src/whathood/docs state=directory
+  file: path={{ wh_src_dir }}/docs state=directory
 
 - name: container whathoood/phpdoc is present
   docker:
@@ -18,10 +18,10 @@
   become: yes
   docker:
     name: docs
-    image: kyma/docker-nginx 
+    image: kyma/docker-nginx
     state: started
     restart_policy: always
 #    volumes:
-#    - "/home/{{ansible_ssh_user}}/src/whathood/docs:/var/www"
+#    - "{{ wh_src_dir }}/docs:/var/www"
     ports:
     - "83:80"

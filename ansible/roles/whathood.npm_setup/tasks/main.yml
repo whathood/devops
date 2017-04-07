@@ -1,13 +1,13 @@
 - name: make sure .npm directory is owned by ansible_user
-  file: path=/home/ubuntu/.npm state=directory owner=ubuntu recurse=yes mode="0777"
+  file: path=/home/{{ ansible_user }}/.npm state=directory owner=ansible_user recurse=yes mode="0777"
   become: yes
 
 - name: make sure node_modules is owned by user
-  file: path=/home/ubuntu/src/whathood/node_modules state=directory recurse=yes owner=ubuntu mode="0777"
+  file: path={{ wh_src_dir }}/node_modules state=directory recurse=yes owner=ansible_user mode="0777"
   become: yes
 
 - name: npm install "{{item.name}}"
   npm:
     name: "{{item.name}}"
-    path: "/home/{{ansible_user}}/src/whathood"
+    path: "{{ wh_src_dir }}"
   with_items: "{{npm_modules}}"
