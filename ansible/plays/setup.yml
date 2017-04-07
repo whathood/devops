@@ -14,6 +14,10 @@
   vars:
     user: "{{ ansible_user }}"
     log_dir: /var/log/whathood
+    rvm1_user: "{{ ansible_user }}"
+    rvm1_rubies:
+      - 'ruby-2.2.5'
+    rvm1_install_path: "/home/{{ ansible_user }}/.rvm"
   roles:
 
     - role: nodesource.node
