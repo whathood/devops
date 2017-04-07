@@ -2,9 +2,9 @@
 
 # run bundler on the whathood src dir
 - name: install whathood ruby gems
-  command: /home/ubuntu/.rvm/gems/ruby-2.3.1/wrappers/bundle update
+  command: /home/{{ ansible_user }}/.rvm/gems/ruby-2.3.1/wrappers/bundle update
   args:
     chdir: "{{wh_src_dir}}"
   tags: [ ruby, ruby-bundle ]
   environment:
-    PATH: "/home/ubuntu/.rvm:{{ ansible_env.PATH }}"
+    PATH: "/home/{{ ansible_user }}/.rvm:{{ ansible_env.PATH }}"
