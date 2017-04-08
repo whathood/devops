@@ -24,11 +24,6 @@
       become: yes
       tags: node_install
 
-    - role: jsmiley.vim
-      tags: vim
-
-    - role: jsmiley.bash
-      tags: bash
 
     - role: rvm_io.ruby
       tags: ruby
@@ -70,3 +65,9 @@
   - role: whathood.system_check
     system_check_dir: "{{application_root}}"
     tags: system_check
+
+  - role: jsmiley.vim
+    tags: vim
+
+  - role: jsmiley.bash
+    tags: bash
