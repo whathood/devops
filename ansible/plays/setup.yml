@@ -40,8 +40,6 @@
 
 - hosts: all
   gather_facts: false
-  vars:
-    ansible_user: "{{ ansible_user }}"
   tags: [ "docker" ]
   roles:
     - role: angstwad.docker_ubuntu
