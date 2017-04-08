@@ -1,9 +1,5 @@
 ---
 
-# setup should:
-# * install base languages like ruby, node, npm # * it should then call deploy.yml
-# * and then import the database
-#
 - hosts: all
   gather_facts: true
   tasks:
