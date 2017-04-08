@@ -130,6 +130,9 @@
 
     - bundler
 
+    - role: whathood.code_docs
+      tags: code_docs
+
     - { role: copy_code, from_dir: "{{ wh_src_dir }}", to_dir: "{{deploy_dest_dir}}" }
 
     - { role: "nginx", container_name: "nginx", http_port: "81", app_dir: "{{ wh_src_dir }}" }
