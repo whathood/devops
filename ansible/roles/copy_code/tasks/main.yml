@@ -4,22 +4,24 @@
   stat: path={{ to_dir }}
   register: st
 
-- shell: echo whathood_`date +%Y%m%d%k%M%S`
+- name: get a timestamp filename to backup current prod dir
+  shell: echo whathood_`date +%Y%m%d%k%M%S`
   register: new_name
-  when: st.stat.exists == true
+  when: st.stat.exists
 
 - name: rename old production dir
   command: mv {{ to_dir }} "/opt/{{ new_name.stdout }}"
   become: yes
-  when: st.stat.exists == true
+  when: st.stat.exists
+
+- name: check if whathood production dir exists
+  stat: path={{ to_dir }}
+  register: st
 
 - name: ensure empty dir
-  command: rm -rf {{ to_dir }}
-  become: yes
+  fail: msg="{{ to_dir }} should not exist"
+  when: st.stat.exists
 
-- name: copy the code over
-  command: cp -r {{ from_dir }} {{ to_dir }}
-  become: yes
-
-- command: chmod -R 777 {{ to_dir }}/app/data
+- name: copy the code over, preserving permissions
+  command: cp -rp {{ from_dir }} {{ to_dir }}
   become: yes
