@@ -116,12 +116,6 @@
 
 - hosts: all
   gather_facts: false
-  roles:
-    - role: whathood.grunt_uglify
-      tags: grunt_uglify
-
-- hosts: all
-  gather_facts: false
   vars:
     user: "{{ ansible_user }}"
   roles:
