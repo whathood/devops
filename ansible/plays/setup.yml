@@ -31,18 +31,20 @@
 
 - hosts: all
   gather_facts: false
+  vars_files:
+    - "{{ playbook_dir }}/../group_vars/vault.yml"
   tags: [ "docker" ]
   roles:
     - role: angstwad.docker_ubuntu
       pip_version_docker_py: '1.10.6'
-  become: yes
+      become: yes
 
-- hosts: production
-  gather_facts: false
-  roles:
     - role: whathood.logentries_install
       tags: logentries_install
-  become: yes
+      become: yes
+
+    - role: whathood.postgres
+      tags: postgres
 
 - include: deploy.yml
   vars:

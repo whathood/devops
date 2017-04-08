@@ -4,12 +4,6 @@
   command: /bin/bash -c "echo 'WH_NGINX_CONTAINER={{nginx_container_name}}' >> /etc/environment"
   become: yes
 
-- name: wh-postgis is started
-  docker:
-    name: wh-postgis
-    image: quay.io/whathood/postgres
-    state: started
-  become: yes
 
 - name: memcached container is started
   docker:

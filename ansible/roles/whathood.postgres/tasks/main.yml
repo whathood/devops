@@ -1,0 +1,8 @@
+---
+
+- name: wh-postgis is started
+  docker:
+    name: wh-postgis
+    image: quay.io/whathood/postgres
+    state: started
+  become: yes
