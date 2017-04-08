@@ -5,5 +5,5 @@
 - name: build composer image
   docker_image:
     name: "whathood/composer"
-    path: /home/{{ansible_ssh_user}}/src/docker/composer
+    path: /home/{{ansible_user}}/src/docker/composer
     state: present

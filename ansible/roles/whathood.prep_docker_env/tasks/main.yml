@@ -2,9 +2,9 @@
 # configure any docker images on the host
 
 - file:
-    path: /home/{{ansible_ssh_user}}/src
+    path: /home/{{ansible_user}}/src
     state: directory
-    owner: "{{ansible_ssh_user}}"
+    owner: "{{ansible_user}}"
   become: yes
 
 - name: Set  correct ssh key path
@@ -13,10 +13,10 @@
 
 - synchronize:
     src: "{{ playbook_dir }}/../../docker"
-    dest: /home/{{ansible_ssh_user}}/src/
+    dest: /home/{{ansible_user}}/src/
     archive: yes
     recursive: yes
-  remote_user: "{{ansible_ssh_user}}"
+  remote_user: "{{ansible_user}}"
 
 - name: pip install docker
   pip: name=docker version=2.0.2

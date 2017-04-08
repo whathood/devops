@@ -1,9 +1,9 @@
 - hosts: all
   gather_facts: true
   vars:
-    user: "{{ ansible_ssh_user }}"
+    user: "{{ ansible_user }}"
     log_dir: /var/log/whathood
-    dot_vim_dir: "/home/{{ansible_ssh_user}}/.vim"
+    dot_vim_dir: "/home/{{ ansible_user }}/.vim"
   roles:
     - name: install common stuff on the guest
       role: common

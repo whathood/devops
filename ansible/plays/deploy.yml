@@ -8,7 +8,7 @@
 - hosts: all
   gather_facts: false
   vars:
-    user: "{{ ansible_ssh_user }}"
+    user: "{{ ansible_user }}"
     wh_log_dir: /var/log/whathood
   roles:
     - role: whathood.prep_docker_env
@@ -23,7 +23,7 @@
     skip_db_check: true
   tasks:
   - name: touch php-zend.log
-    file: path=/var/log/whathood/php-zend.log state=touch owner={{ansible_ssh_user}} mode=0777
+    file: path=/var/log/whathood/php-zend.log state=touch owner={{ansible_user}} mode=0777
     become: yes
 
   - name: make sure ssh-keyscan command works

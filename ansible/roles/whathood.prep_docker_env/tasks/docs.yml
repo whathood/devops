@@ -1,6 +1,6 @@
 ---
 
-- name: make user ansible_ssh_user has full rights to src
+- name: make user ansible_user has full rights to src
   file: recurse=yes path=/home/{{ansible_user}}/src owner={{ansible_user}} state=directory
   become: yes
 

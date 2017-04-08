@@ -17,7 +17,7 @@ deploy_dest_dir: /opt/whathood
 log_dir: /var/log/whathood
 postgres_data_dir: /usr/lib/whathood/postgresql
 
-docker_group_members: [ "{{ansible_ssh_user}}" ]
+docker_group_members: [ "{{ansible_user}}" ]
 
 nginx_container_name: "nginx"
 
