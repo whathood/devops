@@ -4,8 +4,6 @@
   stat: path={{ wh_src_dir }}/.git
   register: stat_result
 
-- debug: var=stat_result
-
 - name: clone whathood repo
   git:
     force: yes
