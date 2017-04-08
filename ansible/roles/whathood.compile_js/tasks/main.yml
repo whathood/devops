@@ -1,6 +1,11 @@
 ---
 
 - name: compile coffeescript
-  command: ./node_modules/grunt/bin/grunt coffee
+  command: ./bin/grunt coffee
   args:
     chdir: "{{wh_src_dir}}"
+
+- name: build whathood javascript
+  shell: ./bin/grunt uglify
+  args:
+    chdir: "{{ wh_src_dir }}"
