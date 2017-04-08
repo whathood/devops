@@ -1,5 +1,10 @@
 ---
 
-- name: running db import
+- name: check if the database already exists
+  shell: 'docker exec nginx psql -lqt | cut -d \| -f 1 | grep -qw whathood && echo "exists" || echo "no exists"'
+  register: result
+
+- name: import the database
   command: docker exec {{ nginx_container }} /bin/sh -c 'cd /var/www/whathood/; bin/import_db'
   become: yes
+  when: result.stdout == "no exists"
