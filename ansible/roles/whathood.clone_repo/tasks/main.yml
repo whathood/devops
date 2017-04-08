@@ -1,15 +1,9 @@
 ---
 
-- name: ensure "{{ wh_src_dir }}" does not exist
-  file:
-    path: "{{ wh_src_dir }}"
-    state: absent
+- name: find out if whathood source dir already exists
+  stat: path={{ wh_src_dir }}/.git
+  register: stat_result
 
-- apt:
-    name: git
-  become: yes
-
-   # need to cd into git_dir and clone from there because the dir will already exist
 - name: clone whathood repo
   git:
     force: yes
@@ -17,9 +11,11 @@
     dest: "{{ wh_src_dir }}"
     accept_hostkey: yes
   become: no
+  when: not stat_result.stat.exists
 
-- file: path=/var/log/whathood state=directory mode=0777
+- name: touch the log directory
+  file: path=/var/log/whathood state=directory mode=0777
   become: yes
 
-- name: copy in whathood.yml
+- name: copy template whathood.yml
   template: src=whathood.yml.j2 dest={{wh_src_dir}}/whathood.yml
