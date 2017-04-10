@@ -1,5 +1,9 @@
 ---
 
+# for ansible's url module used, by system check on urls
+- pip: name=httplib2
+  become: yes
+
 - name: nginx is compressing
   shell: "curl -D - -H 'Accept-Encoding: gzip' {{uri_base}}  -o /dev/null 2>/dev/null | grep 'Content-Encoding: gzip' | wc | awk '{ print $1 }'"
   register: command_result

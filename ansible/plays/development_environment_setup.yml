@@ -5,10 +5,8 @@
     log_dir: /var/log/whathood
     dot_vim_dir: "/home/{{ ansible_user }}/.vim"
   roles:
-    - name: install common stuff on the guest
-      role: common
-      tags: common
-      become: yes
+    - role: whathood.glances
+      tags: glances
 
     - name: configure vim
       role: jsmiley.vim
