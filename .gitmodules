@@ -13,3 +13,6 @@
 [submodule "ansible/roles/whathood.ruby"]
 	path = ansible/roles/whathood.ruby
 	url = https://github.com/whathood/ansible-role-ruby
+[submodule "ansible/roles/jsmiley.tmux"]
+	path = ansible/roles/jsmiley.tmux
+	url = git@github.com:jimRsmiley/ansible-role-tmux.git
