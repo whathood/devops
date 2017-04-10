@@ -1,11 +1,6 @@
 ---
 
-- name: compile coffeescript
-  command: ./bin/grunt coffee
-  args:
-    chdir: "{{wh_src_dir}}"
-
-- name: build whathood javascript
-  shell: ./bin/grunt uglify
-  args:
+# Run `install` target as root
+- make:
     chdir: "{{ wh_src_dir }}"
+    target: javascript
