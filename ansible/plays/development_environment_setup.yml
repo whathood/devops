@@ -13,3 +13,15 @@
     - name: configure vim
       role: jsmiley.vim
       tags: vim
+
+    - name: configure tmux
+      role: jsmiley.tmux
+      tags: tmux
+
+    - name: configure bash
+      role: jsmiley.bash
+      tags: bash
+
+    - name: configure git
+      role: jsmiley.git
+      tags: git

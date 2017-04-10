@@ -1,5 +1,8 @@
 ---
 
+# run at the start in case you need to jump into the target and debug
+- include: development_environment_setup.yml
+
 - hosts: all
   gather_facts: true
   tasks:
@@ -63,9 +66,3 @@
   - role: whathood.system_check
     system_check_dir: "{{application_root}}"
     tags: system_check
-
-  - role: jsmiley.vim
-    tags: vim
-
-  - role: jsmiley.bash
-    tags: bash
