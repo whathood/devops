@@ -1,8 +1,0 @@
-# Set the default window name to empty string instead of the arbitrary "bash"
-#shelltitle ''
-
-caption always "%{= KW}%-Lw%{= wb}%n %t %{= KW}%+Lw %-=| ${USER}@%H | %M%d %c%{-}"
-term screen-256color
-defscrollback 5000
-
-stuff "cd /home/vagrant/src/whathood ^M"

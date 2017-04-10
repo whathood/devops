@@ -1,3 +1,0 @@
-git config --global user.email "joe@example.com"
-git config --global user.name "Joe Smith"
-git config --global push.default simple
