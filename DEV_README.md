@@ -31,6 +31,10 @@ ansible-playbook ansible/plays/provision_ec2.yml -e application_env=production -
 ????
 ```
 
+### After deploying to "staging", how do you associate the production elastic ip?
+
+`ansible-playbook -i hosts ansible/plays/ec2_associate_elastic_ip.yml`
+
 ## Vagrant
 
 Provision Vagrant with:

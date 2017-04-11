@@ -1,3 +1,4 @@
 ---
 
 application_env: production
+elastic_ip: 34.195.110.138

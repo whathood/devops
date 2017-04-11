@@ -1,0 +1,8 @@
+---
+
+- name: associate elastic ip with instance
+  ec2_eip:
+    device_id: "{{ device_id }}"
+    ip: "{{ elastic_ip }}"
+    reuse_existing_ip_allowed: yes
+    in_vpc: yes
