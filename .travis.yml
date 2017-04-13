@@ -31,7 +31,7 @@ install:
 script:
   - echo $TRAVIS_BUILD_DIR
   # NO connection=local
-  - ansible-playbook ansible/plays/provision_ec2.yml -e ansible_ssh_private_key_file=$PRIV_KEY
+  - ansible-playbook ansible/plays/provision_ec2.yml -e application_env=travis -e ansible_ssh_private_key_file=$PRIV_KEY
 
 env:
   - PRIV_KEY=$TRAVIS_BUILD_DIR/ansible/tests/id_rsa_ec2_tests
