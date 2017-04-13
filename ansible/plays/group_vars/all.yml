@@ -30,7 +30,6 @@ docker_nginx_image: quay.io/whathood/nginx:latest
 deploy_working_dir: /home/{{ ansible_user }}/src/whathood
 application_root: /opt/whathood
 wh_src_dir: /home/{{ ansible_user }}/src/whathood
-application_env: unknown
 
 security_group: "whathood-{{ application_env }}"
 vpc:
