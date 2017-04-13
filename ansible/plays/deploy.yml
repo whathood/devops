@@ -136,3 +136,10 @@
     - role: update_upstart
       tags: update_upstart
       become: yes
+
+    - role: jimrsmiley.rollbar_deploy_notify
+      vars:
+        access_token: "{{ rollbar_access_token }}"
+        rollbar_environment: "{{ application_env }}"
+        git_dir: "{{ wh_src_dir }}"
+      tags: rollbar_notify_deploy
