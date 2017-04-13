@@ -1,0 +1,13 @@
+---
+
+- name: copy the rollbar notify script
+  template: src=rollbar_notify_deploy.sh.j2 dest={{ guest_bin }} mode='u=rwx,g=rwx,o=rwx'
+  become: yes
+
+- name: notify rollbar of deploy
+  shell: "{{ guest_bin }}"
+  args:
+    chdir: "{{ git_dir }}"
+  register: result
+  failed_when:  "'{\n  \"data\": {}\n}' not in result.stdout"
+  changed_when:  False
