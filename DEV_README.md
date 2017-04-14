@@ -45,6 +45,14 @@ Re-run ansible setup in Vagrant with(good for iterating through bad builds):
 
 `vagrant provision --provision-with=ansible`
 
+### How do you re-run a play on a guest set up by Vagrant?
+
+`dev-bin/vagrant_run_play_on_host.sh [play]`
+
+#### With tags
+
+`dev-bin/vagrant_run_play_on_host.sh [play] [-t tag_name]`
+
 ### Site Url
 
 Access the site from http://localhost:8080

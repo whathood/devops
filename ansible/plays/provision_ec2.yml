@@ -1,16 +1,10 @@
 ---
 
-- hosts: all
-  gather_facts: true
-  tasks:
-    - debug: var=ansible_user
-
 - hosts: localhost
   connection: local
   gather_facts: false
   vars_files:
-    - "../group_vars/vault.yml"
-    - "../group_vars/all.yml"
+    - group_vars/vault.yml
   roles:
     - role: jsmiley.provision_ec2
   environment:

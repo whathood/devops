@@ -1,10 +1,5 @@
 ---
-# deploy.yml
-#
-# should:
-# * prepare the docker environment
-# * call the compile play
-#
+
 - hosts: all
   gather_facts: false
   vars:
@@ -79,7 +74,7 @@
   vars:
     user: "{{ ansible_user }}"
   vars_files:
-  - ../group_vars/npm_modules.yml
+    - group_vars/vault.yml
   roles:
     - role: whathood.clone_repo
 
@@ -116,6 +111,8 @@
 
 - hosts: all
   gather_facts: false
+  vars_files:
+    - group_vars/vault.yml
   vars:
     user: "{{ ansible_user }}"
   roles:
@@ -136,3 +133,10 @@
     - role: update_upstart
       tags: update_upstart
       become: yes
+
+    - role: jimrsmiley.rollbar_deploy_notify
+      vars:
+        access_token: "{{ rollbar_access_token }}"
+        rollbar_environment: "{{ application_env }}"
+        git_dir: "{{ wh_src_dir }}"
+      tags: rollbar_notify_deploy
