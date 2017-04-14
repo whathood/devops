@@ -1,0 +1,5 @@
+---
+
+# defaults file for jimrsmiley.rollbar_deploy_notify
+
+guest_bin: /usr/local/bin/rollbar_notify_deploy.sh

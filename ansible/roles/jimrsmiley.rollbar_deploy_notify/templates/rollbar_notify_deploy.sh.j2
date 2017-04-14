@@ -1,0 +1,14 @@
+#!/bin/bash
+
+ACCESS_TOKEN={{ access_token }}
+ENVIRONMENT={{rollbar_environment}}
+REVISION=`git log -n 1 --pretty=format:"%H"`
+{% if local_username is defined %}
+LOCAL_USERNAME={{ local_username }}
+{% endif %}
+
+curl https://api.rollbar.com/api/1/deploy/ \
+      -F access_token=$ACCESS_TOKEN \
+      -F environment=$ENVIRONMENT \
+      -F revision=$REVISION \
+      -F local_username=$LOCAL_USERNAME

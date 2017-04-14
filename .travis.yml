@@ -15,8 +15,10 @@ before_install:
   - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
   - git submodule update --init --recursive
 
-  - pip install ansible
+  - pip install ansible==2.2.2.0
   - pip install boto==2.46.1
+
+  - ansible --version
 
 install:
   # we're storing the decrypt pass as a travis env var ANSIBLE_VAULT_PASS
@@ -31,7 +33,7 @@ install:
 script:
   - echo $TRAVIS_BUILD_DIR
   # NO connection=local
-  - ansible-playbook ansible/plays/provision_ec2.yml -e ansible_ssh_private_key_file=$PRIV_KEY
+  - ansible-playbook ansible/plays/provision_ec2.yml -e application_env=travis -e ansible_ssh_private_key_file=$PRIV_KEY
 
 env:
   - PRIV_KEY=$TRAVIS_BUILD_DIR/ansible/tests/id_rsa_ec2_tests

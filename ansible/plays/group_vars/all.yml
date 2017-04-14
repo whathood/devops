@@ -30,7 +30,6 @@ docker_nginx_image: quay.io/whathood/nginx:latest
 deploy_working_dir: /home/{{ ansible_user }}/src/whathood
 application_root: /opt/whathood
 wh_src_dir: /home/{{ ansible_user }}/src/whathood
-application_env: unknown
 
 security_group: "whathood-{{ application_env }}"
 vpc:
@@ -42,4 +41,7 @@ region: us-east-1
 ec2_key_name: "whathood-key-{{ application_env }}"
 cidr_ip: 0.0.0.0/0
 
-logentries: "{{vault_logentries}}"
+logentries: "{{ vault_logentries }}"
+
+rollbar_access_token: "{{ vault_rollbar_access_token }}"
+_all_vars_loaded: true

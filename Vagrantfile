@@ -15,7 +15,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "ansible/plays/setup.yml"
     ansible.raw_arguments = [
-        "-e application_env=development",
+        "-e application_env=vagrant",
         "-e ansible_user=vagrant"
     ]
   end
