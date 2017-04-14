@@ -15,7 +15,7 @@ before_install:
   - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
   - git submodule update --init --recursive
 
-  - pip install ansible=2.2.2.0
+  - pip install ansible==2.2.2.0
   - pip install boto==2.46.1
 
   - ansible --version
