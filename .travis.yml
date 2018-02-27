@@ -1,19 +1,22 @@
 ---
 
 language: python
-python: '2.7.10'
+python: '2.7'
 sudo: required
+cache: pip
 
 # disable the default submodule logic
 git:
   submodules: false
 
 before_install:
+
   # Make sure everything's up to date.
   - sudo apt-get update -qq
 
   # from https://gist.github.com/petrbel/c3bf7e0f59c22a52f534
   - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+
   - git submodule update --init --recursive
 
   - pip install -r requirements.txt
