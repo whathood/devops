@@ -1,8 +1,12 @@
 ---
 
-- name: wh-postgis is started
-  docker:
-    name: wh-postgis
-    image: quay.io/whathood/postgres
-    state: started
+- name: pull postgres docker image
+  docker_image:
+    name: "{{ image_repository_url }}"
+  become: yes
+
+- name: run the postgres docker container
+  docker_container:
+    name: "{{ postgres_container_name }}"
+    image: "{{ image_repository_url }}"
   become: yes
