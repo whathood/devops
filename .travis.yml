@@ -16,7 +16,7 @@ before_install:
   - git submodule update --init --recursive
 
   - pip install ansible==2.2.2.0
-  - pip install boto==2.46.1
+  - pip install boto==2.48
 
   - ansible --version
 
