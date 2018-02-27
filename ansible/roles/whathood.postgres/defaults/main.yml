@@ -1,8 +1,0 @@
----
-
-# defaults/main.yml
-
-postgres_image_name: wh-postgis
-image_repository_url: quay.io/whathood/postgres
-
-postgres_container_name: wh-postgres
