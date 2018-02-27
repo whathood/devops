@@ -14,3 +14,4 @@ whathood.local.yaml
 ansible/hosts
 vpass
 R
+venv/
