@@ -37,9 +37,10 @@
       pip_version_docker_py: '1.10.6'
       become: yes
 
-    - role: whathood.logentries_install
-      tags: logentries_install
-      become: yes
+    # XXJIM - uncomment after travis build passes
+    # - role: whathood.logentries_install
+    #   tags: logentries_install
+    #   become: yes
 
     - role: whathood.postgres
       tags: postgres
