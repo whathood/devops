@@ -1,9 +1,9 @@
 ---
 
 language: python
-python: '2.7'
-dist: trusty
-sudo: false
+python: 2.7
+dist: precise
+sudo: required
 cache: pip
 
 # disable the default submodule logic
@@ -13,7 +13,7 @@ git:
 before_install:
 
   # Make sure everything's up to date.
-  - sudo apt-get update -qq
+  - apt-get update -qq
 
   # from https://gist.github.com/petrbel/c3bf7e0f59c22a52f534
   - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
