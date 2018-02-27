@@ -14,9 +14,16 @@ ansible-playbook-provision-ec2:
 	ansible-playbook ansible/plays/provision_ec2.yml -e application_env=production
 
 mac-virtualenv-init:
+	
 	sudo pip install virtualenv
 	virtualenv venv
+
 	echo "\n\n*********************\n\nrun: 'source venv/bin/activate' to init virtualenv\n\n*********************\n"
+
+	source venv/bin/activate
 
 mac-dev-init: mac-virtualenv-init
 	sudo pip install boto
+
+python-pip-freeze:
+	pip freeze > requirements.txt
