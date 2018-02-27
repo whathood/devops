@@ -16,10 +16,11 @@ before_install:
   - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
   - git submodule update --init --recursive
 
-  - pip install ansible==2.3.0.0
-  - pip install boto==2.48.0
+  - pip install -r requirements.txt
 
+  ## debugging
   - ansible --version
+  - pip show boto
 
 install:
   # we're storing the decrypt pass as a travis env var ANSIBLE_VAULT_PASS
