@@ -1,17 +1,13 @@
-provision/hosts/production
-provision/config/ssh
-*.swp
+# general
 .DS_store
-user_config
-/whathood
-TODO.md
-whathood.local.yaml
-/tmp
+*.swp
+*.swo
+
+# vagrant and controller computer
 .vagrant/
-/cookbooks/
-/tmp/librarian/
-*.retry
+venv/
+
+# ansible
 ansible/hosts
 vpass
-R
-venv/
+*.retry
