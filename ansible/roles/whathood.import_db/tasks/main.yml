@@ -1,5 +1,10 @@
 ---
 
+- name: install postgresql-contrib
+  apt:
+    name: postgresql-contrib
+  become: yes
+  
 - name: check if the database already exists
   shell: 'docker exec nginx psql -lqt | cut -d \| -f 1 | grep -qw whathood && echo "exists" || echo "no exists"'
   register: result
