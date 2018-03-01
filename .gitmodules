@@ -16,3 +16,6 @@
 [submodule "ansible/roles/whathood.postgres"]
 	path = ansible/roles/whathood.postgres
 	url = git@github.com:whathood/ansible-role-postgres.git
+[submodule "ansible/roles/jsmiley.provision_ec2"]
+	path = ansible/roles/jsmiley.provision_ec2
+	url = git@github.com:jimRsmiley/ansible-role-provision-ec2.git
