@@ -14,8 +14,10 @@
     rvm1_install_path: "/home/{{ ansible_user }}/.rvm"
   roles:
 
-    - role: nodesource.node
+    - role: geerlingguy.nodejs
       become: yes
+      vars:
+        nodejs_version: "9.x"
       tags: node_install
 
 

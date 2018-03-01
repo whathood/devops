@@ -2,6 +2,6 @@
 
 - name: angstwad.docker_ubuntu
 
-- name: nodesource.node
+- name: geerlingguy.nodejs
 
 - name: rvm_io.ruby
