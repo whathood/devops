@@ -1,5 +1,14 @@
 - hosts: all
   gather_facts: true
+  become: yes
+  tasks:
+    - name: update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 36000
+
+- hosts: all
+  gather_facts: true
   vars:
     user: "{{ ansible_user }}"
     log_dir: /var/log/whathood
