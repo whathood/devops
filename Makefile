@@ -28,4 +28,4 @@ python-pip-freeze:
 	pip freeze > requirements.txt
 
 vagrant-provision:
-	vagrant up --provision-with=ansible
+	time vagrant up --provision-with=ansible
