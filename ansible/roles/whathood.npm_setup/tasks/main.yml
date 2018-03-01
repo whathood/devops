@@ -1,10 +1,5 @@
-- name: make sure .npm directory is owned by ansible_user
-  file: path=/home/{{ ansible_user }}/{{ item }} state=directory owner={{ ansible_user }} recurse=yes mode="0777"
-  with_items:
-    - '.npm'
-    - 'node_modules'
-  become: yes
-
+---
+  
 - name: npm install
   npm:
     path: "{{ wh_src_dir }}"
