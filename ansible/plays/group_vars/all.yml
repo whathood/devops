@@ -1,17 +1,14 @@
 ---
 
-whathood_git_url: "git@github.com:whathood/whathood.git"
-image: ami-c481fad3
-instance_type: t2.micro
-group_id: sg-df5942a5
-ansible_host_group: ec2_hosts
+# whathood_git_url: "git@github.com:whathood/whathood.git"
+# image: ami-c481fad3
+# instance_type: t2.micro
+# group_id: sg-df5942a5
+# ansible_host_group: ec2_hosts
 
-aws_access_key: "{{ vault_aws_access_key }}"
-aws_secret_key: "{{ vault_aws_secret_key }}"
-
-git_username: "James Smiley"
-git_usermail: "james.robert.smiley@gmail.com"
-composer_github_token: "{{vault_composer_github_token}}"
+# git_username: "James Smiley"
+# git_usermail: "james.robert.smiley@gmail.com"
+# composer_github_token: "{{vault_composer_github_token}}"
 
 deploy_dest_dir: /opt/whathood
 log_dir: /var/log/whathood
