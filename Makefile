@@ -14,7 +14,6 @@ ansible-playbook-provision-ec2:
 	ansible-playbook ansible/plays/provision_ec2.yml -e application_env=production
 
 mac-virtualenv-init:
-	
 	sudo pip install virtualenv
 	virtualenv venv
 
@@ -27,3 +26,6 @@ mac-dev-init: mac-virtualenv-init
 
 python-pip-freeze:
 	pip freeze > requirements.txt
+
+vagrant-provision:
+	vagrant up --provision-with=ansible
