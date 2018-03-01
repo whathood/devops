@@ -4,11 +4,12 @@
 - pip: name=httplib2
   become: yes
 
-- name: nginx is compressing
-  shell: "curl -D - -H 'Accept-Encoding: gzip' {{uri_base}}  -o /dev/null 2>/dev/null | grep 'Content-Encoding: gzip' | wc | awk '{ print $1 }'"
-  register: command_result
-  failed_when: "'0' in command_result.stdout"
-  when: not skip_system_check
+# XXJIM uncomment after debugging
+# - name: nginx is compressing
+#   shell: "curl -D - -H 'Accept-Encoding: gzip' {{uri_base}}  -o /dev/null 2>/dev/null | grep 'Content-Encoding: gzip' | wc | awk '{ print $1 }'"
+#   register: command_result
+#   failed_when: "'0' in command_result.stdout"
+#   when: not skip_system_check
 
 - name: Checking for uri for a 404
   uri:
