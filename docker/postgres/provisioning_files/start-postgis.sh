@@ -64,6 +64,8 @@ su - postgres -c "$POSTGRES -D $DATADIR -c config_file=$CONF &"
 
 # Wait for the db to start up before trying to use it....
 
+echo "sleeping for 10"
+
 sleep 10
 
 RESULT=`su - postgres -c "psql -l | grep postgis | wc -l"`

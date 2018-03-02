@@ -17,10 +17,23 @@ RUN apt-get -y install ca-certificates rpl pwgen
 
 #------------- POSTGRES Specific Stuff ----------------------------------------------------
 
-RUN apt-get -y install postgresql-9.3
+# RUN apt-get -y install postgresql-9.3 postgresql-client-9.3
 
 # Start with supervisor
-ADD postgres.conf /etc/supervisor/conf.d/postgres.conf
+ADD provisioning_files/postgres.conf /etc/supervisor/conf.d/postgres.conf
+
+#-------------- build extensions
+
+# POSTGIS
+
+# RUN sudo apt-get install -y postgresql-9.3-postgis-2.1
+
+# PGROUTING
+
+ADD provisioning_files/install-pgrouting.sh /install-pgrouting.sh
+RUN sh /install-pgrouting.sh
+
+#-------------- set up how we start when the container runs
 
 # Open port 5432 so linked containers can see them
 EXPOSE 5432
@@ -31,22 +44,15 @@ ADD provisioning_files/setup.sh /setup.sh
 RUN chmod 0755 /setup.sh
 RUN /setup.sh
 
-#-------------- build extensions
-
-# POSTGIS
-
-ADD provisioning_files/install-postgis.sh /install-postgis.sh
-RUN sh /install-postgis.sh
-
-# PGROUTING
-
-ADD provisioning_files/install-pgrouting.sh /install-pgrouting.sh
-RUN sh /install-pgrouting.sh
-
-#-------------- set up how we start when the container runs
-
 # We will run any commands in this when the container starts
 ADD provisioning_files/start-postgis.sh /start-postgis.sh
 RUN chmod 0755 /start-postgis.sh
+
+# Correct the Error: could not open temporary statistics file "/var/run/postgresql/9.3-main.pg_stat_tmp/global.tmp": No such file or directory
+RUN mkdir -p /var/run/postgresql/9.3-main.pg_stat_tmp
+RUN chown postgres.postgres /var/run/postgresql/9.3-main.pg_stat_tmp -R
+
+# Correct the error: "FATAL:  private key file "/etc/ssl/private/ssl-cert-snakeoil.key" has group or world access"
+RUN chmod 600 /etc/ssl/private/ssl-cert-snakeoil.key
 
 CMD /start-postgis.sh

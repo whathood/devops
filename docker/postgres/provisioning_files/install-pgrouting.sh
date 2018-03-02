@@ -10,4 +10,5 @@ sudo apt-get -y install wget ca-certificates
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 sudo apt-get update
 
+sudo apt-get -y install postgresql-9.3-postgis-2.4
 sudo apt-get -y install postgresql-9.3-pgrouting
