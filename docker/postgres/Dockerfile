@@ -29,7 +29,7 @@ EXPOSE 5432
 
 # Run any additional tasks here that are too tedious to put in
 # this dockerfile directly.
-ADD setup.sh /setup.sh
+ADD provisioning_files/setup.sh /setup.sh
 RUN chmod 0755 /setup.sh
 RUN /setup.sh
 
@@ -38,7 +38,7 @@ RUN /setup.sh
 RUN apt-get install -y postgresql-9.3-pgrouting
 
 # We will run any commands in this when the container starts
-ADD start-postgis.sh /start-postgis.sh
+ADD provisioning_files/start-postgis.sh /start-postgis.sh
 RUN chmod 0755 /start-postgis.sh
 
 RUN apt-get install -y git
