@@ -123,8 +123,8 @@
 
     - bundler
 
-    - role: whathood.code_docs
-      tags: code_docs
+    # - role: whathood.code_docs
+    #   tags: code_docs
 
     - { role: copy_code, from_dir: "{{ wh_src_dir }}", to_dir: "{{deploy_dest_dir}}" }
 
