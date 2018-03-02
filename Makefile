@@ -29,3 +29,6 @@ python-pip-freeze:
 
 vagrant-provision:
 	time vagrant up --provision-with=ansible
+
+vagrant-resume-setup:
+	time vagrant up --provision-with=resume-setup

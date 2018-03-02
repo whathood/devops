@@ -13,9 +13,34 @@ Vagrant.configure("2") do |config|
   # Run Ansible from the Vagrant Host
   #
   config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "ansible/plays/setup.yml"
+    ansible.playbook = "ansible/plays/development_environment_setup.yml"
     ansible.compatibility_mode = "2.0"
     ansible.raw_arguments = [
+        "-e application_env=vagrant",
+        "-e ansible_user=vagrant"
+    ]
+  end
+
+  #
+  # Run Ansible from the Vagrant Host
+  #
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "ansible/plays/setup_guest.yml"
+    ansible.compatibility_mode = "2.0"
+    ansible.raw_arguments = [
+        "-e application_env=vagrant",
+        "-e ansible_user=vagrant"
+    ]
+  end
+
+  #
+  # Run Ansible from the Vagrant Host
+  #
+  config.vm.provision "resume-setup", type: "ansible" do |resume|
+    resume.playbook = "ansible/plays/setup_guest.yml"
+    resume.compatibility_mode = "2.0"
+    resume.limit = "@./ansible/retry-files/setup_guest.retry"
+    resume.raw_arguments = [
         "-e application_env=vagrant",
         "-e ansible_user=vagrant"
     ]
