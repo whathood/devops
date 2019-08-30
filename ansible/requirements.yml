@@ -4,4 +4,4 @@
 
 - name: geerlingguy.nodejs
 
-- name: rvm_io.ruby
+- name: rvm.ruby

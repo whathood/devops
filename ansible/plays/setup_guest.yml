@@ -18,7 +18,7 @@
       tags: node_install
 
 
-    - role: rvm_io.ruby
+    - role: rvm.ruby
       tags: ruby
       rvm1_rubies: ['ruby-2.3.1']
       become: yes
