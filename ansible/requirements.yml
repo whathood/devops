@@ -5,3 +5,7 @@
 - name: geerlingguy.nodejs
 
 - name: rvm.ruby
+
+- name: geerlingguy.pip
+
+- name: geerlingguy.docker
