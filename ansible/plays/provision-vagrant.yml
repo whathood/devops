@@ -10,9 +10,9 @@
   tasks:
   
 # run at the start in case you need to jump into the target and debug during ansible failures
-- include: development_environment_setup.yml
+- include: provision-dev-env.yml
 
-- include: setup_guest.yml
+- include: provision-ubuntu.yml
 
 - include: deploy.yml
   vars:
