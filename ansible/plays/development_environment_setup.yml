@@ -1,4 +1,5 @@
-- hosts: all
+- name: update apt
+  hosts: all
   gather_facts: true
   become: yes
   tasks:
@@ -7,7 +8,8 @@
         update_cache: yes
         cache_valid_time: 36000
 
-- hosts: all
+- name: configure your dev environment
+  hosts: all
   gather_facts: true
   vars:
     user: "{{ ansible_user }}"

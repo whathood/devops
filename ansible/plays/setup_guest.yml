@@ -1,6 +1,7 @@
 ---
-
-- hosts: all
+  
+- name: install ruby and node
+  hosts: all
   gather_facts: true
   vars:
     user: "{{ ansible_user }}"
@@ -26,7 +27,8 @@
     - role: git
       become: yes
 
-- hosts: all
+- name: install docker
+  hosts: all
   gather_facts: false
   vars_files:
     - group_vars/vault.yml
