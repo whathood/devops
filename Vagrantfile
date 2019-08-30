@@ -19,6 +19,11 @@ Vagrant.configure("2") do |config|
         "-e application_env=vagrant",
         "-e ansible_user=vagrant"
     ]
+    ansible.host_vars = {
+        "default" => {
+            "ansible_python_interpreter" => "/usr/bin/python3"
+        }
+    }
   end
 
   #
