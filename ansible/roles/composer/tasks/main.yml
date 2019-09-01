@@ -1,10 +1,14 @@
 ---
 
-- name: installing vendor libraries
-  make:
-    target: "composer-install"
-    chdir: "{{ wh_src_dir }}"
+- name: run composer install via docker container
+  docker_container:
+    name: composer
+    image: composer
+    command: install
+    volumes:
+      - "{{ wh_src_dir }}/app:/app"
   tags: [ composer ]
+  become: yes
 
 - name: composer creates an autoload classmap
   command: make composer-dumpautoload
