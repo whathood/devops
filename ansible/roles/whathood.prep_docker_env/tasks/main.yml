@@ -18,39 +18,25 @@
     recursive: yes
   remote_user: "{{ansible_user}}"
 
-- name: pip install docker
-  pip: name=docker version=2.0.2
-  become: yes
-
-- name: pip install docker-py
-  pip: name=docker-py version=1.9.0
-  become: yes
-
 - include: composer.yml tags=composer
   become: yes
 
 - name: memcached container is present
-  docker:
-    name: wh_memcached
-    image: quay.io/whathood/memcached
-    state: present
-    restart_policy: always
+  docker_image:
+    name: quay.io/whathood/memcached
+    pull: yes
   become: yes
 
 - name: image nginx is present
-  docker:
-    name: nginx
-    image: "{{docker_nginx_image}}"
-    state: present
-    restart_policy: always
+  docker_image:
+    name: "{{docker_nginx_image}}"
+    pull: yes
   become: yes
 
-- name: image whathood/postgres is present
-  docker:
-    name: wh-postgis
-    image: quay.io/whathood/postgres
-    state: present
-    restart_policy: always
+- name: memcached container is present
+  docker_image:
+    name: quay.io/whathood/postgres
+    pull: yes
   become: yes
 
 - template: src=wh-start-containers.conf.j2 dest=/etc/init/wh-start-containers.conf

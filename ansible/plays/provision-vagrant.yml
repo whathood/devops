@@ -6,27 +6,28 @@
   become: yes
   pre_tasks:
     - raw: test -e /usr/bin/python || (sudo apt -y update && sudo apt install -y python3-minimal)
-    - setup: # aka gather_facts
+    # - setup: # aka gather_facts
   tasks:
   
 - include: provision-dev-env.yml
 
 - include: provision-ubuntu.yml
 
-- include: deploy.yml
-  vars:
-    skip_db_check: true
-    skip_system_check: true
+# - include: deploy.yml
+#   vars:
+#     skip_db_check: true
+#     skip_system_check: true
   
-- hosts: all
-  gather_facts: false
-  vars:
-    nginx_container: "{{nginx_container_name}}"
-  roles:
+# - name: import db and run system check
+#   hosts: all
+#   gather_facts: false
+#   vars:
+#     nginx_container: "{{nginx_container_name}}"
+#   roles:
 
-  - role: whathood.import_db
-    tags: import_db
+#   - role: whathood.import_db
+#     tags: import_db
 
-  - role: whathood.system_check
-    system_check_dir: "{{application_root}}"
-    tags: system_check
+#   - role: whathood.system_check
+#     system_check_dir: "{{application_root}}"
+#     tags: system_check
