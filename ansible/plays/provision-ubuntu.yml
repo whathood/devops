@@ -41,6 +41,7 @@
         pip_executable: pip3
         pip_install_packages:
           - docker
+          - docker-compose
       become: yes
 
     - role: geerlingguy.docker

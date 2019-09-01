@@ -1,0 +1,15 @@
+version: '3'
+services:
+
+  wh_memcached:
+    image: quay.io/whathood/memcached
+    ports:
+      - "11211:11211"
+
+  nginx:
+    image: quay.io/whathood/nginx
+    ports:
+      - "80:80"
+    volumes:
+      - "/var/log/whathood:/var/log/whathood:rw"
+      - "/opt/whathood/:/var/www/whathood:rw"
