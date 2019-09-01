@@ -8,8 +8,6 @@
     - raw: test -e /usr/bin/python || (sudo apt -y update && sudo apt install -y python3-minimal)
     # - setup: # aka gather_facts
   tasks:
-  
-- include: provision-dev-env.yml
 
 - include: provision-ubuntu.yml
 

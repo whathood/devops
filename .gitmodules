@@ -1,15 +1,3 @@
-[submodule "ansible/roles/jsmiley.vim"]
-	path = ansible/roles/jsmiley.vim
-	url = https://github.com/jimRsmiley/ansible-vim
-[submodule "ansible/roles/jsmiley.git"]
-	path = ansible/roles/jsmiley.git
-	url = https://github.com/jimRsmiley/ansible-role-git
-[submodule "ansible/roles/jsmiley.bash"]
-	path = ansible/roles/jsmiley.bash
-	url = https://github.com/jimRsmiley/ansible-role-bash
-[submodule "ansible/roles/jsmiley.tmux"]
-	path = ansible/roles/jsmiley.tmux
-	url = git@github.com:jimRsmiley/ansible-role-tmux.git
 [submodule "ansible/roles/whathood.postgres"]
 	path = ansible/roles/whathood.postgres
 	url = git@github.com:whathood/ansible-role-postgres.git
