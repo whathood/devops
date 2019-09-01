@@ -47,6 +47,19 @@
     - role: geerlingguy.docker
       become: yes
 
+  post_tasks:
+
+    - name: add user to docker group
+      user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: yes
+      become: yes
+
+    - name: reboot the VM to be able to use docker without sudo
+      reboot:
+      become: yes
+
     # - role: angstwad.docker_ubuntu
     #   pip_version_docker_py: '1.10.6'
     #   become: yes
