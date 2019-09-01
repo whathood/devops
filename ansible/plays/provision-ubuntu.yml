@@ -36,6 +36,11 @@
   roles:
 
     - role: geerlingguy.pip
+      vars:
+        pip_package: python3-pip
+        pip_executable: pip3
+        pip_install_packages:
+          - docker
       become: yes
 
     - role: geerlingguy.docker

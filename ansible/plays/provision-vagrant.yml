@@ -9,7 +9,6 @@
     - setup: # aka gather_facts
   tasks:
   
-# run at the start in case you need to jump into the target and debug during ansible failures
 - include: provision-dev-env.yml
 
 - include: provision-ubuntu.yml
@@ -18,7 +17,7 @@
   vars:
     skip_db_check: true
     skip_system_check: true
-
+  
 - hosts: all
   gather_facts: false
   vars:
