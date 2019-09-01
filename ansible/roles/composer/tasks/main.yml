@@ -7,11 +7,17 @@
     command: install
     volumes:
       - "{{ wh_src_dir }}/app:/app"
+      - "/var/tmp/composer:/tmp"
   tags: [ composer ]
   become: yes
 
-- name: composer creates an autoload classmap
-  command: make composer-dumpautoload
-  args:
-    chdir: "{{ wh_src_dir }}"
+- name: run composer dumpautoload via docker container
+  docker_container:
+    name: composer
+    image: composer
+    command: dumpautoload
+    volumes:
+      - "{{ wh_src_dir }}/app:/app"
+      - "/var/tmp/composer:/tmp"
   tags: [ composer ]
+  become: yes
