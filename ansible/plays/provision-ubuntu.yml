@@ -42,6 +42,14 @@
       become: yes
       tags: [ "docker" ]
 
+    - role: whathood.postgres
+      tags: postgres
+
+    # XXJIM - uncomment after travis build passes
+    # - role: whathood.logentries_install
+    #   tags: logentries_install
+    #   become: yes
+
   post_tasks:
 
     - name: add user to docker group
@@ -56,11 +64,3 @@
       reboot:
       become: yes
       when: group_add.changed
-
-    # XXJIM - uncomment after travis build passes
-    # - role: whathood.logentries_install
-    #   tags: logentries_install
-    #   become: yes
-
-    - role: whathood.postgres
-      tags: postgres
