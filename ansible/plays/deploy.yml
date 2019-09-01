@@ -59,15 +59,13 @@
     command: "{{ wh_src_dir }}/d-bin/check_db_schema"
     when: not skip_db_check
 
-- hosts: all
-  gather_facts: false
-  tasks:
   - name: Setting whathood env var
     command: /bin/bash -c "echo 'WH_APP_ENV={{ item }}' >> /etc/environment"
     become: yes
     with_items: application_env
 
-- hosts: all
+- name: configure whathood code
+  hosts: all
   gather_facts: false
   vars:
     user: "{{ ansible_user }}"
@@ -82,7 +80,8 @@
     - role: whathood.compile_js
       tags: compile_js
 
-- hosts: all
+- name: run tasks for doctirne; config promotion
+  hosts: all
   gather_facts: false
   tasks:
 
@@ -96,9 +95,6 @@
       line: "{{application_env}}"
       create: yes
 
-- hosts: all
-  gather_facts: true
-  tasks:
   - name: install project ruby gems
     command: /home/{{ ansible_user }}/.rvm/gems/ruby-2.3.1/wrappers/bundle install
     environment:
@@ -107,7 +103,8 @@
       chdir: "{{wh_src_dir}}"
     tags: [ ruby, ruby-bundle ]
 
-- hosts: all
+- name: deploy - run composer, less
+  hosts: all
   gather_facts: false
   vars_files:
     - group_vars/vault.yml
