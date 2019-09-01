@@ -11,3 +11,6 @@ venv/
 ansible/hosts
 vpass
 *.retry
+
+ansible/roles/geerlingguy.*
+ansible/roles/rvm.ruby/
