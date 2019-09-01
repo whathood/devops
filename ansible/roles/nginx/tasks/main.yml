@@ -35,7 +35,7 @@
 - name: file '/var/log/whathood/php-zend.log' exists
   file: path=/var/log/whathood/php-zend.log mode=0777
 
-- name: start docker-compose
+- name: docker-compose start path= [/vagrant/docker-compose]
   docker_compose:
     project_src: /vagrant/docker-compose
   become: yes

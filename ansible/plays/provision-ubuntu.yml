@@ -1,15 +1,13 @@
 ---
   
-- name: install ruby and node
+- name: install ruby, node and docker
   hosts: all
   gather_facts: true
+  vars_files:
+    - group_vars/vault.yml
   vars:
     user: "{{ ansible_user }}"
     log_dir: /var/log/whathood
-    rvm1_user: "{{ ansible_user }}"
-    rvm1_rubies:
-      - 'ruby-2.2.5'
-    rvm1_install_path: "/home/{{ ansible_user }}/.rvm"
   roles:
 
     - role: geerlingguy.nodejs
@@ -18,22 +16,17 @@
         nodejs_version: "9.x"
       tags: node_install
 
-
     - role: rvm.ruby
-      tags: ruby
-      rvm1_rubies: ['ruby-2.3.1']
+      vars:
+        rvm1_user: "{{ ansible_user }}"
+        rvm1_rubies:
+          - ruby-2.3.1
+        rvm1_install_path: "/home/{{ ansible_user }}/.rvm"
       become: yes
+      tags: ruby
 
     - role: git
       become: yes
-
-- name: install docker
-  hosts: all
-  gather_facts: false
-  vars_files:
-    - group_vars/vault.yml
-  tags: [ "docker" ]
-  roles:
 
     - role: geerlingguy.pip
       vars:
@@ -43,9 +36,11 @@
           - docker
           - docker-compose
       become: yes
+      tags: [ "docker" ]
 
     - role: geerlingguy.docker
       become: yes
+      tags: [ "docker" ]
 
   post_tasks:
 
