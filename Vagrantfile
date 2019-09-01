@@ -26,17 +26,4 @@ Vagrant.configure("2") do |config|
     }
   end
 
-  #
-  # Run Ansible from the Vagrant Host
-  #
-  # config.vm.provision "resume-setup", type: "ansible" do |resume|
-  #   resume.playbook = "ansible/plays/setup_guest.yml"
-  #   resume.compatibility_mode = "2.0"
-  #   resume.limit = "@./ansible/retry-files/setup_guest.retry"
-  #   resume.raw_arguments = [
-  #       "-e application_env=vagrant",
-  #       "-e ansible_user=vagrant"
-  #   ]
-  # end
-
 end
