@@ -1,0 +1,74 @@
+---
+
+# tasks/main.yml
+
+- name: Check if postgresql service exists
+  stat: path=/etc/init.d/postgresql
+  register: service_status
+
+- name: stop postgresql service because we want to expose 5432 via docker
+  service: name=postgresql state=stopped
+  when: service_status.stat.exists
+  register: service_stopped
+  become: yes
+
+- name: pull postgres docker image
+  docker_image:
+    name: "{{ image_repository_url }}"
+  become: yes
+
+- name: run the postgres docker container
+  docker_container:
+    name: "{{ postgres_container_name }}"
+    image: "{{ image_repository_url }}"
+    ports:
+      - "5432:5432"
+  become: yes
+
+- name: Check if psql installed
+  shell: command -v psql >/dev/null 2>&1
+  register: command_result
+  ignore_errors: yes
+
+- name: install psql command
+  apt: name=postgresql-client-10 update_cache=yes
+  become: yes
+  when: command_result.stdout == ""
+
+- name: sleep for 15 seconds and continue with play
+  wait_for: timeout=15
+  delegate_to: localhost
+
+- name: Test postgres by 'Select 1'
+  command: psql -c 'SELECT 1;'
+  environment:
+    PGHOST: "{{ postgres_host }}"
+    PGUSER: "{{ postgres_username }}"
+    PGDATABASE: "{{ postgres_maintenence_db }}"
+
+- name: register current timestamp
+  shell: 'date +%Y%m%d%H%M%S_%5N'
+  register: date_cmd_result
+
+- set_fact: test_db_name="ansible_role_postgres_test_{{ date_cmd_result.stdout }}"
+
+- name: Create a test temp db
+  command: "psql -c 'CREATE DATABASE {{ test_db_name }};'"
+  environment:
+    PGHOST: "{{ postgres_host }}"
+    PGUSER: "{{ postgres_username }}"
+    PGDATABASE: "{{ postgres_maintenence_db }}"
+
+- name: Test creating the postgis extension
+  command: "psql -c 'CREATE EXTENSION POSTGIS;'"
+  environment:
+    PGHOST: "{{ postgres_host }}"
+    PGUSER: "{{ postgres_username }}"
+    PGDATABASE: "{{ test_db_name }}"
+
+- name: Test creating the pgrouting extension
+  command: "psql -c 'CREATE EXTENSION PGROUTING;'"
+  environment:
+    PGHOST: "{{ postgres_host }}"
+    PGUSER: "{{ postgres_username }}"
+    PGDATABASE: "{{ test_db_name }}"

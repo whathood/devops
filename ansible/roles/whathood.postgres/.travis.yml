@@ -1,0 +1,34 @@
+---
+
+dist: trusty
+sudo: required
+
+language: python
+python: '2.7'
+
+cache: pip
+
+before_install:
+
+  - sudo /etc/init.d/postgresql stop
+
+install:
+
+  # WARNING gotta sudo pip because docker will be sudo'd
+  - sudo pip install -r ./requirements.txt
+
+  - echo '[defaults]' > ansible.cfg
+  - echo 'roles_path = ../:../../' >> ansible.cfg
+  - echo 'host_key_checking = False' >> ansible.cfg
+
+  - sudo apt-get install postgresql-contrib
+
+script:
+
+  # run our role in the bootstrap play
+  - ansible-playbook -i tests/inventory tests/test.yml --connection=local
+
+  # should test here
+  - psql -h 0.0.0.0 -U docker postgres -c 'SELECT 1'
+  - psql -h 0.0.0.0 -U docker postgres -c 'CREATE EXTENSION postgis'
+  - psql -h 0.0.0.0 -U docker postgres -c 'CREATE EXTENSION pgrouting'

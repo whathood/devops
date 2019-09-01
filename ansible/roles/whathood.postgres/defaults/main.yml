@@ -1,0 +1,12 @@
+---
+
+# defaults/main.yml
+
+postgres_image_name: wh-postgis
+image_repository_url: quay.io/whathood/postgres
+
+postgres_container_name: wh-postgres
+
+postgres_username: docker
+postgres_host: 0.0.0.0
+postgres_maintenence_db: postgres
