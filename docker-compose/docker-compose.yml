@@ -31,3 +31,8 @@ services:
     volumes:
       - "/var/log/whathood:/var/log/whathood:rw"
       - "/opt/whathood/:/var/www/whathood:rw"
+
+  postgres:
+    image: quay.io/whathood/postgres
+    ports:
+      - "5432:5432"
