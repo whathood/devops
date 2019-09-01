@@ -19,6 +19,7 @@
   vars:
     skip_db_check: true
   tasks:
+
   - name: touch php-zend.log
     file: path=/var/log/whathood/php-zend.log state=touch owner={{ansible_user}} mode=0777
     become: yes
@@ -31,22 +32,17 @@
     command: echo `ssh-keyscan github.com` >> /root/.ssh/known_hosts
     become: yes
 
-  # on setup, wh-foreman won't exist, so ignore errors
-  - command: status wh-foreman
-    register: result
+  - name: ensure wh-foreman service is stopped
+    service:
+      name: wh-foreman
+      state: stopped
     ignore_errors: yes
 
-  - shell: stop wh-foreman
-    become: yes
-    when: '"started" in result.stdout'
-
-  - command: status wh-worker
-    register: result
+  - name: ensure wh-worker service is stopped
+    service:
+      name: wh-worker
+      state: stopped
     ignore_errors: yes
-
-  - shell: stop wh-worker
-    become: yes
-    when: '"started" in result.stdout'
 
   - shell: docker stop wh-jsx || true
     become: yes
