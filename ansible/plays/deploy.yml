@@ -21,14 +21,22 @@
     - role: whathood.npm_setup
       tags: [ npm_install, npm_setup ]
 
-    - role: whathood.compile_js
-      tags: compile_js
-
 - name: run tasks for doctirne; config promotion
   hosts: all
   connection: local
   gather_facts: false
   tasks:
+  
+    - name: compile js - run 'grunt javascript'
+      docker_container:
+        name: grunt
+        image: huli/grunt:alpine
+        volumes:
+          - "/Users/jsmiley/dev/whathood/whathood:/app"
+        command: javascript
+        working_dir: /app
+        auto_remove: yes
+
 
     - name: make sure the doctrine proxy dir is writeable
       file: path={{ wh_src_dir }}/app/data/DoctrineORMModule/Proxy mode=777 owner={{ansible_user}} state=directory
