@@ -1,7 +1,5 @@
 ---
   
 - name: npm install
-  npm:
-    path: "{{ wh_src_dir }}"
-    production: no
+  shell: 'docker run -w /app -v {{ wh_src_dir }}:/app node:9 npm install node:9 npm install'
   become: no

@@ -1,78 +1,22 @@
 ---
+  # - name: checking database schema
+  #   command: "{{ wh_src_dir }}/d-bin/check_db_schema"
+  #   when: not skip_db_check
 
-- name: prep docker environment for deploy
-  hosts: all
-  gather_facts: false
-  vars:
-    user: "{{ ansible_user }}"
-    wh_log_dir: /var/log/whathood
-  roles:
-    - role: whathood.prep_docker_env
-      tags: prep_docker_env
-
-    - role: whathood.prep_log_dir
-      tags: [ prep_log_dir ]
-
-- name: deploy whathood services
-  hosts: all
-  gather_facts: false
-  vars:
-    skip_db_check: true
-  tasks:
-
-  - name: touch php-zend.log
-    file: path=/var/log/whathood/php-zend.log state=touch owner={{ansible_user}} mode=0777
-    become: yes
-
-  - name: make sure ssh-keyscan command works
-    command: echo `ssh-keyscan github.com`
-    become: yes
-
-  - name: add github to known hosts
-    command: echo `ssh-keyscan github.com` >> /root/.ssh/known_hosts
-    become: yes
-
-  - name: ensure wh-foreman service is stopped
-    service:
-      name: wh-foreman
-      state: stopped
-    ignore_errors: yes
-
-  - name: ensure wh-worker service is stopped
-    service:
-      name: wh-worker
-      state: stopped
-    ignore_errors: yes
-
-  - shell: docker stop wh-jsx || true
-    become: yes
-    when: (application_env is defined) and (application_env == 'development')
-
-  - shell: docker rm -f wh-jsx || true
-    become: yes
-    when: (application_env is defined) and (application_env == 'development')
-
-  - shell: docker start wh_memcached || true
-    become: yes
-
-  - name: checking database schema
-    command: "{{ wh_src_dir }}/d-bin/check_db_schema"
-    when: not skip_db_check
-
-  - name: Setting whathood env var
-    command: /bin/bash -c "echo 'WH_APP_ENV={{ item }}' >> /etc/environment"
-    become: yes
-    with_items: application_env
+  # - name: Setting whathood env var
+  #   command: /bin/bash -c "echo 'WH_APP_ENV={{ item }}' >> /etc/environment"
+  #   become: yes
+  #   with_items: application_env
 
 - name: configure whathood code
   hosts: all
+  connection: local
   gather_facts: false
   vars:
     user: "{{ ansible_user }}"
   vars_files:
     - group_vars/vault.yml
   roles:
-    - role: whathood.clone_repo
 
     - role: whathood.npm_setup
       tags: [ npm_install, npm_setup ]
@@ -90,6 +34,7 @@
     become: yes
 
   - name: set applicaton_env
+  
     lineinfile:
       dest: "{{wh_src_dir}}/application_env"
       line: "{{application_env}}"
