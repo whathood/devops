@@ -30,8 +30,8 @@ services:
     ports:
       - "80:80"
     volumes:
-      - "/var/log/whathood:/var/log/whathood:rw"
-      - "/opt/whathood/:/var/www/whathood:rw"
+      - "$PWD/../../whathood/:/var/www/whathood:rw"
+      - "$PWD/logs/:/var/log/whathood:rw"
 
   postgres:
     image: quay.io/whathood/postgres
