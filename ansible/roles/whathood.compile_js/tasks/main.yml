@@ -1,6 +1,22 @@
 ---
 
+- set_fact:
+    grunt_js_cmd: docker run --rm -w /app -v $(pwd)/../whathood:/app huli/grunt:alpine javascript
+
+# - name: grunt javascript
+#   shell: "{{ grunt_js_cmd }}"
+
+- name: grunt javascript
+  docker_container:
+    name: grunt
+    image: huli/grunt:alpine
+    volumes:
+      - "/Users/jsmiley/dev/whathood/whathood:/app"
+    command: javascript
+    working_dir: /app
+    auto_remove: yes
+
 # Run `install` target as root
-- make:
-    chdir: "{{ wh_src_dir }}"
-    target: javascript
+# - make:
+#     chdir: "{{ wh_src_dir }}"
+#     target: javascript

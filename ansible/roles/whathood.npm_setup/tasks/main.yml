@@ -3,7 +3,5 @@
 - set_fact:
     npm_install_cmd: 'docker run --rm -w /app -v $(pwd)/../whathood:/app node:9 npm install'
 
-- debug: var=npm_install_cmd
-
 - name: npm install
   shell: "{{ npm_install_cmd }}"
