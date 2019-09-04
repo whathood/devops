@@ -127,9 +127,9 @@
 
     - { role: "nginx", container_name: "nginx", http_port: "81", app_dir: "{{ wh_src_dir }}" }
 
-    - role: update_upstart
-      tags: update_upstart
-      become: yes
+    # - role: update_upstart
+    #   tags: update_upstart
+    #   become: yes
 
     # XXJIM: uncomment after you sort out the vault issues
     # - role: jimrsmiley.rollbar_deploy_notify
