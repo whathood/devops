@@ -20,13 +20,13 @@ nginx_container_name: "nginx"
 
 boundary_build_grid_res: "0.00009"
 heatmap_build_grid_res:  "0.0007"
-docker_dir: /home/{{ ansible_user }}/src/wh-devops/docker
+
 docker_nginx_http_port: 80
 docker_nginx_image_url: quay.io/whathood/nginx
 docker_nginx_image: quay.io/whathood/nginx:latest
-deploy_working_dir: /home/{{ ansible_user }}/src/whathood
+
 application_root: /opt/whathood
-wh_src_dir: /home/{{ ansible_user }}/src/whathood
+wh_src_dir: /home/{{ ansible_user }}/dev/whathood/whathood
 
 security_group: "whathood-{{ application_env }}"
 vpc:
