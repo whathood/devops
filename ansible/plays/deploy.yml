@@ -26,7 +26,7 @@
   connection: local
   gather_facts: false
   tasks:
-  
+
     - name: compile js - run 'grunt javascript'
       docker_container:
         name: grunt
@@ -85,17 +85,48 @@
     - role: composer
       tags: composer
   
-    - role: less
-      tags: less
+- name: run tasks for doctirne; config promotion
+  hosts: all
+  connection: local
+  gather_facts: false
+  tasks:
 
-    - bundler
+    - name: compile less - run 'grunt less'
+      docker_container:
+        name: grunt
+        image: huli/grunt:alpine
+        volumes:
+          - "/Users/jsmiley/dev/whathood/whathood:/app"
+        command: less
+        working_dir: /app
+        auto_remove: yes
+
+    - name: run docker-compose
+      docker_compose:
+        project_src: "{{ playbook_dir }}/../.."
+      register: output
+
+    - debug:
+        var: output
+
+# - name: deploy - run composer, less
+#   hosts: all
+#   connection: local
+#   gather_facts: false
+#   vars_files:
+#     - group_vars/vault.yml
+#   vars:
+#     user: "{{ ansible_user }}"
+#   roles:
+
+    # - bundler
 
     # - role: whathood.code_docs
     #   tags: code_docs
 
-    - { role: copy_code, from_dir: "{{ wh_src_dir }}", to_dir: "{{deploy_dest_dir}}" }
+    # - { role: copy_code, from_dir: "{{ wh_src_dir }}", to_dir: "{{deploy_dest_dir}}" }
 
-    - { role: "nginx", container_name: "nginx", http_port: "81", app_dir: "{{ wh_src_dir }}" }
+    # - { role: "nginx", container_name: "nginx", http_port: "81", app_dir: "{{ wh_src_dir }}" }
 
     # - role: update_upstart
     #   tags: update_upstart
