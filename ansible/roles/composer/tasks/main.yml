@@ -9,7 +9,6 @@
       - "{{ wh_src_dir }}/app:/app"
       - "/var/tmp/composer:/tmp"
   tags: [ composer ]
-  become: yes
 
 - name: run composer dumpautoload via docker container
   docker_container:
@@ -20,4 +19,3 @@
       - "{{ wh_src_dir }}/app:/app"
       - "/var/tmp/composer:/tmp"
   tags: [ composer ]
-  become: yes

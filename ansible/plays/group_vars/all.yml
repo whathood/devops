@@ -26,7 +26,6 @@ docker_nginx_image_url: quay.io/whathood/nginx
 docker_nginx_image: quay.io/whathood/nginx:latest
 
 application_root: /opt/whathood
-wh_src_dir: /home/{{ ansible_user }}/dev/whathood/whathood
 
 security_group: "whathood-{{ application_env }}"
 vpc:

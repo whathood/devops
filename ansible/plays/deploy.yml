@@ -26,30 +26,47 @@
 
 - name: run tasks for doctirne; config promotion
   hosts: all
+  connection: local
   gather_facts: false
   tasks:
 
-  - name: make sure the doctrine proxy dir is writeable
-    file: path={{ wh_src_dir }}/app/data/DoctrineORMModule/Proxy mode=777 owner={{ansible_user}} state=directory
-    become: yes
+    - name: make sure the doctrine proxy dir is writeable
+      file: path={{ wh_src_dir }}/app/data/DoctrineORMModule/Proxy mode=777 owner={{ansible_user}} state=directory
 
-  - name: set applicaton_env
-  
-    lineinfile:
-      dest: "{{wh_src_dir}}/application_env"
-      line: "{{application_env}}"
-      create: yes
+    - name: set applicaton_env
+      lineinfile:
+        dest: "{{wh_src_dir}}/application_env"
+        line: "{{application_env}}"
+        create: yes
 
-  - name: install project ruby gems
-    command: /home/{{ ansible_user }}/.rvm/gems/ruby-2.3.1/wrappers/bundle install
-    environment:
-      PATH: "/home/{{ ansible_user }}/.rvm:{{ ansible_env.PATH }}"
-    args:
-      chdir: "{{wh_src_dir}}"
-    tags: [ ruby, ruby-bundle ]
+    # - set_fact:
+    #     gems_install_cmd: docker run --rm -w /app -v $(pwd)/../whathood:/app ruby:2.3.1 bundle install
+
+    #- debug: var=gems_install_cmd
+
+    #- shell: "{{ gems_install_cmd }}"
+
+    - name: ruby bundle install
+      docker_container:
+        name: ruby
+        image: ruby:2.3.1
+        volumes:
+          - "/Users/jsmiley/dev/whathood/whathood:/app"
+        command: bundle install
+        working_dir: /app
+        auto_remove: yes
+
+    # - name: install project ruby gems
+    #   command: /home/{{ ansible_user }}/.rvm/gems/ruby-2.3.1/wrappers/bundle install
+    #   environment:
+    #     PATH: "/home/{{ ansible_user }}/.rvm:{{ ansible_env.PATH }}"
+    #   args:
+    #     chdir: "{{wh_src_dir}}"
+    #   tags: [ ruby, ruby-bundle ]
 
 - name: deploy - run composer, less
   hosts: all
+  connection: local
   gather_facts: false
   vars_files:
     - group_vars/vault.yml
