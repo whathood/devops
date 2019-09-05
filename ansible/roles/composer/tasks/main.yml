@@ -5,26 +5,31 @@
     composer_image: composer:1.9
     php_app_dir: "{{ wh_src_dir }}/app"
     
-- name: run composer install via docker container
+- name: composer requires hirak/prestissimo cache-dir= [{{ composer_cache_dir }}]
   docker_container:
     name: composer
     image: "{{ composer_image }}"
-    command: composer global require hirak/prestissimo
+    command: global require hirak/prestissimo
     working_dir: /app
     volumes:
       - "{{ php_app_dir }}:/app"
       - "{{ composer_cache_dir }}:/tmp"
     auto_remove: yes
+    detach: no
   tags: [ composer ]
+#   register: global_result
 
-- name: run composer install via docker container
+# - debug: var=global_result
+
+- name: composer install cache-dir= [{{ composer_cache_dir }}] php-app-dir= [{{ php_app_dir }}]
   docker_container:
     name: composer
     image: "{{ composer_image }}"
-    command: composer install
+    command: install
     working_dir: /app
     volumes:
       - "{{ php_app_dir }}:/app"
       - "{{ composer_cache_dir }}:/tmp"
     auto_remove: yes
+    detach: no
   tags: [ composer ]
