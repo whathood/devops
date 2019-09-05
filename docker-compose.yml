@@ -30,7 +30,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - "$PWD/../whathood/:/var/www/whathood:rw"
+      - "$APP_DIR:/var/www/whathood:rw"
       - "$VOLUMES_DIR/logs/:/var/log/whathood:rw"
 
   postgres:
