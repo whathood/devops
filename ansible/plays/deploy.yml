@@ -37,7 +37,6 @@
         working_dir: /app
         auto_remove: yes
 
-
     - name: make sure the doctrine proxy dir is writeable
       file: path={{ wh_src_dir }}/app/data/DoctrineORMModule/Proxy mode=777 owner={{ansible_user}} state=directory
 
@@ -46,13 +45,6 @@
         dest: "{{wh_src_dir}}/application_env"
         line: "{{application_env}}"
         create: yes
-
-    # - set_fact:
-    #     gems_install_cmd: docker run --rm -w /app -v $(pwd)/../whathood:/app ruby:2.3.1 bundle install
-
-    #- debug: var=gems_install_cmd
-
-    #- shell: "{{ gems_install_cmd }}"
 
     - name: ruby bundle install
       docker_container:
