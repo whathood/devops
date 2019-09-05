@@ -93,7 +93,7 @@
 
     - name: compile less - run 'grunt less'
       docker_container:
-        name: grunt
+        name: grunt-less
         image: huli/grunt:alpine
         volumes:
           - "/Users/jsmiley/dev/whathood/whathood:/app"
