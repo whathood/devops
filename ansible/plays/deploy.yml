@@ -106,8 +106,8 @@
         project_src: "{{ playbook_dir }}/../.."
       register: output
 
-    - debug:
-        var: output
+    # - debug:
+    #     var: output
 
 # - name: deploy - run composer, less
 #   hosts: all
