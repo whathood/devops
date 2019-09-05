@@ -92,6 +92,7 @@
         command: less
         working_dir: /app
         auto_remove: yes
+        detach: no
 
     - name: run docker-compose
       docker_compose:
