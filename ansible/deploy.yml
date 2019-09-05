@@ -96,7 +96,7 @@
 
     - name: run docker-compose
       docker_compose:
-        project_src: "{{ playbook_dir }}/../.."
+        project_src: "{{ playbook_dir }}/.."
       register: output
 
     # - debug:
