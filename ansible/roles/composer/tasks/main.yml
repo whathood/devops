@@ -2,7 +2,7 @@
 
 - set_fact:
     composer_cache_dir: "{{ wh_src_dir }}/.composer"
-    composer_image: composer:1.9
+    composer_image: whathood/composer
     php_app_dir: "{{ wh_src_dir }}/app"
     
 - name: composer requires hirak/prestissimo cache-dir= [{{ composer_cache_dir }}]
@@ -14,12 +14,8 @@
     volumes:
       - "{{ php_app_dir }}:/app"
       - "{{ composer_cache_dir }}:/tmp"
-    auto_remove: yes
     detach: no
   tags: [ composer ]
-#   register: global_result
-
-# - debug: var=global_result
 
 - name: composer install cache-dir= [{{ composer_cache_dir }}] php-app-dir= [{{ php_app_dir }}]
   docker_container:
@@ -30,6 +26,5 @@
     volumes:
       - "{{ php_app_dir }}:/app"
       - "{{ composer_cache_dir }}:/tmp"
-    auto_remove: yes
     detach: no
   tags: [ composer ]
