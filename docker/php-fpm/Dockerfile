@@ -1,4 +1,10 @@
-FROM php:5.6-fpm
+FROM php:5.6-fpm-alpine
+
+RUN set -ex \
+  && apk --no-cache add \
+    postgresql-dev
+
+RUN docker-php-ext-install pdo pdo_pgsql
 
 # Ensure UTF-8
 # RUN locale-gen en_US.UTF-8
@@ -9,14 +15,12 @@ FROM php:5.6-fpm
 
 # RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
 
-# RUN add-apt-repository -y ppa:ondrej/php5-5.6
+# RUN 
 # RUN apt-add-repository --yes ppa:brightbox/ruby-ng
 
 # RUN apt-get update && apt-get install -y vim git
 
 # RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y vim curl wget build-essential python-software-properties
-# RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y --force-yes php5-cli php5-fpm php5-mysql php5-pgsql php5-sqlite php5-curl\
-# 		       php5-gd php5-mcrypt php5-intl php5-imap php5-tidy php5-memcached memcached
 
 # # to run phpunit
 # RUN wget https://phar.phpunit.de/phpunit.phar
