@@ -1,6 +1,0 @@
----
-
-# Run `install` target as root
-- make:
-    chdir: "{{ wh_src_dir }}"
-    target: javascript

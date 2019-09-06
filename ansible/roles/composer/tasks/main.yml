@@ -1,23 +1,30 @@
 ---
 
-- name: run composer install via docker container
+- set_fact:
+    composer_cache_dir: "{{ wh_src_dir }}/.composer"
+    composer_image: whathood/composer
+    php_app_dir: "{{ wh_src_dir }}/app"
+    
+- name: composer requires hirak/prestissimo cache-dir= [{{ composer_cache_dir }}]
   docker_container:
     name: composer
-    image: composer
-    command: install
+    image: "{{ composer_image }}"
+    command: global require hirak/prestissimo
+    working_dir: /app
     volumes:
-      - "{{ wh_src_dir }}/app:/app"
-      - "/var/tmp/composer:/tmp"
+      - "{{ php_app_dir }}:/app"
+      - "{{ composer_cache_dir }}:/tmp"
+    detach: no
   tags: [ composer ]
-  become: yes
 
-- name: run composer dumpautoload via docker container
+- name: composer install cache-dir= [{{ composer_cache_dir }}] php-app-dir= [{{ php_app_dir }}]
   docker_container:
     name: composer
-    image: composer
-    command: dumpautoload
+    image: "{{ composer_image }}"
+    command: install
+    working_dir: /app
     volumes:
-      - "{{ wh_src_dir }}/app:/app"
-      - "/var/tmp/composer:/tmp"
+      - "{{ php_app_dir }}:/app"
+      - "{{ composer_cache_dir }}:/tmp"
+    detach: no
   tags: [ composer ]
-  become: yes

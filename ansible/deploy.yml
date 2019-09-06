@@ -1,0 +1,134 @@
+---
+  # - name: checking database schema
+  #   command: "{{ wh_src_dir }}/d-bin/check_db_schema"
+  #   when: not skip_db_check
+
+  # - name: Setting whathood env var
+  #   command: /bin/bash -c "echo 'WH_APP_ENV={{ item }}' >> /etc/environment"
+  #   become: yes
+  #   with_items: application_env
+
+- name: configure whathood code
+  hosts: all
+  connection: local
+  gather_facts: false
+  vars:
+    user: "{{ ansible_user }}"
+  vars_files:
+    - group_vars/vault.yml
+  roles:
+
+    - role: whathood.npm_setup
+      tags: [ npm_install, npm_setup ]
+
+- name: run tasks for doctirne; config promotion
+  hosts: all
+  connection: local
+  gather_facts: false
+  tasks:
+
+    - name: compile js - run 'grunt javascript'
+      docker_container:
+        name: grunt
+        image: huli/grunt:alpine
+        volumes:
+          - "/Users/jsmiley/dev/whathood/whathood:/app"
+        command: javascript
+        working_dir: /app
+        auto_remove: yes
+
+    - name: make sure the doctrine proxy dir is writeable
+      file: path={{ wh_src_dir }}/app/data/DoctrineORMModule/Proxy mode=777 owner={{ansible_user}} state=directory
+
+    - name: set applicaton_env
+      lineinfile:
+        dest: "{{wh_src_dir}}/application_env"
+        line: "{{application_env}}"
+        create: yes
+
+    - name: ruby bundle install
+      docker_container:
+        name: ruby
+        image: ruby:2.3.1
+        volumes:
+          - "/Users/jsmiley/dev/whathood/whathood:/app"
+        command: bundle install
+        working_dir: /app
+        auto_remove: yes
+
+    # - name: install project ruby gems
+    #   command: /home/{{ ansible_user }}/.rvm/gems/ruby-2.3.1/wrappers/bundle install
+    #   environment:
+    #     PATH: "/home/{{ ansible_user }}/.rvm:{{ ansible_env.PATH }}"
+    #   args:
+    #     chdir: "{{wh_src_dir}}"
+    #   tags: [ ruby, ruby-bundle ]
+
+- name: deploy - run composer, less
+  hosts: all
+  connection: local
+  gather_facts: false
+  vars_files:
+    - group_vars/vault.yml
+  vars:
+    user: "{{ ansible_user }}"
+  roles:
+
+    - role: composer
+      tags: composer
+  
+- name: run tasks for doctirne; config promotion
+  hosts: all
+  connection: local
+  gather_facts: false
+  tasks:
+
+    - name: compile less - run 'grunt less'
+      docker_container:
+        name: grunt-less
+        image: huli/grunt:alpine
+        volumes:
+          - "/Users/jsmiley/dev/whathood/whathood:/app"
+        command: less
+        working_dir: /app
+        auto_remove: yes
+        detach: no
+
+    - name: run docker-compose
+      docker_compose:
+        project_src: "{{ playbook_dir }}/.."
+      register: output
+
+    # - debug:
+    #     var: output
+
+# - name: deploy - run composer, less
+#   hosts: all
+#   connection: local
+#   gather_facts: false
+#   vars_files:
+#     - group_vars/vault.yml
+#   vars:
+#     user: "{{ ansible_user }}"
+#   roles:
+
+    # - bundler
+
+    # - role: whathood.code_docs
+    #   tags: code_docs
+
+    # - { role: copy_code, from_dir: "{{ wh_src_dir }}", to_dir: "{{deploy_dest_dir}}" }
+
+    # - { role: "nginx", container_name: "nginx", http_port: "81", app_dir: "{{ wh_src_dir }}" }
+
+    # - role: update_upstart
+    #   tags: update_upstart
+    #   become: yes
+
+    # XXJIM: uncomment after you sort out the vault issues
+    # - role: jimrsmiley.rollbar_deploy_notify
+    #   vars:
+    #     access_token: "{{ rollbar_access_token }}"
+    #     rollbar_environment: "{{ application_env }}"
+    #     git_dir: "{{ wh_src_dir }}"
+    #   tags: rollbar_notify_deploy

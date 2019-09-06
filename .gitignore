@@ -1,16 +1,9 @@
-ubuntu-*-console.log
+volumes/
 .DS_store
 *.swp
-*.swo
-
-# vagrant and controller computer
-.vagrant/
-venv/
 
 # ansible
-ansible/hosts
 vpass
 *.retry
-
 ansible/roles/geerlingguy.*
 ansible/roles/rvm.ruby/

@@ -1,7 +1,15 @@
 ---
   
+- set_fact:
+    node_image: node:9
+
 - name: npm install
-  npm:
-    path: "{{ wh_src_dir }}"
-    production: no
-  become: no
+  docker_container:
+    name: node-9
+    image: "{{ node_image }}"
+    volumes:
+      - "{{ wh_src_dir }}:/app"
+    command: npm install
+    working_dir: /app
+    auto_remove: yes
+    detach: no
