@@ -40,7 +40,7 @@ services:
     ports:
       - "3000:80"
     volumes:
-      - ${APP_DIR}/app/public:/code
+      - ${APP_DIR}/app:/code
       - ./docker/nginx/whathood-site.conf:/etc/nginx/conf.d/default.conf
     links:
       - php-fpm
