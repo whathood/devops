@@ -22,10 +22,21 @@ services:
 
   postgres:
     image: whathood/postgres
+    restart: always
     ports:
       - "5432:5432"
     volumes:
       - ./docker/postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+
+  adminer:
+    image: adminer:4.7.3
+    restart: always
+    ports:
+      - 8090:8080
+    depends_on:
+      - postgres
+    links:
+      - postgres:db
 
   # memcached:
   #   image: quay.io/whathood/memcached
@@ -34,6 +45,7 @@ services:
 
   php-fpm:
     image: whathood/php-fpm
+    restart: always
     volumes:
       - ${APP_DIR}:/code
     environment:
@@ -43,6 +55,7 @@ services:
 
   nginx:
     image: nginx:1.17.3
+    restart: always
     ports:
       - "3000:80"
     volumes:
