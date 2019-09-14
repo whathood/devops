@@ -44,7 +44,7 @@ services:
   #     - "11211:11211"
 
   php-fpm:
-    image: whathood/php-fpm
+    image: ${PHP_FPM_IMAGE}
     restart: always
     volumes:
       - ${APP_DIR}:/code
