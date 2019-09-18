@@ -9,10 +9,12 @@ CREATE DATABASE whathood OWNER = whathood_admin;
 
 \connect whathood
 
+-- CREATE SCHEMA whathood AUTHORIZATION whathood_admin;
+
 CREATE EXTENSION postgis;
 CREATE EXTENSION pgrouting;
 
-CREATE SCHEMA whathood AUTHORIZATION whathood_admin;
+-- SET search_path = public, pg_catalog;
 
 --
 -- Name: asbinary(geometry); Type: FUNCTION; Schema: public; Owner: -

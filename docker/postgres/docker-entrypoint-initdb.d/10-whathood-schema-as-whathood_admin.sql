@@ -8,15 +8,7 @@
 
 SET ROLE whathood_admin;
 
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET client_encoding = 'SQL_ASCII';
-SET standard_conforming_strings = on;
-SET check_function_bodies = false;
-SET client_min_messages = warning;
-
-
-SET search_path = public, pg_catalog;
+-- SET search_path = whathood, public, pg_catalog;
 
 --
 -- Name: polygon_counts_result; Type: TYPE; Schema: public; Owner: -
@@ -33,8 +25,6 @@ CREATE TYPE polygon_counts_result AS (
 	dominant_neighborhood_id integer
 );
 
-SET search_path = whathood, pg_catalog;
-
 --
 -- Name: neighborhood_counts_by_point_result; Type: TYPE; Schema: whathood; Owner: -
 --
@@ -44,11 +34,6 @@ CREATE TYPE neighborhood_counts_by_point_result AS (
 	neighborhood_id integer,
 	total_user_polygons bigint
 );
-
-
-SET search_path = public, pg_catalog;
-
-
 
 --
 -- Name: delete_user_polygon(integer); Type: FUNCTION; Schema: public; Owner: -
@@ -71,10 +56,6 @@ BEGIN
 
 END;
 $$;
-
-
-
-SET search_path = whathood, pg_catalog;
 
 --
 -- Name: create_contentious_points(integer); Type: FUNCTION; Schema: whathood; Owner: -
@@ -109,10 +90,10 @@ $$;
 
 
 --
--- Name: gather_test_point_counts(public.geometry[], integer); Type: FUNCTION; Schema: whathood; Owner: -
+-- Name: gather_test_point_counts(geometry[], integer); Type: FUNCTION; Schema: whathood; Owner: -
 --
 
-CREATE FUNCTION gather_test_point_counts(test_points public.geometry[], _neighborhood_id integer) RETURNS SETOF public.polygon_counts_result
+CREATE FUNCTION gather_test_point_counts(test_points geometry[], _neighborhood_id integer) RETURNS SETOF polygon_counts_result
     LANGUAGE plpgsql
     AS $$
   DECLARE
@@ -132,10 +113,10 @@ $$;
 
 
 --
--- Name: get_dominant_neighborhood(public.geometry); Type: FUNCTION; Schema: whathood; Owner: -
+-- Name: get_dominant_neighborhood(geometry); Type: FUNCTION; Schema: whathood; Owner: -
 --
 
-CREATE FUNCTION get_dominant_neighborhood(_test_point public.geometry) RETURNS integer
+CREATE FUNCTION get_dominant_neighborhood(_test_point geometry) RETURNS integer
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -188,14 +169,14 @@ $$;
 
 
 --
--- Name: makegrid_2d(public.geometry, numeric); Type: FUNCTION; Schema: whathood; Owner: -
+-- Name: makegrid_2d(geometry, numeric); Type: FUNCTION; Schema: whathood; Owner: -
 --
 
-CREATE FUNCTION makegrid_2d(bound_polygon public.geometry, grid_step numeric) RETURNS public.geometry[]
+CREATE FUNCTION makegrid_2d(bound_polygon geometry, grid_step numeric) RETURNS geometry[]
     LANGUAGE plpgsql
     AS $_$
 DECLARE
-  BoundM public.geometry; --Bound polygon transformed to metric projection (with metric_srid SRID)
+  BoundM geometry; --Bound polygon transformed to metric projection (with metric_srid SRID)
   Xmin DOUBLE PRECISION;
   Xmax DOUBLE PRECISION;
   Ymax DOUBLE PRECISION;
@@ -243,10 +224,10 @@ $_$;
 
 
 --
--- Name: neighborhood_counts_by_point(public.geometry); Type: FUNCTION; Schema: whathood; Owner: -
+-- Name: neighborhood_counts_by_point(geometry); Type: FUNCTION; Schema: whathood; Owner: -
 --
 
-CREATE FUNCTION neighborhood_counts_by_point(_test_point public.geometry) RETURNS SETOF neighborhood_counts_by_point_result
+CREATE FUNCTION neighborhood_counts_by_point(_test_point geometry) RETURNS SETOF neighborhood_counts_by_point_result
     LANGUAGE plpgsql
     AS $$
 BEGIN
@@ -266,10 +247,10 @@ $$;
 
 
 --
--- Name: neighborhood_point_geometry(integer, public.geometry, numeric); Type: FUNCTION; Schema: whathood; Owner: -
+-- Name: neighborhood_point_geometry(integer, geometry, numeric); Type: FUNCTION; Schema: whathood; Owner: -
 --
 
-CREATE FUNCTION neighborhood_point_geometry(_neighborhood_id integer, _user_polygon_bound public.geometry, _grid_resolution numeric) RETURNS public.geometry
+CREATE FUNCTION neighborhood_point_geometry(_neighborhood_id integer, _user_polygon_bound geometry, _grid_resolution numeric) RETURNS geometry
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -280,10 +261,10 @@ $$;
 
 
 --
--- Name: neighborhood_point_info(integer, public.geometry, numeric); Type: FUNCTION; Schema: whathood; Owner: -
+-- Name: neighborhood_point_info(integer, geometry, numeric); Type: FUNCTION; Schema: whathood; Owner: -
 --
 
-CREATE FUNCTION neighborhood_point_info(_neighborhood_id integer, _user_polygon_bound public.geometry, _grid_resolution numeric) RETURNS SETOF public.polygon_counts_result
+CREATE FUNCTION neighborhood_point_info(_neighborhood_id integer, _user_polygon_bound geometry, _grid_resolution numeric) RETURNS SETOF polygon_counts_result
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -302,10 +283,10 @@ $$;
 
 
 --
--- Name: polygon_counts(public.geometry, integer); Type: FUNCTION; Schema: whathood; Owner: -
+-- Name: polygon_counts(geometry, integer); Type: FUNCTION; Schema: whathood; Owner: -
 --
 
-CREATE FUNCTION polygon_counts(_test_point public.geometry, _neighborhood_id integer) RETURNS public.polygon_counts_result
+CREATE FUNCTION polygon_counts(_test_point geometry, _neighborhood_id integer) RETURNS polygon_counts_result
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -378,10 +359,10 @@ $$;
 
 
 --
--- Name: post_create_neighborhood_border(public.geometry); Type: FUNCTION; Schema: whathood; Owner: -
+-- Name: post_create_neighborhood_border(geometry); Type: FUNCTION; Schema: whathood; Owner: -
 --
 
-CREATE FUNCTION post_create_neighborhood_border(_collected_points public.geometry) RETURNS text
+CREATE FUNCTION post_create_neighborhood_border(_collected_points geometry) RETURNS text
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -390,16 +371,6 @@ BEGIN
 
 END;
 $$;
-
-
-SET search_path = public, pg_catalog;
-
-
-
-
-SET default_tablespace = '';
-
-SET default_with_oids = false;
 
 --
 -- Name: heatmap_point; Type: TABLE; Schema: public; Owner: -; Tablespace: 
@@ -692,7 +663,7 @@ CREATE SEQUENCE whathood_user_id_seq
     CACHE 1;
 
 
-SET search_path = whathood, pg_catalog;
+-- SET search_path = whathood, pg_catalog;
 
 --
 -- Name: user_polygon_test_point; Type: VIEW; Schema: whathood; Owner: -
@@ -703,11 +674,8 @@ CREATE VIEW user_polygon_test_point AS
     up.polygon,
     n.name AS neighborhood_name,
     n.id AS neighborhood_id
-   FROM (public.user_polygon up
-   JOIN public.neighborhood n ON ((n.id = up.neighborhood_id)));
-
-
-SET search_path = public, pg_catalog;
+   FROM (user_polygon up
+   JOIN neighborhood n ON ((n.id = up.neighborhood_id)));
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
